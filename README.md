@@ -262,7 +262,6 @@
       # 나중에..
       ```
   
-      
 *  결정 문제
   
   * 답이 2개로 나타낼 수 있는 문제(True or False 등)
@@ -329,6 +328,331 @@
     
 
 ## 2. 배열 2
+
+### 배열: 2차 배열
+
+* 숫자 퍼즐 예제
+
+* 2차원 배열의 선언
+
+  * list안에 list
+  * arr = [[0,1,2,3], [4,5,6,7]]
+* **주의**
+  
+```python
+  # 방법 1 - 나의 실수
+list1 = [[0] * 3] * 3
+  list1[0][0] = 1
+  print(list1)
+  # [[1, 0, 0], [1, 0, 0], [1, 0, 0]]
+  
+  # 방법 2 - 맞는 방법
+  list2 = [[0] * 3 for _ in range(3)]
+  list2[0][0] = 1
+  print(list2)
+  # [[1, 0, 0], [0, 0, 0], [0, 0, 0]]
+  ```
+  
+  * 배열 순회
+  
+    * n*m개 원소 빠짐없이 조사하는 방법
+    * 행 우선순회(첫 번째 행, 두번째 행...)
+  
+    ```python
+    arr = [[1, 2], [3, 4]]
+    # python스러운 코드
+    for a in arr:
+        for val in a:
+            print(val)
+    ```
+  
+    * 열 우선순회
+  
+    * 지그재그 순회
+  
+    ```python
+    # idx 짝수, 홀수일 때로 나눔
+    arr = [[1, 2], [3, 4]]
+    N = len(arr)
+    for i in range(N):
+        if not i % 2: # 짝수
+            for j in range(N):
+                pass
+        else:
+            for j in range(N-1, -1, -1): # 홀수, N-1부터 0까지
+                pass
+      
+    ```
+  
+  * 배열의 활용
+  
+    * 전치 행렬 : 행과 열이 바뀜
+    * 대각 순회 i, j = [ 00 => 01 -> 10 => 0, 2 -> 1, 1 -> 2, 0 => ... => 4, 4 ]
+  
+    ```python
+    n, m = len(arr), len(arr[0])
+    for diag in range(0, n + m -1) # diag: 사선의 수
+    
+    # x, y: 시작좌표
+    x = 0 if diag < M else (diag - M _1)
+    y = diag if diag < M else M -1
+    
+    while x < n and y >= 0:
+        arr[x][y]
+        x += 1
+        y -= 1
+    ```
+  
+    * 델타를 이용한 2차 배열 탐색
+      * 배열의 한 좌표에서 4방향 인접 배열 요소 탐색하는 방법
+      * 미로 탐색, 체스 등 많이 쓰임
+  
+    ```python
+    # 상하좌우
+    dx = [0, 0, -1, 1] # x 좌표 리스트
+    dy = [-1, 1, 0, 0] # y 좌표 리스트
+    ```
+  
+  * 연습문제
+  
+    * 5*5 2차 배열에 무작위로 25개 숫자로 초기화한 후
+    * 각 요소에 대해 그 요소와 이웃한 요소와의 차의 절대값의 합을 구하시오
+    * 주의! 벽에 있는 요소는 이웃한 요소가 없을 수 있음
+    * [소스보기](day3_ex1.py)
+    * 
+
+### 부분집합 생성(비트)
+
+* 부분집합 합(Subset Sum) 문제
+
+  * n개의 정수로 이루어진 집합이 있을 때, 부분집합 중 집합 원소의 합이 0이 되는 경우가 있는지를 알아내는 문제
+  * 결정 문제 (True or False)
+  * 최적화 문제로 바꾼다면 '총 합이 0이 되는 경우 중 합이 가장 큰(혹은 작은) 값은?'
+  * [-7, -3, -2, 5, 8]이 있을 때, [-3, -2, 5]는 총 합이 0이므로 답이 참이 된다.
+  * 완전검색으로 모든 부분집합 생성 후 부분집합 합 구하기
+
+* 부분집합 수 : 2^n개(공집합, 자기자신까지 포함)
+
+  * 각 원소에 대해 포함되거나 되지 않거나 2가지
+  * n = 3, {1, 2, 3}, 2^n가지(0~2^n-1)
+
+  |     부분집합      | 2진수 | 10진수 |
+  | :---------------: | :---: | :----: |
+  |  c(3, 0), 공집합  |  000  |   0    |
+  |    c(3, 1) {1}    |  100  |   4    |
+  |        {2}        |  010  |   2    |
+  |        {3}        |  001  |   1    |
+  |  C(3, 2) {1, 2}   |  110  |   6    |
+  |      {1, 3}       |  101  |   5    |
+  |      {2, 3}       |  011  |   3    |
+  | C(3, 3) {1, 2, 3} |  111  |   7    |
+
+  ```python
+  arr = 'ABC'
+  bits = [0] * 3
+  
+  for i in range(2):
+      bits[0] = i
+      for i in range(2):
+          bits[1] = i
+          for i in range(2):
+              bits[2] = i
+              print(bits, end = '> ')
+              for i in range(len(bits)):
+                  if bits[i]: print(arr[i], end=' ')
+  # [0, 0, 0]
+  # [0, 0, 1]> C
+  # ...
+  # [1. 1. 1]> A B C
+  ```
+
+* 위의 코드 재귀호출로 바꿔보기
+
+```python
+arr = 'ABC'
+bits = [0] * 3
+
+def subset(k, n):
+    if k == n:
+        print(bits, end = '> ')
+        for i in range(len(bits)):
+            if bits[i]: print(arr[i], end=' ')
+        
+        return
+    
+    
+# 재귀 호출
+bits[0] = 0
+subset(k + 1, n)
+bits[1] = 1
+subset(k + 1, n)
+            
+```
+
+* 비트 연산자 (Bit Operator)
+
+  * &, |, <<, >>, ...
+
+  ```python
+  a = 10
+  print(bin(10)) # bin() 이진수 표기로 문자형으로 리턴
+  
+  a = 0b1010
+  print(a) # 10진수 표기
+  
+  # AND 연산
+  a = 0b1010
+  b = 0b1100
+  c = a & b
+  print(bin(c)) # => 0b1000
+  
+  # Shift 연산 << 곱하기, >> 나누기
+  print(bin(a << 1)) # => 0b10100
+  ```
+
+  * 비트 연산자를 쓰는 이유?
+
+    * 다른 연산에 비해 빠르다. (c에서는 다른 operator보다 적은 명령어)
+
+    ```python
+    n = 10
+    if n % 2:
+        print('홀수')
+    else:
+        print('짝수')
+    
+    # 비트 연산자 이용
+    n = 10
+    if n & 1:
+        print('홀수')
+    else:
+        print('짝수')    
+    ```
+
+  * `1 << n`: 2^n
+
+  * `i & (1 << j)`: i의 j번째 비트가 1인지 아닌지를 리턴
+
+* 비트 연산자 사용해 부분집합 생성
+
+```python
+arr = [3, 6, 7, 1, 5, 4]
+
+n = len(arr) # n : 원소의 개수
+
+for i in range(1 << n): # 1 << n: 부분 집합의 개수
+    for j in range(n): # 원소의 수만큼 비트를 비교함
+        if i & (1 << j): # i의 j번째 비트가 1이면 j번째 원소 출력
+            print(arr[j], end=",")
+   	print()
+print()
+
+```
+
+
+
+### 이진 검색 (Binary Search)
+
+* 검색의 종류 : 순차 검색, 이진 검색, 해쉬
+
+* 순차 검색: 브루트 포스 방법
+
+  * 가장 단순하고 직관적인 검색 방법
+  * 리스트 등 순차구조로 구현된 자료구조에서 순차적으로 검색
+  * 정렬되어 있다면 이진검색을 보통 씀.
+
+* 이진 검색
+
+  * **반드시 정렬된 상태여야 한다.**
+  * 중앙에 있는 원소와 비교
+
+  ```python
+  def binarySearch(arr, key):
+      lo, hi = 0, len(arr)-1
+      # lo = 범위의 시작인덱스, hi = 범위의 끝 인덱스
+      
+      while lo <= hi: # 같아질 때 까지! lo가 커지면 탐색실패!
+  		mid = (lo + hi) >> 1 # // 2 (나누기 2)
+          if arr[mid] == key:
+              return True
+          elif arr[mid] > key: # 왼쪽에서 탐색해야함 (lo ~ mid-1)
+              hi = mid - 1
+          else:
+              lo = mid + 1
+      return False
+  ```
+
+  ```python
+  # 재귀호출
+  def binarySearch(arr, lo, hi, key):
+      if lo > hi: return False
+      mid = (lo + hi) >> 1
+      if arr[mid] == key:
+          return True
+      elif arr[mid] > key: # 왼쪽에서 탐색해야함 (lo ~ mid-1)
+          return binarySearch(arr, lo, mid - 1, key)
+      else:
+          return binarySearch(arr, mid + 1, hi, key)
+  ```
+
+
+
+* 인덱스
+  * 대량 데이터 성능 저하 문제 해결 위해 배열 인덱스 사용
+  * 문자열의 suffix array(접미사 배열)
+
+### 셀렉션 알고리즘 (Selection Algorithm)
+
+정렬되어 있는(혹은 정렬되지 않은) 자료로부터 k번째로 큰(혹은 작은) 원소를 찾는 방법
+
+### 선택 정렬 (Selection Sort)
+
+k번째 큰값(혹은 작은값) 찾는 것
+
+```python
+# 규칙 찾기
+
+arr = [64, 25, 10, 22, 11]
+n = len(arr)
+
+# 첫번째 단계 [0, n - 1]
+min_idx = 0
+for j in range(1, n):
+    if arr[min_idx] > arr[j]:
+        min_idx = j
+arr[0], arr[min_idx] = arr[min_dix], arr[0]
+
+print(arr)
+
+# 두번째 단계 [1, n - 1]
+min_idx = 1
+for j in range(2, n):
+    if arr[min_idx] > arr[j]:
+        min_idx = j
+arr[1], arr[min_idx] = arr[min_dix], arr[1]
+
+print(arr)
+```
+
+
+
+```python
+# 선택 정렬 코드 
+
+arr = [64, 25, 10, 22, 11]
+n = len(arr)
+
+for i in range(n-1): # 범위의 시작 위치 : 0 ~ n-2
+    min_idx = i
+    for j in range(i+1, n):
+        if arr[min_idx] > arr[j]:
+        min_idx = j
+arr[i], arr[min_idx] = arr[min_dix], arr[i]
+
+print(arr)
+```
+
+### 실습 1, 2
 
 
 

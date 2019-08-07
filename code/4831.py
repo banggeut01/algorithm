@@ -10,7 +10,7 @@ for tc in range(t):
         print('#{} {}'.format(tc+1, 0))
     else:
         values = list(map(int, input().split()))
-        station = [0]*n # 정류장
+        station = [0]*n # 정류장 (선생님피드백:n-1까지 해도됨)
         for value in values:
             station[value] = 1 # 충전기가 있는 정류장
         cnt = 0 # 충전 횟수

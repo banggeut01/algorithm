@@ -17,4 +17,5 @@ for tc in range(t):
         if cnt[i] >= max_cnt: # 더 개수가 크면
             max_cnt = cnt[i]
             max_num = i
+    # max_cnt, max_num = (cnt[i], i) for i in range(1, 10) if cnt[i] >= max+cnt
     print('#{} {} {}'.format(tc+1, max_num, max_cnt))

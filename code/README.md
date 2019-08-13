@@ -195,6 +195,10 @@ Solving Club > list(8월 8일)
     * [사이트](https://www.acmicpc.net/problem/10163)
  * [숫자카드 10815]() (아직 안함)
    * [사이트](https://www.acmicpc.net/problem/10815)
+   * 첫번째시도) 초기 완전탐색 코드 시간초과!
+   * 두번째시도) 이진 탐색
+     * 상근이 카드 정렬 시킨 후 할 것
+     * 이 때, sorted() 써도 되는지.. 모르겠지만 일단 써보자.
  * 
 
 

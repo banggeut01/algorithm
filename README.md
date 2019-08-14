@@ -29,6 +29,8 @@
 * 초반 알고리즘 연습시 최대한 내장 함수, 라이브러리 쓰지 않고 구현하기!
   * len(), append(), 리스트 컴프리헨션 외에 다른 것 쓰지 않기
   * list slicing 쓰지 않기
+  
+* [알고리즘 참고 사이트 broblems](http://problems.kr/)
 
 ## 1. 배열(List) 1 
 
@@ -351,13 +353,13 @@ list1 = [[0] * 3] * 3
   list2[0][0] = 1
   print(list2)
   # [[1, 0, 0], [0, 0, 0], [0, 0, 0]]
-  ```
-  
+```
+
   * 배열 순회
   
     * n*m개 원소 빠짐없이 조사하는 방법
     * 행 우선순회(첫 번째 행, 두번째 행...)
-  
+    
     ```python
     arr = [[1, 2], [3, 4]]
     # python스러운 코드
@@ -367,9 +369,9 @@ list1 = [[0] * 3] * 3
     ```
   
     * 열 우선순회
-  
+    
     * 지그재그 순회
-  
+    
     ```python
     # idx 짝수, 홀수일 때로 나눔
     arr = [[1, 2], [3, 4]]
@@ -388,7 +390,7 @@ list1 = [[0] * 3] * 3
   
     * 전치 행렬 : 행과 열이 바뀜
     * 대각 순회 i, j = [ 00 => 01 -> 10 => 0, 2 -> 1, 1 -> 2, 0 => ... => 4, 4 ]
-  
+    
     ```python
     n, m = len(arr), len(arr[0])
     for diag in range(0, n + m -1) # diag: 사선의 수
@@ -406,7 +408,7 @@ list1 = [[0] * 3] * 3
     * 델타를 이용한 2차 배열 탐색
       * 배열의 한 좌표에서 4방향 인접 배열 요소 탐색하는 방법
       * 미로 탐색, 체스 등 많이 쓰임
-  
+    
     ```python
     # 상하좌우
     dx = [0, 0, -1, 1] # x 좌표 리스트
@@ -654,11 +656,232 @@ print(arr)
 
 ### 실습 1, 2
 
-
+p. 100
 
 
 
 ## 3. 문자열
+
+### 문자열
+
+c와 관련된 내용들
+
+```python
+# ASCII값
+print(ord('A'))
+
+# 문자로 변환
+print(chr(65))
+```
+
+* 문자의 표현
+  * 데이터 저장하는 방식, Byte order
+    * big-endian : 앞부터 차례대로 01, 02, 03, 04 (Linux, window, IBM ...)
+    * little-endian : 뒤부터 차례대로 04, 03, 02, 01 (솔라리스, 리눅스, Hp)
+* 인코딩 확인
+
+```python
+import sys
+print(sys.getdefualtencoding())
+```
+
+* 문자열은 기본  자료형이 아니다.
+
+* python 에서 class를 정의하면 멤버 함수 코드는 가지고 있지 않음.
+
+  멤버 변수를 저장하는 메모리 공간이 할당됨.
+
+* 문자 뒤집기 (펠린드롬, 회문)
+
+  * 예제 : [초심자의 회문검사 1989.py](./code/1989.py)	
+
+```python
+arr = 'algorithm'
+# print(arr[::-1]) python에서는 이렇게하면 바로 뒤집어짐
+
+arr = list(arr)
+print(arr)
+
+n = len(arr)
+for i in range(n//2):
+	# arr[i] <-- arr[n - 1 - i]
+    arr[i], arr[n - 1 - i] = arr[n - 1 - i], arr[i]
+print(arr)		
+```
+
+* 문자열 비교
+  * 사전 순으로 비교
+
+```python
+print('aaa' == 'aab') # => False
+print('aaa' > 'aab') # => FAlse
+print('aaa' < 'aab') # => True
+```
+
+* int쓰지 않고 숫자로 바꾸기
+
+```python
+arr = '1234567'
+val = 0
+for c in arr:
+    val = val * 10 + (ord(c) - ord('0'))
+    
+print(val)
+```
+
+* str 쓰지 않고 숫자로바꾸기
+
+```python
+val = 1234567
+val_str = ''
+while val:
+    print(val % 10)
+    val = val//10
+```
+
+
+
+### 패턴 매칭
+
+IM에는 안나옴
+
+AD에서도 패턴 매칭 문제 잘 안나옴
+
+고지식한 알고리즘(브루트-포스)는 알아두기
+
+```
+t: text
+p: pattern
+n: text길이
+m: pattern의 길이
+```
+
+
+
+* 브루트 포스(Brute Force)
+
+  * 고지식한 방법
+  * 모든 가능한 시작위치에서 검사하는 것
+  * 0 ~ n-m 시작위치부터 비교
+
+  ```python
+  p = 'ACAAAGTCCAGTACTAAA'
+  t = 'CA'
+  
+  n, m = len(t), len(p)
+  
+  # 가능한 모든 위치에 대해
+  for i in range(n - m + 1):
+      for j in range(m):
+          if t[i + j] != p[j]:
+              break
+      else:
+          # 패턴을 찾음
+          
+          
+  # c 스타일
+  for i in range(n - m + 1):
+      j = 0
+      while j < m and t[i + j] == p[j]:
+          j += 1
+      if j == m:
+          # 패턴을 찾음
+  ```
+
+  * t[i] == p[j], 같은 경우
+    * i++, j++
+  * t[i] != p[j], 다른 경우
+    * j = 0
+    * i는 원래 시작했던 위치의 다음 칸(원래 시작 위치: i-j, 다음칸:i-j+1)
+    * i = i - j + 1
+
+  ```python
+  p = 'ACAAAGTCCAGTACTAAA'
+  t = 'CA'
+  
+  n, m = len(t), len(p)
+  
+  i = j = 0
+  while i < n:
+      if t[i] == [j]:
+          i, j = i + 1, j + 1
+      else:
+          i = i - j + 1
+          j = 0
+      
+      if j == m:
+          # 찾음
+          break
+  ```
+
+  ```python
+  # 교재에 있는 방법, 꼭 이렇게 안해도 됨
+  
+  p = 'ACAAAGTCCAGTACTAAA'
+  t = 'CA'
+  
+  n, m = len(t), len(p)
+  
+  i = j = 0
+  while i < n and j < m:
+      if t[i] != [j]:
+          i = i - j
+          j = -1
+      i, j = i + 1, j + 1
+      if j == m:
+          # i - j를 저장
+          j = 0
+  ```
+
+* KMP(Knuth-Morris-Pratt Algorithm)
+
+  * 브루스 포트처럼 비교하다가 매치하지 않으면,
+
+    패턴 위치 0으로 돌아가지 않음.
+
+  * 패턴 전처리
+
+    * 패턴의 각 자리에서 불일치가 발생했을 때, 미리 이동할 곳을 찾아놓음.
+
+  * 접두어, 접미어
+
+    ```
+    'abcd'의 접두어
+    a
+    ab
+    abc
+    
+    'abcd'의 접미어
+    d
+    cd
+    bcd
+    
+    같은 길이의 접두어, 접미어
+    
+    불일치가 일어났을 때, 길이가 같고 공통되는 접두어, 접미어가 없으면,
+    i는 가만히(브루트 포스에서는 i=0)
+    j는 0, 만약 공통되는 접두어, 접미어 있으면 그에 맞게
+    ```
+
+    
+
+* Rabin–Karp: 해싱의 개념 사용
+
+* Boyer-moore
+
+  * 상용으로 가장 널리 사용됨
+  * 문자집합이 큰 경우
+  * 오른쪽에서 왼쪽으로 비교
+  * bad character : 비교를 안해도 되는 구간 skip
+  * Suffix : 공통된 접미사, 안벽 대칭되는 접미/접두사
+
+### 문자열 암호화
+
+
+
+### 문자열 압축
+
+
 
 
 

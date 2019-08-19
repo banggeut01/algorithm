@@ -8,7 +8,7 @@ def row_pal(i, j, m):
         if word[i][j + p] == word[i][j + m - p - 1]:
             p += 1
         else:
-            return 0
+            return 1
     return m
 
 def col_pal(i, j, m):
@@ -17,7 +17,7 @@ def col_pal(i, j, m):
         if word[i + p][j] == word[i + m - p - 1][j]:
             p += 1
         else:
-            return 0
+            return 1
     return m
 
 for t in range(10):

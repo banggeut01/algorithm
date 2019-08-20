@@ -1,6 +1,6 @@
 # 2578풀이.py
 import sys
-sys.stdin = open('1209input.txt', 'r')
+sys.stdin = open('2578input.txt', 'r')
 
 for tc in range(1, 11):
 

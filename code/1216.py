@@ -1,6 +1,6 @@
 # 회문2 1216.py
 import sys
-sys.stdin = open('1216input.txt', 'r')
+
 
 def row_pal(i, j, m):
     p = 0 # p: 회문 idx
@@ -20,14 +20,15 @@ def col_pal(i, j, m):
             return 1
     return m
 
+sys.stdin = open('1216input.txt', 'r')
 for t in range(10):
     tc = int(input())
     word = [input() for _ in range(100)]
 
     max_len = 0
     for i in range(100):
-        for j in range(99): # j인덱스 0 ~ 98, 회문길이 100 ~ 2
-            for m in range(100, 99-j, -1): # 회문 길이 100 ~ (99-j), 길이1이면 1출력
+        for j in range(99): # j인덱스 0 ~ 98
+            for m in range(100-j, 1, -1): # 회문 길이 100 ~ 2, 길이1이면 1출력
                 tmp = row_pal(i, j, m)
                 if tmp > max_len:
                     max_len = tmp

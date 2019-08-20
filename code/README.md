@@ -145,7 +145,71 @@ Solving Club > list(8월 7일)
 
 [추가 문제 - 백준](https://www.acmicpc.net/problem/2578)
 
-* [2578 빙고](./code/2578.py) (미완성코드)
+* [2578 빙고](./code/2578.py) 
+
+  ```python
+  # list copy 주의!
+  row_cnt = col_cnt = [0]*5
+  row_cnt[3] = 4
+  print(row_cnt) # => [0, 0, 0, 4, 0]
+  print(col_cnt) # => [0, 0, 0, 4, 0]
+  ```
+
+  ```python
+  # error
+  if i == j:
+      check[10] += 1
+  elif i + j == 4:
+      check[11] += 1
+  ```
+
+  이렇게 하면, arr(i=2, j=2)=5 일 때, cross_cnt 한개만 카운트된다.
+
+  따라서, elif가 아닌 if로 바꿔줘야 함.
+
+  ```python
+  if i == j:
+      check[10] += 1
+  if i + j == 4:
+      check[11] += 1
+  ```
+
+  ```
+  error
+  주의!!
+  반례 생각해주기
+  계속 틀렸는데, 그 이유가 빙고 갯수를 3인 경우만 생각했기 때문!!
+  2줄이 그어진 상태에서, 한 줄이 더 그어졌을 때
+  빙고의 개수가 4가 될 수도 있다.
+  ```
+
+  
+
+  ```python
+  # 수정 전
+  if bingo == 3:
+      print(cnt)
+      break
+  ```
+
+  ```python
+  # 수정 후
+  if bingo >= 3:
+      print(cnt)
+      break
+  ```
+
+  * 김준영 방법 (이렇게 풀어보기!)
+
+  ```
+  나의 방법) check = [0] * 12 # row_cnt:0~4, col_cnt:5~9, cross_cnt:10~11
+  지워진 개수를 세어주는 리스트를 따로 만들었다.
+  
+  하지만, 이를 따로 만들지 않고 숫자를 지우는 방법도 있다.
+  arr에서 숫자 0으로 변경 후 행순회, 열순회, 대각순회
+  ```
+
+추가문제 - SWEA
 
 * [요리사 4012](./code/4012.py) (아직 안함)
 
@@ -207,6 +271,7 @@ for i in range(r1, r2+1): # 위 -> 아래로 r1~r2
 
 * [부분집합의 합 4837](./code/4837.py)
 * [이진탐색 4839](./code/4839.py)
+
 * [특별한 정렬 4843](./code/4843.py)
 
 Solving Club > list(8월 8일)
@@ -257,13 +322,47 @@ Solving Club > list(8월 8일)
    
     * [사이트](https://www.acmicpc.net/problem/10163)
     
- * [숫자카드 10815](./code/10815.py) (미완성)
+ * [숫자카드 10815](./code/10815.py) 
    
    * [사이트](https://www.acmicpc.net/problem/10815)
    * 첫번째시도) 초기 완전탐색 코드 시간초과!
    * 두번째시도) 이진 탐색
      * 상근이 카드 정렬 시킨 후 할 것
      * 이 때, sorted() 써도 되는지.. 모르겠지만 일단 써보자.
+   
+   ```python
+   # error
+   if your > my[mid]:
+     left = mid
+   elif your < my[mid]:
+     right = mid
+   ```
+   
+   ```
+   위와 같이 하게 되면,
+   반복문 빠져나올 수 없다.
+   이미 검사한 mid 위치를 제외하고 검사해야한다.
+   아래와 같이 바꿈.
+   ```
+   
+   ```python
+   if your > my[mid]:
+     left = mid + 1
+   elif your < my[mid]:
+     right = mid - 1
+   ```
+   
+   ```
+   또한, while 조건문도 다음과 같이 바꾸어줌
+   ```
+   
+   ```python
+   while left != right: # 수정 전
+   while left <= right: # 수정 후
+   ```
+   
+   
+   
    * 김태우 방법(set 이용)
    
    ```
@@ -318,15 +417,19 @@ SWEA > Learn > Course > IM > 파이썬 - String
 
 * [글자수 4865.py](./code/4865.py)
 
-추가문제
+추가문제 - SWEA
 
 * [세상의 모든 팰린드롬 2 4579.py](./code/4579.py)
 * [세상의 모든 팰린드롬 4522.py](./code/4522.py)
 * [자기 방으로 돌아가기 4408.py](./code/4408.py)
 
+[추가문제 - 백준](https://www.acmicpc.net/problem/1244)
+
+* [스위치 켜고 끄기 b1244.py](./code/b1244.py) (아직안함)
+
 Solving club > 03.String(8월 16일)
 
-* [회문2 1216.py](./code/1216.py) 아직 안함
+* [회문2 1216.py](./code/1216.py) 
 
 * [회문2 1215.py](./code/1215.py) 
 

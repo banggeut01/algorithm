@@ -10,39 +10,32 @@ nums = []
 for _ in range(5):
     nums += list(map(int, input().split()))
 
-# 지워진 개수를 값으로 갖는 리스트
-# 5개 행(idx 0 ~ 4), 5개 열, 우하향 대각선 1개, 좌하향 대각선 1개
-check_list = [0] * 12
-line_cnt = 0 # 그어진 선의 개수
-num_cnt = 0
+check = [0] * 12 # row_cnt:0~4, col_cnt:5~9, cross_cnt:10~11
+cnt = 0
 
 for num in nums:
-    for row in range(5):
-        for col in range(5):
-            if arr[row][col] == num:
-                # 행
-                check_list[row] += 1
-                if check_list[row] == 5: # 빙고면,
-                    line_cnt += 1 # 그어진 선 개수 ++1
-
-                # 열
-                check_list[4 + col] += 1
-                if check_list[4 + col] == 5:
-                    line_cnt += 1
-
-                # 우하향 대각선
-                if row == col:
-                    check_list[10] += 1
-                    if check_list[10] == 5:
-                        line_cnt += 1
-
-                # 좌하향 대각선
-                elif row + col == 5:
-                    check_list[11] += 1
-                    if check_list[11] == 5:
-                        line_cnt += 1
-                num_cnt += 1
-                if line_cnt == 3:  # 지워진 선 3개면,
-                    print(num_cnt)
-                    sys.exit(1)
-                break
+    flag = 0
+    for i in range(5):
+        for j in range(5):
+            if arr[i][j] == num:
+                check[i] += 1
+                check[5 + j] += 1
+                if i == j:
+                    check[10] += 1
+                if i + j == 4:
+                    check[11] += 1
+                flag = 1
+                cnt += 1
+                # print(arr[i][j], i, j, check)
+                break # 숫자 arr에서 지워지면 이중 for문 종료, 새 숫자 받기
+        if flag:
+            break
+    bingo = 0
+    for chk in check:
+        if chk == 5: # 빙고
+            bingo += 1
+    if bingo >= 3:
+        print(cnt)
+        break
+else:
+    print(25)

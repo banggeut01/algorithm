@@ -425,13 +425,57 @@ SWEA > Learn > Course > IM > 파이썬 - String
 
 [추가문제 - 백준](https://www.acmicpc.net/problem/1244)
 
-* [스위치 켜고 끄기 b1244.py](./code/b1244.py) (아직안함)
+* [스위치 켜고 끄기 b1244.py](./code/b1244.py) 
+
+  ```python
+  # error 출력형식이 잘못되었습니다.
+  # 아래 두 코드 시도해봐도 안됨
+  # 1)
+  print(' '.join(map(str, switch)))
+  
+  # 2)
+  for i in range(sw_len - 1):
+      print(switch[i], end=" ")
+  
+  print(switch[i + 1])
+  ```
+
+  문제 출력 조건 제대로 읽기! (**한 줄에 20개씩 출력**)
+
+  아래와 같이 바꾸었다.
+
+  그런데, ...
+
+  ```python
+  # runtime error!
+  switch = list(map(str, switch))
+  while len(switch) >= 20:
+      print(' '.join(switch[20]))
+      tmp -= 20
+      switch = switch[20:]
+  print(' '.join(switch))
+  ```
+
+  왜 그런지는 모르겠으나 아래와 같이 수정 후 pass
+
+  ```python
+  s = 0
+  tmp = sw_len
+  switch = list(map(str, switch))
+  while tmp >= 20:
+      print(' '.join(switch[s:s+20]))
+      tmp -= 20
+      s += 20
+  print(' '.join(switch[s:]))
+  ```
+
+  아마 `switch = switch[20:]` 이 부분이 원인인듯 하다.
+
+  앞으로 이러한 코드는 쓰지 않는 걸로..
 
 Solving club > 03.String(8월 16일)
 
-* [회문2 1216.py](./code/1216.py) 
-
-* [회문2 1215.py](./code/1215.py) 
+* [회문1 1215.py](./code/1215.py) 
 
   ```
   index 주의하기!
@@ -443,6 +487,137 @@ Solving club > 03.String(8월 16일)
   검사 범위 (text길이8, 회문길이4 일 때)
   행 검사: row는 0 ~ 7 / col은 0 ~ 4
   열 검사: col은 0 ~ 7 / row는 0 ~ 4
+  ```
+
+  ```
+  start = (0 ~ N -M)
+  end = start + m - 1
+  비교 횟수 m // 2
+  ```
+  
+  * 선생님 풀이
+  
+    * 슬라이싱 쓰면 속도가 느려지고, 메모리 많이 쓴다!
+  
+    * 나의 코드 경우에 p라는 현재 위치 변수 만들었지만, 
+  
+      선생님 경우 start, end위치 저장하는 변수 따로 만들었음
+  
+  ```python
+  for tc in range(1, 11):
+      m = int(input()) # 회문 길이
+      word = [input() for _ in range(8)]
+      
+      ans = 0
+      
+      idx = 0
+      # 한 행/열(idx:0)에 대해서,
+      for s in range(8 - m + 1):
+      	e = s + m - 1 # end, start
+          for i in range(m // 2): # 행우선순회
+              if arr[idx][s + i] != arr[idx][e - i]: break
+          else:
+              ans += 1
+          for i in range(m // 2): # 열우선순회
+              if arr[s + i][idx] != arr[e - i][idx]: break
+          else:
+              ans += 1
+  ```
+  
+* [회문2 1216.py](./code/1216.py) 
+
+  * 선생님 코드 
+
+  ```python
+  for tc in range(1, 11):
+      m = int(input()) # 회문 길이
+      word = [input() for _ in range(8)]
+      
+      ans = 1 # 지금까지 찾은 최대 길이
+      # 한 행/열에 대해서,
+      for idx in range(100):
+          for s in range(100): # 시작 위치
+              for e in range(99, s, -1): # 끝 위치, 99 ~ 0
+                  L = e - s + 1 # L 현재 길이
+                  if L <= ans: break
+          		for i in range(L // 2): # 행우선순회
+              		if arr[idx][s + i] != arr[idx][e - i]: break
+         			else:
+              		ans = L
+                  if L <= ans: break
+          		for i in range(L // 2): # 열우선순회
+              		if arr[s + i][idx] != arr[e - i][idx]: break
+          		else:
+              		ans = L
+  ```
+
+  * 다른 방법 (한번 구현해보기)
+    * 인접한 부분 비교, 같을 때까지
+    * 회문 길이가 짝수, 홀수인 경우로 나눠 비교해야함
+    * 기준 위치를 잡아야함 (홀수의 경우 가운데/짝수 경우 왼쪽 or 오른쪽)
+
+  ```python
+  for tc in range(1, 11):
+      m = int(input()) # 회문 길이
+      word = [input() for _ in range(8)]
+      
+      ans = 1 # 지금까지 찾은 최대 길이
+      # 한 행/열에 대해서,
+      for idx in range(100):
+          for x in range(100): # x => 기준 위치
+              # 회문 길이가 짝수
+              # 행에 대해서
+              l, r, cnt = x, x + 1, 0 # cnt는 회문 길이
+              while l >= 0 and r < 100:
+                  if arr[idx][l] != arr[idx][r]: break
+                  l, r, cnt = l - 1, r + 1, cnt + 2
+              ans = max(ans, cnt)
+              # 열에 대해서 
+              l, r, cnt = x, x + 1, 0
+              while l >= 0 and r < 100:
+                  if arr[l][idx] != arr[r][idx]: break
+                  l, r, cnt = l - 1, r + 1, cnt + 2
+              ans = max(ans, cnt)
+              
+              # 회문 길이가 홀수
+              # 행에 대해서
+              l, r, cnt = x - 1, x + 1, 1
+              while l >= 0 and r < 100:
+                  if arr[idx][l] != arr[idx][r]: break
+                  l, r, cnt = l - 1, r + 1, cnt + 2
+              ans = max(ans, cnt)
+              # 열에 대해서 
+              l, r, cnt = x - 1, x + 1, 1
+              while l >= 0 and r < 100:
+                  if arr[l][idx] != arr[r][idx]: break
+                  l, r, cnt = l - 1, r + 1, cnt + 2
+              ans = max(ans, cnt)
+  ```
+
+# Day 7
+
+SWEA > IM > stack1
+
+* [4일차 괄호검사 4866.py](./code/4866.py)
+
+* [Ladder 1](./code/1210.py)
+
+  * 김준영 방법
+
+  ```python
+  맨 위부터 찾지 않고,
+  마지막 행부터 찾는다.
+  2를 먼저 찾아서 위로 올라가는 방식!
+  헿
+  ```
+
+  
+
+  * [재귀로 해보기](./code/1210-2.py)
+
+  ```
+  김준영 방법으로 첫번째 행부터 말고, 마지막 행부터!
+  결과를 찾아 올라가기!
   ```
 
   

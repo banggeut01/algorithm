@@ -889,13 +889,370 @@ m: pattern의 길이
 
 ## 4. Stack 1
 
+### 스택
 
+* 스택은 선형구조이다.
 
+  * 선형구조:  자료간 관계 1대1의 관계, 지금 자료 다음 읽을 자료 1개
+  * 비선형구조: 트리, 그래프의 경우 인접한 자식 여러개 중 선택
 
+* 스택 구현 위해 필요한 자료구조, 연산
+
+  * 자료구조: 자료를 선형으로 저장할 저장소(c의 경우 배열)
+  * 연산: push, pop, isEmpty, peek
+  * top: 맨 위 자료를 가리키는 idx
+
+* 스택 구현
+
+  ```python
+  # C - style
+  stack = [0] * 3
+  top = -1 # 맨 마지막
+  
+  def push(item):
+      global top
+      # full - 상태를 주의
+      # c에서는 마지막 인덱스인지 아닌지 if top == 마지막인덱스:
+      top += 1
+      stack[top] = item
+   
+  def pop():
+      # empty - 상태를 체크
+      if top == -1: return
+      ret = stack[top]
+      top -= 1
+  	return ret
+  
+  # python에서는
+  stack.append(1) # push
+  stack.append(2) # push
+  stack.append(3) # push
+  stack.pop() # pop
+  
+  # => 3\n2\n1\n
+  
+  ```
+
+  
+
+### 재귀호출
+
+재귀호출로 DFS(깊이 우선 탐색) 많이함
+
+1. 재귀적으로 문제를 해결
+   * 재귀적 정의를 코드 구현할 때
+   * 좀 더 작은 문제의 해를 이용해서 좀 더 큰 문제의 해를 구하는 문제
+   * => 분할 정복, DP
+2. 그래프 탐색(DFS)
+3. 백트래킹(상태 공간 트리 탐색)
+
+```python
+def printHello():
+    print('Hello')
+    printHello()
+    
+# for i in range(3):
+#     print('Hello')
+
+printHello()
+```
+
+위 코드 error! 재귀호출 횟수 1000으로 제한
+
+```python
+import sys
+print(sys.getrecursionlimit())
+# => 1000
+```
+
+검정 시험에서는 풀 수 있도록 늘려놨을 것이다.
+
+```python
+def printHello(i, n):
+    if i == n:
+        # 하고 싶은 일
+        return
+    else:
+        print(i, 'Hello') # 함수 호출 전
+    	printHello(i + 1, n)
+        print(i, 'Hello') # 함수 호출 후
+
+printHello(0, 3)
+```
+
+```pyhon
+# 결과
+0 Hello
+1 Hello
+2 Hello
+2 Hello
+1 Hello
+0 Hello
+```
+
+```python
+cnt = 0
+def printHello(i, n):
+    global cnt
+    if i == n:
+        cnt += 1
+        return
+    else:
+    	printHello(i + 1, n)
+
+printHello(0, 3)
+print('cnt=', cnt) # = cnt = 1
+```
+
+```python
+cnt = 0
+def printHello(i, n):
+    global cnt
+    if i == n:
+        cnt += 1
+        return
+    else:
+    	printHello(i + 1, n)
+        printHello(i + 1, n)
+
+printHello(0, 3)
+print('cnt=', cnt) # = cnt = 8 2^3
+```
+
+```python
+cnt = 0
+def printHello(i, n):
+    global cnt
+    if i == n:
+        cnt += 1
+        return
+    else:
+    	printHello(i + 1, n)
+        printHello(i + 1, n)
+        printHello(i + 1, n)
+
+printHello(0, 3)
+print('cnt=', cnt) # = cnt = 27 depth만큼 제곱 3^3
+```
+
+* 이해 x 이해해보기
+
+```python
+cnt = 0
+bits = [0] * 3
+def printHello(i, n):
+    global cnt
+    if i == n:
+        cnt += 1
+        print(bits)
+        return
+    else:
+    	bits[i] = 1; printHello(i + 1, n)
+        bits[i] = 0; printHello(i + 1, n)
+        
+printHello(0, 3)
+print('cnt=', cnt)
+```
+
+* factorial 재귀로 구현 
+  * O( 2^n)
+
+```python
+def fact(n): # n = 문제를 식별하는 값, 문제의 크기
+    if n == 0 or n == 1:
+        return 1
+    else:
+        return n * fact(n - 1)
+```
+
+```python
+def fibo(n):
+    if n == 0 or n == 1:
+        return n
+    return fibo(n - 1) + fibo(n - 2)
+
+print(fibo(40))
+```
+
+### Memoization
+
+* O(n)
+
+  `recursive` 방식으로 구현
+
+```python
+memo = [-1] * (101)
+def fibo(n):
+    if n == 0 or n == 1:
+        return n
+    if memo[n] != -1: # 답을 구함
+        return memo[0]
+    
+    memo[n] = fibo(n - 1) + fibo(n - 2)
+    return memo[n]
+
+print(fibo(40))
+```
+
+이게 DP다.
+
+### DP(Dynamic Programming, 동적 계획)
+
+* 그리디처럼 **최적화 문제** 해결하는 알고리즘
+* 최적화 문제는 완전 탐색을 기본으로 한다.
+
+* 완전 탐색인데, 덜 무식하게 하는 방법
+* DP는 재귀로 푼다.(작은 문제 -> 큰 문제 최적해 구함)
+* DP의 구현 방식
+  * recursive
+  * iterative
+* `iterative` 방식으로 구현 (`recursive`보다 `iterative` 방식이 좋다.)
+
+```python
+memo = [-1] * (101)
+def fibo(n):
+    # 내가 알고 있는 기저상태 채우기
+    memo[0], memo[1] = 0, 1
+    for i in range(2, n + 1): # i => 문제를 식별하는 값
+    	memo[n] = memo(n - 1) + memo(n - 2)
+     
+    return memo[n]
+
+print(fibo(40))
+```
+
+16주차 그래프 먼저 함
+
+## 12. 그래프
+
+### 그래프 기본
+
+그래프는 아이템(사물 또는 추상적 개념)들 - **정점**과 이들 사이의 연결관계 - **간선**을 표현함.
+
+* 그래프 속성
+
+  * 정점(Vertex)와 이를 연결하는 간선(Edge)
+  * V개의 정점을 가지는 그래프는 최대 V*(V-1)/2개 간선이 가능
+  * 최소간선 개수 : 정점개수 - 1
+
+* 인접 정점
+
+  * 인접 : 두 개 정점 사이 간선이 존재하면 서로 인접해있다고 함.
+
+* 그래프 표현
+
+  * 인접 행렬 : v*v 크기 2차원 배열에 간선 정보 저장
+  * 인접 리스트 : 각 정점마다 해당 정점으로 나가는 간선 정보 저장
+
+  
+
+### DFS(Depth First Search, 깊이 우선 탐색)
+
+* **그래프**에서 사용하는 알고리즘
+* 단점 : 최단 경로를 보장할 수 없음!
+
+### 실습1, 2, 3
+
+* [연습문제 3](./code/stack_ex3-1.py)
+
+  * 스택을 사용해 그래프 탐색
+  * [input](./code/DFS_input.txt)
+
+  ```python
+  # stack_ex3-1.py
+  
+  import sys; sys.stdin = open('DFS_input.txt', 'r')
+  
+  
+  def DFS(v):
+      # 시작점을 방문하고 스택에 push
+      stack = [] # 방문 경로 저장할 스택
+      visit[v] = True; print(v, end='')
+      stack.append(v)
+      while s: # 빈 스택이 아닐동안 반복
+          for w in g[v]:
+              if not visit[w]: # v에 방문하지 않은 인접정점 w를 찾아서
+                  visit[w] = True; print(w, end='')
+                  stack.append(w) # w를 방문하고, v를 스택에 push
+                  v = w # v를 w로 설정
+                  break
+          else: # 인접정점이 없다면, 스택에서 pop()해서
+              v = s.pop() # v로 설정
+  
+  
+  v, e = map(int, input().split()) # 정점수, 간선수
+  g = [[] for _ in range(v + 1)]   # 1 ~ v 까지
+  visit = [False] * (v + 1)        # 방문 정보
+  
+  for _ in range(e):
+      u, v = map(int, input().split()) # 정점1, 정점2
+      g[u].append(v)
+      g[v].append(u) # 무향 그래프
+  
+  print(g)
+  ```
+
+  
+
+  * 하지만, 재귀호출로 짜는 것이 낫다.
+  * 한번 짜보기!
+
+  * [재귀로](./code/stack_ex3.py)
+
+  ```python
+  # stack_ex3.py
+  
+  import sys; sys.stdin = open('DFS_input.txt', 'r')
+  
+  
+  def DFS(v): # v = 현재 방문하는 정점
+  
+      visit[v] = True; print(v, end='')
+  
+      for w in g[v]:
+          if not visit[w]: # v에 방문하지 않은 인접정점 w를 찾아서
+              DFS(w)
+  
+  
+  v, e = map(int, input().split()) # 정점수, 간선수
+  g = [[] for _ in range(v + 1)]   # 1 ~ v 까지
+  visit = [False] * (v + 1)        # 방문 정보
+  
+  for _ in range(e):
+      u, v = map(int, input().split()) # 정점1, 정점2
+      g[u].append(v)
+      g[v].append(u) # 무향 그래프
+  
+  print(g)
+  
+  DFS(1)
+  ```
+
+  
 
 ## 5. Stack 2
 
+### 계산기
 
+
+
+### 백트래킹(Backtracking)
+
+* 해를 찾는 도중 '막히면'(해가 아니면) 되돌아가서 해를 다시 찾음
+* 최적화 문제, 결정 문제
+* 결정 문제: Yes or No
+  * 미로 찾기
+  * n-Queen 문제
+  * Map coloring
+  * 부분 집합의 합 문제 등
+
+
+
+### 분할정복
+
+
+
+### 실습1, 2
 
 
 

@@ -602,7 +602,7 @@ SWEA > IM > stack1
 
 * [Ladder 1](./code/1210.py)
 
-  * 김준영 방법
+  * 김준영 방법 : 거꾸로 생각하기
 
   ```python
   맨 위부터 찾지 않고,
@@ -611,13 +611,229 @@ SWEA > IM > stack1
   헿
   ```
 
-  
-
   * [재귀로 해보기](./code/1210-2.py)
 
   ```
-  김준영 방법으로 첫번째 행부터 말고, 마지막 행부터!
+김준영 방법으로 첫번째 행부터 말고, 마지막 행부터!
   결과를 찾아 올라가기!
+  ```
+  
+  * [선생님 풀이1 - 반복문 (내 방법과 같음)](./code/1210solution.py)
+
+    * 조건에 따른 좌표 이동과 방향 설정
+  
+      1. 오른쪽 길 있으면 이동, 방향 설정
+      2. 왼쪽 길 있으면 이동, 방향 설정
+      3. 위로 이동
+      4. 왼쪽에 길이 있으면 이동
+      5. 위로 이동, 방향 설정
+      6. 오른쪽에 길 있으면 이동
+      7. 위로 이동, 방향설정
+  
+    * 위 경우는 3가지로 묶을 수 있음 (1,2,3), (4, 5), (6, 7)
+  
+    * 방향 상태 저장하는 변수 direction = 위 or 왼쪽 or 오른쪽
+    
+    ```python
+    dir = 0 # direction 0: 위, 1: 왼쪽, 2: 오른쪽
+  while x:
+        if dir != 2 and y - 1 >= 0 and arr[x][y - 1]:
+            y, dir = y - 1, 1
+        elif dir != 1 and y + 1 < 100 and arr[x][y + 1]:
+            y, dir = y + 1, 2
+       else:
+            x, dir = x - 1, 0
+    ```
+    
+    ```python
+    while x:
+        if y - 1 >= 0 and arr[x][y - 1]:
+            while y - 1 >= 0 and arr[x][y - 1]:
+                y -= 1
+        elif y + 1 < 100 and arr[x][y + 1]:
+            while y + 1 < 0 and arr[x][y - 1]:
+                y += 1
+        x -= 1
+    ```
+    
+  * [선생님 풀이 2(재귀)](./code/1210solution.py)
+  
+    * 나의 재귀와 다르게 visit라는 방문 리스트를 따로 만들지 않고,
+  
+      가지고 있는 경로 변수를 이용함
+  
+    ```python
+    def DFS(x, y):
+        if x == 0: return y
+        
+        arr[x][y] = 0 # 이 부분 주목!
+        if y - 1 >= 0 and arr[x][y - 1]:
+            return arr(x, y - 1)
+        elif y + 1 < 100 and arr[x][y + 1]:
+            return arr(x, y + 1)
+        else:
+            return arr(x + 1, y)
+    ```
+  
+    
+  
+  ​    
+
+# Day 8
+
+SWEA > IM > stack1
+
+* 4869.4일차 - 종이붙이기
+
+  * [재귀](./code/4869.py)
+  * [DP](./code/4869-2.py) 
+
+* 4871 [파이썬 S/W 문제해결 기본] 4일차 - 그래프 경로
+
+  * [스택 사용](./code/4871-2.py) runtime error! 어떻게 해결해야할지 모르겠다..
+
+  * [재귀 사용](./code/4871.py)
+
+    * ??? 의문점) 재귀로 쓰는 DFS는 중간에 stop하지 못하는가..?
+
+    ```python
+    # error1
+    def DFS(v, g): # v 현재 노드, g 도착 노드
+        if v == g:
+            return 1
+        
+        visit[v] = True
+    
+        for w in matrix[v]:
+            if not visit[w]:
+                route.append(w)
+                return DFS(w, g)
+       	return 0
+    ```
+
+    ```결과
+    #1 1
+    #2 1
+    #3 None
+    ```
+
+    ```python
+    # error2
+    def DFS(v, g): # v 현재 노드, g 도착 노드
+        if v == g:
+            return 1
+        
+        visit[v] = True
+    
+        for w in matrix[v]:
+            if not visit[w]:
+                route.append(w)
+                DFS(w, g)
+    ```
+
+    ```
+    #1 None
+    #2 None
+    #3 None
+    ```
+
+    ```python
+    # error3
+    def DFS(v, g):  # v 현재 노드, g 도착 노드
+        if v == g:
+            return 1
+    
+        visit[v] = True
+    
+        for w in matrix[v]:
+            if not visit[w]:
+                route.append(w)
+                DFS(w, g)
+        return 0
+    ```
+
+    ```
+    #1 0
+    #2 0
+    #3 0
+    ```
+
+    ```python
+    # 해결
+    def DFS(v):
+        visit[v] = True
+    
+        for w in matrix[v]:
+            if not visit[w]:
+                route.append(w)
+                DFS(w)
+                
+    ...
+    route = []
+    
+    DFS(s)
+    for r in route:
+        if r == g:
+            result = 1
+            break
+        else:
+            result = 0
+    ```
+
+    DFS 중간에 중단하지 않고, 모두 수행한 후
+
+    route 중 도착지점 있는지 검사하였다.
+
+  * 정지수 해결법 ==> flag 변수 사용
+
+    ```python
+    ## 그래프 경로 4871.py
+    # 유향 그래프
+    # 재귀 DFS
+    def DFS(v):
+       flag = 0
+       visit[v] = True
+       if v ==g:
+           return 1
+       for w in matrix[v]:
+           if not visit[w]:
+               flag = DFS(w)
+               if flag == 1:
+                   break
+       return flag
+    t = int(input())
+    for tc in range(1, t + 1):
+       v, e = map(int, input().split()) # 노드, 엣지
+       matrix = [[] for _ in range(v + 1)]
+       # 인접행렬
+       for _ in range(e):
+           start, end = map(int, input().split())
+           matrix[start].append(end)
+       s, g = map(int, input().split()) # 시작, 도착노드
+       visit = [False] * (v + 1) # 방문 노드
+       print('#{} {}'.format(tc, DFS(s)))
+    ```
+
+    
+
+* [4873. [파이썬 S/W 문제해결 기본] 4일차 - 반복문자 지우기 D](./code/4873.py)
+
+추가문제
+
+SWEA > Soving Club
+
+* [작업순서 1267](./code/1267.py) 푸는중..
+
+  ```
+  루트노드 찾기)
+  들어오는 엣지 개수를 배열에 저장한 후, 개수가 0인 곳이 루트노트!
+  => 결과 Fail
+  
+  왜?
+  모든 노드가 연결된 형태가 아니기 때문!
+  
   ```
 
   
+
+* [쇠막대기 자르기 5432](./code/5432.py)

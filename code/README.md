@@ -707,7 +707,34 @@ SWEA > IM > stack1
 
 * 4871 [파이썬 S/W 문제해결 기본] 4일차 - 그래프 경로
 
-  * [스택 사용](./4871-2.py) runtime error! 어떻게 해결해야할지 모르겠다..
+  * [스택 사용](./4871-2.py) 해결하지 못하였음!
+
+    ```python
+    # runtime error!
+    def DFS(v, g):
+        stack = []
+    
+        visit[v] = True
+        stack.append(v)
+    
+        while s: # 빈 스택 아닐동안
+            for w in matrix[v]:
+                if not visit[w]: # 가지 않았던 노드
+                    if w == g:
+                        return 1
+                    visit[w] = True # 방문
+                    stack.append(w)
+                    v = w
+                    break
+            else: # 갈 수 있는 노드 없으면, 
+                stack.pop()
+                if stack:
+                    v = stack[-1] # 되돌아가기
+        return 0
+    ```
+
+    * 이유를 모르겠다. 원래 재귀로 푸는 것인가..???
+    * 해결하지 못하였음!
 
   * [재귀 사용](./4871.py)
 
@@ -841,7 +868,13 @@ SWEA > Soving Club
 
 * 작업순서 1267
 
-  * DFS스택, DFS재귀, DAG 세가지 방법으로 풀어보기
+  * DFS-스택, [DFS-재귀](./code/1267-2.py), [DAG-queue](./code/1267-3.py) 세가지 방법으로 풀어보았다.
+  * DFS-스택, 재귀는 답을 스택에 저장해 거꾸로 출력
+    * 방문하면서 위상순서 리스트에 저장하는 것이 아닌
+    * 더 이상 갈 노드가 없을 때, 위상순서에 저장하였고
+    * 이를 거꾸로 출력한 것이 답이다.
+  * DAG-큐는 위상순서 그대로 출력
+    * visit 대신 indegree 리스트를 사용하였음
   * [dfs스택 - 소스보기](./1267.py) 
 
   ```python
@@ -853,22 +886,15 @@ SWEA > Soving Club
   * DFS로 푸는데 문제점 발생!  (DAG로도 풀어보기!)
 
   ```
-  루트노드 찾기)
-  indegree를 배열에 저장한 후, 개수가 0인 곳이 루트노트!
-  => 결과 Fail
+  시작노드 찾기)
   
-  왜?
-  input한 노트만 연결
-  하지만 배열은 존재하지 않는 노드까지 포함되어 있음!
-  
-  어떻게 해결?
   들어오는 indegree 0이면서, outdegree 1이상
   
   => 결과 Fail
   
   왜?
-  루트 노드가 한개만 존재하는 것이 아니다.
-  아래 그림을 예로, a, g 모두 루트노드가 된다.
+  시작 노드가 한개만 존재하는 것이 아니다.
+  아래 그림을 예로, a, g 모두 시작노드가 된다.
   
   그렇다면 시작노드에서 시작한 후, 터미널 노드까지 갔을 때
   다시 돌아오면서 방문하지 않은 노드를 찾아야한다.
@@ -907,13 +933,15 @@ SWEA > Soving Club
 
     ```python
     for s in range(1, v + 1):
-        if outgoing[s]: # 시작노드이면,
+        if indegree[s] == 0:: # 시작노드이면,
             dfs(s)# DFS 시작
     ```
 
     * 왜?
-
-    
+      * 혼자 떨어져 있는 노드가 존재함
+      * [input data](./day9/1210input.txt)의 in, out node에는 존재하지 않음
+      * 예로 test case 6번의 {160, 137, 172, 140, 119}번 노드들
+      * 모두 다 연결된 상태는 아님
 
   * 위상 정렬 - 1) DAG(Directed Acyclic Graph) (indegree, outdegree고려)
 
@@ -930,6 +958,52 @@ SWEA > Soving Club
       * FIFO
     * v의 인접정점(u) 찾아 진입차수 1감소
       * u의 진입차수 0이 되면 u를 큐에 삽입
+
+    ![dag](./images/dag.png)
+
+    ```python
+    arr = [0, 1, 2, 2, 2, 1, 0]
+    	 # a, b, c, d, e, f, g 
+    
+    
+    queue = [a, g] # indegree 0 큐에 삽입
+    arr = [0, 0, 2, 1, 2, 1, 0] # queue[0]인 a의 인접정점 indegree -1
+    result = [a] # 위상순서 a
+    queue = [g, b] # 인접정점 indegree 0 이 되면, queue에 삽입
+    
+    arr = [0, 0, 2, 0, 2, 1, 0] # g의 인접정점 indegree -1
+    result = [a, g]
+    queue = [b, d]
+    
+    arr = [0, 0, 1, 0, 1, 1, 0]
+    result = [a, g, b]
+    queue = [d]
+    
+    arr = [0, 0, 1, 0, 0, 1, 0] # d의 인접정점 e의 indegree -1
+    result = [a, g, b, d]
+    queue = [e]
+    
+    arr = [0, 0, 0, 0, 0, 0, 0] # d의 인접정점 e의 indegree -1
+    result = [a, g, b, d, e]
+    queue = [c, f]
+    
+    result = [a, g, b, d, e, c, f]
+    queue = []
+    ```
+
+    ```python
+    # python에서 큐 구현은 아래와 같이 import하여 사용함
+    from collections import deque
+    
+    dq = deque()
+    dq.append(1)
+    dq.append(2)
+    dq.append(3)
+    dq.append(4) # => [1, 2, 3, 4]
+    dq.popleft() # => [2, 3, 4]
+    ```
+
+    
 
   * 위상 정렬 - 2) DFS (outdegree만 고려)
 
@@ -1014,6 +1088,7 @@ Lean > Course > IM > List2 [부분집합의 합 4837](./4837.py) 문제를
   아래와 같이 바꿈!
 
   ```python
+  # 해결!
   def subset(k, n, cnt, tmpsum): # cnt = 현재 선택한 원소수, tmp_sum: 원소들 합
       global result, ele_cnt, setsum
       if tmpsum > setsum:
@@ -1035,20 +1110,20 @@ Lean > Course > IM > List2 [부분집합의 합 4837](./4837.py) 문제를
   
   
       print('#{} {}'.format(tc, result))
-  ```
-
-  * **여기서 중요한 점!** 
-
-    * 지역변수를 영역 밖에서 사용할 때, `global`로 선언하고 써야함
-
-    * 단순히 값이 몇인지 확인할 수 있지만,
-
-    * 변수의 값을 바꿀 순 없다.
-
-    * 하지만 리스트는 그냥 썼는데?
-
-      * 김준영 피셜) 리스트는 객체이기 때문에 인자로 넘기지 않고도 변경이 가능했던 것!
-
+```
+  
+* **여기서 중요한 점!** 
+  
+  * 지역변수를 영역 밖에서 사용할 때, `global`로 선언하고 써야함
+  
+  * 단순히 값이 몇인지 확인할 수 있지만,
+  
+  * 변수의 값을 바꿀 순 없다.
+  
+  * 하지만 리스트는 그냥 썼는데?
+  
+    * 김준영 피셜) 리스트는 객체이기 때문에 인자로 넘기지 않고도 변경이 가능했던 것!
+  
       ```python
       # 변경할 수 없음
       
@@ -1061,8 +1136,8 @@ Lean > Course > IM > List2 [부분집합의 합 4837](./4837.py) 문제를
       
       # error!
       # UnboundLocalError: local variable 'a' referenced before assignment
-      ```
-
+    ```
+  
       ```python
       # 값이 몇인지는 알 수 있음
       
@@ -1071,8 +1146,8 @@ Lean > Course > IM > List2 [부분집합의 합 4837](./4837.py) 문제를
           
       a = 3
       test2() # => 3
-      ```
-
+    ```
+  
       ```python
       # global 선언
       
@@ -1084,10 +1159,10 @@ Lean > Course > IM > List2 [부분집합의 합 4837](./4837.py) 문제를
       a = 3
       test3()
       4
-      ```
-
+    ```
+  
       
 
 SWEA > Soving Club
 
-* [1220 Magnetic](./code/day9/1220.py)
+* [1220 Magnetic](./code/day9/1220.py) 미완성코드!

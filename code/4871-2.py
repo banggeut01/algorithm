@@ -1,6 +1,9 @@
 # 그래프 경로 4871.py
 # 유향 그래프
 # stack을 사용한 DFS
+################# runtime error! 미완성코드
+import sys
+sys.stdin = open('4871input.txt', 'r')
 
 def DFS(v, g):
     stack = []
@@ -18,15 +21,12 @@ def DFS(v, g):
                 v = w
                 break
         else: # 갈 수 있는 노드 없으면, 
-            v = stack.pop() # 돌아가기
-    else:
-        return 0
-
-
-
+            stack.pop()
+            if stack:
+                v = stack[-1] # 되돌아가기
+    return 0
 
 t = int(input())
-
 for tc in range(1, t + 1):
     v, e = map(int, input().split()) # 노드, 엣지
     matrix = [[] for _ in range(v + 1)]

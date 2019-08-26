@@ -615,7 +615,7 @@ SWEA > IM > stack1
   * [재귀로 해보기](./1210-2.py)
 
   ```
-김준영 방법으로 첫번째 행부터 말고, 마지막 행부터!
+  김준영 방법으로 첫번째 행부터 말고, 마지막 행부터!
   결과를 찾아 올라가기!
   ```
   
@@ -637,17 +637,17 @@ SWEA > IM > stack1
     
     ```python
     dir = 0 # direction 0: 위, 1: 왼쪽, 2: 오른쪽
-  while x:
+    while x:
         if dir != 2 and y - 1 >= 0 and arr[x][y - 1]:
             y, dir = y - 1, 1
         elif dir != 1 and y + 1 < 100 and arr[x][y + 1]:
             y, dir = y + 1, 2
-       else:
+        else:
             x, dir = x - 1, 0
     ```
     
     ```python
-    while x:
+        while x:
         if y - 1 >= 0 and arr[x][y - 1]:
             while y - 1 >= 0 and arr[x][y - 1]:
                 y -= 1
@@ -664,7 +664,7 @@ SWEA > IM > stack1
       가지고 있는 경로 변수를 이용함
   
     ```python
-    def DFS(x, y):
+        def DFS(x, y):
         if x == 0: return y
         
         arr[x][y] = 0 # 이 부분 주목!
@@ -678,7 +678,7 @@ SWEA > IM > stack1
   
     
   
-  ​    
+
 
 # Day 8
 
@@ -1110,7 +1110,7 @@ Lean > Course > IM > List2 [부분집합의 합 4837](./4837.py) 문제를
   
   
       print('#{} {}'.format(tc, result))
-```
+  ```
   
 * **여기서 중요한 점!** 
   
@@ -1136,7 +1136,7 @@ Lean > Course > IM > List2 [부분집합의 합 4837](./4837.py) 문제를
       
       # error!
       # UnboundLocalError: local variable 'a' referenced before assignment
-    ```
+      ```
   
       ```python
       # 값이 몇인지는 알 수 있음
@@ -1146,7 +1146,7 @@ Lean > Course > IM > List2 [부분집합의 합 4837](./4837.py) 문제를
           
       a = 3
       test2() # => 3
-    ```
+      ```
   
       ```python
       # global 선언
@@ -1159,7 +1159,7 @@ Lean > Course > IM > List2 [부분집합의 합 4837](./4837.py) 문제를
       a = 3
       test3()
       4
-    ```
+      ```
   
       
 

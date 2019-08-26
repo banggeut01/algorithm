@@ -686,6 +686,22 @@ SWEA > IM > stack1
 
 * 4869.4일차 - 종이붙이기
 
+  * 점화식 문제 - 보통 n에 대한 문제 풀 때는, n-1은 다 완료되어있다 생각하기
+  * 더 작은 문제로 큰 문제를 해결하자
+
+  ```
+  f(1), f(2)
+  n=1일 때 1가지
+  n=2일 때 3가지(가로2개, 세로2개, 큰거1개)
+  
+  f(0)이면, 안만드는법 1가지!
+  
+  길이 n일 때,
+  n-1에 10짜리 붙이는 방법 1가지!
+  n-2에 1)20짜리 가로직사각형2개로, 2)20짜리 큰 사각형 1개로 2가지!
+  (세로2개는 n-1에 10짜리 붙이는 방법에 포함!)
+  ```
+
   * [재귀](./4869.py)
   * [DP](./4869-2.py) 
 
@@ -823,18 +839,255 @@ SWEA > IM > stack1
 
 SWEA > Soving Club
 
-* [작업순서 1267](./1267.py) 푸는중..
+* 작업순서 1267
+
+  * DFS스택, DFS재귀, DAG 세가지 방법으로 풀어보기
+  * [dfs스택 - 소스보기](./1267.py) 
+
+  ```python
+  # 항상 스택 접근할 때 isEmpty 주의한다!
+  if tmp_stack: 
+      v = tmp_stack[-1] # 되돌아가기
+  ```
+
+  * DFS로 푸는데 문제점 발생!  (DAG로도 풀어보기!)
 
   ```
   루트노드 찾기)
-  들어오는 엣지 개수를 배열에 저장한 후, 개수가 0인 곳이 루트노트!
+  indegree를 배열에 저장한 후, 개수가 0인 곳이 루트노트!
   => 결과 Fail
   
   왜?
-  모든 노드가 연결된 형태가 아니기 때문!
+  input한 노트만 연결
+  하지만 배열은 존재하지 않는 노드까지 포함되어 있음!
   
+  어떻게 해결?
+  들어오는 indegree 0이면서, outdegree 1이상
+  
+  => 결과 Fail
+  
+  왜?
+  루트 노드가 한개만 존재하는 것이 아니다.
+  아래 그림을 예로, a, g 모두 루트노드가 된다.
+  
+  그렇다면 시작노드에서 시작한 후, 터미널 노드까지 갔을 때
+  다시 돌아오면서 방문하지 않은 노드를 찾아야한다.
+  예)
+  a -> b -> c 까지 온 후,
+  c에서 outdegree 0이므로 이 때 1) stack에 넣어줌!
+  stack을 2개 써야함
+  
+  1) 방문 순서 저장할 stack
+  2) 돌아갈 노드 저장할 stack
+  
+  자세한 방법은 위상정렬 - 2)DFS 보기!
   ```
 
-  
+  * error
+    * v(노드)와 result_stack의 길이는 같아야 하지만, v값이 더 크다.
+      방문하지 않은 노드가 존재한다!
+      어디서 놓쳤을까?
 
-* [쇠막대기 자르기 5432](./5432.py)
+  ```python
+  # 10 tc 중 6개만 맞음
+  # 왜?
+      print(v)
+      print(len(result_stack))
+  ```
+
+  * 문제 코드
+
+    ```python
+    for s in range(1, v + 1):
+        if outgoing[s] and indegree[s] == 0: # 시작노드이면,
+            dfs(s)# DFS 시작
+    ```
+
+  * 해결 코드
+
+    ```python
+    for s in range(1, v + 1):
+        if outgoing[s]: # 시작노드이면,
+            dfs(s)# DFS 시작
+    ```
+
+    * 왜?
+
+    
+
+  * 위상 정렬 - 1) DAG(Directed Acyclic Graph) (indegree, outdegree고려)
+
+    ![dag](./images/dag.png)
+
+    *  **들어오는 엣지를 Incomming** **/나가는 엣지를 Outgoing**
+    * **엣지의 개수를 Indegree** /**나가는 엣지의 개수를 Outdegree**
+    * BFS와 비슷한 방법이다.
+    * 작업의 우선순위를 표현할 때 DAG 구조를 가짐
+    * Queue 이용해야한다.
+    * 진입 차수 계산(정점번호 idx로, 모든 정점의 진입차수 계산)
+      * v에서 나가는 간선의 개수
+    * 들어오는 화살표 없는(진입차수가 0인) 정점 Queue에 넣기
+      * FIFO
+    * v의 인접정점(u) 찾아 진입차수 1감소
+      * u의 진입차수 0이 되면 u를 큐에 삽입
+
+  * 위상 정렬 - 2) DFS (outdegree만 고려)
+
+    * 위의 예제로 보자
+      * **시작점이 주어질 땐, 방문할 때마다 result_list에 넣었다.**
+      * **방문 끝나면 들어온 순서대로 출력**
+      * 이 예제는 시작점이 주어지지 않음!
+      * 따라서 **더 이상 갈 노드가 없을 때 result_stack에 넣는다.**
+      * **방문 끝나면 거꾸로 출력!**
+
+    ```
+    a에서 시작! (outgoing이 존재함)
+    stack = [a]
+    stack = [a, b]
+    stack = [a, b, c] => 갈 노드가 없음! result_stack = [c]
+    stack = [a, b]
+    stack = [a, b, e]
+    stack = [a, b, e, f] => 갈 노드가 없음! result_stack = [c, f]
+    stack = [a, b, e] => 갈 노드가 없음! result_stack = [c, f, e]
+    stack = [a, b] => 갈 노드가 없음! result_stack = [c, f, e, b]
+    stack = [a]
+    stack = [a, d] => 갈 노드가 없음! result_stack = [c, f, e, d]
+    stack = [a] => 갈 노드가 없음! result_stack = [c, f, e, d, a]
+    stack = []
+    
+    g에서 시작! (indegree 0, outdegree 1이상)
+    stack = [g] => 갈 노드가 없음! result_stack = [c, f, e, d, a, g]
+    ```
+
+    * indegree 0인 곳에서 시작!
+    * 더 이상 진입할 노드 없을 때, 다시 돌아감
+      * 현재 노드를 스택에 저장
+    * 거꾸로 출력! (stack pop)
+
+* [쇠막대기 자르기 5432](./5432.py) 아직 푸는 중!
+
+# Day 9
+
+오늘은 백트래킹에 대해서 배웠다.
+
+Lean > Course > IM > List2 [부분집합의 합 4837](./4837.py) 문제를
+
+백트래킹 이용해 다시 풀어보겠다.
+
+* [부분집합의 합 4837-2](./4837-2.py)
+
+  * 가지치기 해보기
+
+  ```python
+  # error!
+  def subset(k, n, tmpsum):
+      global result
+      if tmpsum > setsum:
+          return
+      if k == n:
+          if tmpsum == setsum: # => 1)이부분 잘못됨!
+              result += 1
+          return
+      subset(k + 1, n, tmpsum + uset[k]) # 왼쪽
+      subset(k + 1, n, tmpsum) # 오른쪽
+      
+  uset = [i for i in range(1, 13)]
+  t = int(input())
+  for tc in range(1, t+1):
+      n, setsum = map(int, input().split())
+  
+      result = 0
+      subset(0, n, 0) # => 2)이부분 잘못됨!
+  
+  
+      print('#{} {}'.format(tc, result))
+  ```
+
+  1)부분집합원소의 수를 체크하지 않았다! 
+
+  2)12 높이까지 모두 확인해야함 (여기서 높이는 루트노드에서 현재노드까지 경로를 의미함)
+
+  `subset(0, 3, 0)` 이면 높이 3까지만 확인함
+
+  문제에서는 부분집합원소개수, 부분집합원소합 두가지 조건 충족해야한다고 하였음
+
+  아래와 같이 바꿈!
+
+  ```python
+  def subset(k, n, cnt, tmpsum): # cnt = 현재 선택한 원소수, tmp_sum: 원소들 합
+      global result, ele_cnt, setsum
+      if tmpsum > setsum:
+          return
+      if k == n:
+          if tmpsum == setsum and cnt == ele_cnt:
+              result += 1
+          return
+      subset(k + 1, n, cnt + 1, tmpsum + uset[k]) # 왼쪽(1:포함)
+      subset(k + 1, n, cnt, tmpsum) # 오른쪽(0:미포함)
+  
+  uset = [i for i in range(1, 13)]
+  t = int(input())
+  for tc in range(1, t+1):
+      ele_cnt, setsum = map(int, input().split())
+  
+      result = 0
+      subset(0, 12, 0, 0)
+  
+  
+      print('#{} {}'.format(tc, result))
+  ```
+
+  * **여기서 중요한 점!** 
+
+    * 지역변수를 영역 밖에서 사용할 때, `global`로 선언하고 써야함
+
+    * 단순히 값이 몇인지 확인할 수 있지만,
+
+    * 변수의 값을 바꿀 순 없다.
+
+    * 하지만 리스트는 그냥 썼는데?
+
+      * 김준영 피셜) 리스트는 객체이기 때문에 인자로 넘기지 않고도 변경이 가능했던 것!
+
+      ```python
+      # 변경할 수 없음
+      
+      def test():
+          print(a)
+          a = a + 1
+          
+      a = 3
+      test()
+      
+      # error!
+      # UnboundLocalError: local variable 'a' referenced before assignment
+      ```
+
+      ```python
+      # 값이 몇인지는 알 수 있음
+      
+      def test2():
+          print(a)   
+          
+      a = 3
+      test2() # => 3
+      ```
+
+      ```python
+      # global 선언
+      
+      def test3():
+          global a
+          a += 1
+          print(a)
+          
+      a = 3
+      test3()
+      4
+      ```
+
+      
+
+SWEA > Soving Club
+
+* [1220 Magnetic](./code/day9/1220.py)

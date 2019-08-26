@@ -1181,18 +1181,18 @@ print(fibo(40))
   
   def DFS(v):
       # 시작점을 방문하고 스택에 push
-      stack = [] # 방문 경로 저장할 스택
+      stack = [] # 스택
       visit[v] = True; print(v, end='')
       stack.append(v)
-      while s: # 빈 스택이 아닐동안 반복
+      while stack: # 빈 스택이 아닐동안 반복
           for w in g[v]:
               if not visit[w]: # v에 방문하지 않은 인접정점 w를 찾아서
-                  visit[w] = True; print(w, end='')
+                  visit[w] = True; print(w, end='') # 방문
                   stack.append(w) # w를 방문하고, v를 스택에 push
                   v = w # v를 w로 설정
                   break
           else: # 인접정점이 없다면, 스택에서 pop()해서
-              v = s.pop() # v로 설정
+              v = stack.pop() # v로 설정
   
   
   v, e = map(int, input().split()) # 정점수, 간선수
@@ -1205,15 +1205,16 @@ print(fibo(40))
       g[v].append(u) # 무향 그래프
   
   print(g)
-  ```
-
+  DFS(1)
+```
   
 
+  
   * 하지만, 재귀호출로 짜는 것이 낫다.
-  * 한번 짜보기!
-
-  * [재귀로](./code/stack_ex3.py)
-
+* 한번 짜보기!
+  
+* [재귀로](./code/stack_ex3.py)
+  
   ```python
   # stack_ex3.py
   
@@ -1241,8 +1242,8 @@ print(fibo(40))
   print(g)
   
   DFS(1)
-  ```
-
+```
+  
   
 
 ## 5. Stack 2
@@ -1253,19 +1254,313 @@ print(fibo(40))
 
 ### 백트래킹(Backtracking)
 
-* 해를 찾는 도중 '막히면'(해가 아니면) 되돌아가서 해를 다시 찾음
+* **해를 찾는 도중 '막히면'(해가 아니면) 되돌아가서** 해를 다시 찾음
 * 최적화 문제, 결정 문제
 * 결정 문제: Yes or No
   * 미로 찾기
+  
+    * 그래프 문제로 생각할 수 있지만 백트래킹!
+    * 왜? 그래프 탐색은 모든 정점을 방문하는 것이 목적임
+    * 미로찾기는 답을 빨리 찾는 것이 목적이다.
+      * 답을 찾으면 바로 종료!
+    * DFS, BFS로 풀 때, 그래프가 아니지만 그래프 인 것 처럼 푼다.
+    * 갈림길에서 어느 길로 가야하는지 모름
+      * 그럼 어떻게?
+      * 일단 가본다.
+    * 백트래킹 vs 깊이우선탐색
+      * 백트래킹: 경로가 해결책으로 이어질 것 같지 않으면 더 이상 경로를 따라가지 않음
+        * Pruning 가지치기
+      * 깊이우선탐색: 모든 경로 추적
+      * **그래서!** 4871그래프 경로(./code/README/Day8 참고) 풀이시 return 쓰면 어려움이 있었다.
+      * 깊이우선탐색 가하기엔 경우의 수 너무나 많음
+      * 백트래킹을 적용해도 경우의 수 줄어들지만, 이도 역시 최악의 경우 불가능할 수 있음
+  
   * n-Queen 문제
+  
+    * 보통 8-Queen으로 알려져있음(서양의 8*8장기판)
+      * C(64, 8) 경우의 수
+    * 4*4 예제
+      * C(16, 4)  경우의 수
+  
   * Map coloring
+  
   * 부분 집합의 합 문제 등
+  
+  * 8-puzzle
+  
+    * 3*3 에 1~8 숫자, 한칸 비어있음
+    * 비어있는 곳으로 숫자 옮길 수 있다.
+    * 퍼즐판 상태 9! 가지
+    * 상태 공간 트리로 표현할 수 있음
+      * 현재 상태에서 퍼즐 하나 밀어서 갈 수 있는 상태
+      * 이것을 인접 상태로 표현한다.
+    * 초기 상태에서 목표 상태로 가는 경로 찾기
+    * 최단 경로 찾으면 됨
+    * 한번 갔던 경로 가지 않아도 됨
+  
+  * 부분집합 구하기
+  
+    ```
+    원소수 = N, 부분집합 1 << n
+    n=3, 1 << 3 = 8
+    ```
+  
+    ![부분집합트리](./image/부분집합트리.jpeg)
+  
+    ```python
+    arr = 'ABC'; N = len(arr)
+    bits = [0] * N
+    
+    for i in range(2):
+        bits[0] = i
+        for j in range(2):
+        	bits[0] = j
+        	for k in range(2):
+        		bits[0] = k
+                print(bits)
+    ```
+  
+    ![부분집합트리2](./image/부분집합트리2.jpeg)
+  
+    ```python
+    arr = 'ABC'; n = len(arr)
+    bits = [0] * n
+    
+    def subset(k, n): #k: 현재 노드의 높이, n: 단말 노드의 높이
+        if k == n: # 모든 선택이 완료, 단말노드 도착
+            for i in range(n):
+                if bist[i]: print(arr[i], end=" ") # 1(포함)이면 출력
+            print(bits)
+            return
+        # 선택이 남았다.
+        bits[k] = 1; subset(k + 1, n) # 왼쪽
+        bits[k] = 0; subset(k + 1, n) # 오른쪽
+        
+        
+    subset(0, n) # 0: 어떤 선택도 하지 않았다. n: 해야할 선택 수
+    ```
+  
+    * [부분집합의 합 4837-2](./code/4837-2.py) 참고
+
+* 최적화 문제 가장 기본적인 방법은 완전 탐색!
+
+  * 모든 경우의 수 트리로 그리기 => 상태 공간 트리
+
+* 백트래킹 기법
+
+  * 어떤 노드의 유망성을 점검 후, 유망하지 않으면 부모로 되돌아감(backtracking)
+    * 지금 한 선택 취소하고 돌아감
+  * 가지치기(pruning): 답이 될 가능성 없는 노드 탐색 하지 않음
+  * 다음과 같은 절차!
+    * 상태 공간 트리의 깊이 우선 탐색 실시
+    * 각 노드의 유망성 점검
+    * 그 유망하지 않다면, 그 선택 취소하고 부모 노드로 돌아감
+
+  ```pseudocode
+  def checknode(v) : # 현재노드
+      if promising(v): # 유망성
+          if there is a solution at v:
+              write the solution
+          else:
+              for u in each child of v:
+                  checknode(u)
+  ```
+
+* 동전 실습
+
+  ```python
+  coin = [6, 4, 1] # 가장 적은 동전 문제라면, 큰 금액부터 하는 것이 좋음
+  choose = [0] * 100
+  def coinChange(k, n): # k: 선택한 동전의 수, n: 거스름돈 금액
+      if n == 0:
+          for i in range(k):
+              print(choose[i], end=' ')
+          print()
+          return
+      for c in coin:
+          if c > n: continue
+          choose[k] = c
+          coinChange(k + 1, n - c)
+          
+  coinChange(0, 8)
+  ```
+
+  가지치기를 해보자!
+
+  ```python
+  coin = [6, 4, 1]
+  choose = [0] * 100
+  MIN = 0xffffff
+  def coinChange(k, n): # k: 선택한 동전의 수, n: 거스름돈 금액
+      if k >= MIN: return
+      if n == 0:
+          global MIN
+          MIN = min(k, MIN)
+          for i in range(k):
+              print(choose[i], end=' ')
+          print()
+          return
+      for c in coin:
+          if c > n: continue
+          choose[k] = c
+          coinChange(k + 1, n - c)
+          
+  coinChange(0, 8)
+  ```
+
+  ```python
+  arr = 'ABC'; n = len(arr)
+  order = [0] * N # 원소의 인덱스의 순서를 저장
+  
+  def coinChange(k, n, used):
+      if k == n: # 하나의 순열을 생성
+          return
+          
+      for i in range(n):
+          if used & (1 << i): continue
+          order[k] = i
+  coinChange(0, N, 0) # 선택한 수, 전체원소수, 선택한 요소들의 집합
+  ```
+
+  
+
+### 순열 (공부해보기!)
+
+```
+{A, B, C}, n = 3
+n! = 3! = 6
+
+터미널 노드 개수 6개
+```
+
+* 부분집합과 다른점
+  * 자식 노드의 수 가변적
+  * 선택했던 것을 기록해야함 (이전에 선택한 것에 따라 다음단계 선택후보 달라짐)
+
+```python
+# 중복순열
+
+arr = 'ABC'; N = len(arr)
+
+for i in range(N):
+    for j in range(N):
+        for k in range(N):
+            print(arr[i], arr[j], arr[k])
+```
+
+```python
+# 중복 제외한 순열
+
+arr = 'ABC'; N = len(arr)
+
+for i in range(N):
+    for j in range(N):
+        if i == j:
+            continue
+        for k in range(N):
+            if i == k or j == k: 
+                continue
+            print(arr[i], arr[j], arr[k])
+```
+
+```python
+# 교재에 있는 내용 - 잘 이해가 가지 않는다...
+arr = 'ABC'; N = len(arr)
+order = [0] * N # 실제 요소들의 순서(index를 기록)
+
+def perm(k, n):
+    if k == n:
+        for i in range(N):
+            print(arr[order[i]], end=" ")
+        print()
+        return
+  	used = [False] * N # 선택했는지
+    for i in range(k): # 지금까지 선택한 k개의 원소를 확인
+        used[order[i]] = True
+        
+    for i in range(N): # 선택하지 않은 요소들에 대해
+        if used[i]: continue
+        order[k] = i
+        perm(k + 1, n)
+        
+perm(0, N)
+```
+
+```python
+# 선생님 방법
+arr = 'ABC'; N = len(arr)
+order = [0] * N # 실제 요소들의 순서(index를 기록)
+used = [0] * N # global 변수로 선언하여 썼다지웠다하는 방법
+
+def perm(k, n):
+    if k == n:
+        for i in range(N):
+            print(arr[order[i]], end=" ")
+        print()
+        return
+    
+    for i in range(N): # 선택하지 않은 요소들에 대해
+        if used[i]: continue
+        used[i] = 1
+        order[k] = i
+        perm(k + 1, n)
+        used[i] = 0
+        
+perm(0, N)
+```
+
+```python
+# 선생님's best practices
+arr = 'ABC'; N = len(arr)
+order = [0] * N # 실제 요소들의 순서(index를 기록)
+
+def perm(k, n, used):
+    if k == n:
+        for i in range(N):
+            print(arr[order[i]], end=" ")
+        print()
+        return
+    
+    for i in range(N): # 선택하지 않은 요소들에 대해
+        if used[i] & (1 << i): continue
+        order[k] = i
+        perm(k + 1, n, used | (1 << i))
+       
+perm(0, N, 0)
+```
 
 
 
 ### 분할정복
 
+* 분할 : 해결할 문제 여러 개의 작은 부분으로 나눔
+* 정복 : 작은 문제 각각 해결
+* 통합 : 해결된 해답 모음
 
+```python
+arr = [6, 4, 2, 5, 1, 9, 2, 11, 8, 7]
+
+def getMin(lo, hi): # lo: 범위의 시작, hi: 범위 끝
+    if lo == hi:
+        return arr[lo]
+    
+    return min(arr[hi], getMin(lo, hi - 1))
+
+print(getMin(0, len(arr) - 1))
+```
+
+### 퀵 정렬
+
+* 주어진 배열 두 개로 분할하고, 각각을 정렬한다.
+* 합병정렬과 같은가?
+  * 다른점1 : 합병정렬 그냥 나누는 반면, 퀵정렬은 pivot item 중심으로 작은 것 왼편, 큰 것 오른편으로 위치시킴
+  * 다른점2 : 각 부분 정렬 끝나면 합병정렬은 `합병`작업이 필요하나 퀵정렬은 아님
+* 교재에 있는 코드 깔끔치 않음!
+* 다음에 다시 코드 보기!
+* 퀵 정렬의 시간 복잡도 O(n^2)
+  * 분할이 안되는 경우
+  * pivio값이 가장 큰 값, 가장 작은 값이면 크기가 1씩 줄어듬
+  * 버블정렬, 선택정렬처럼 
 
 ### 실습1, 2
 

@@ -1212,9 +1212,9 @@ print(fibo(40))
 
   
   * 하지만, 재귀호출로 짜는 것이 낫다.
-* 한번 짜보기!
+  * 한번 짜보기!
   
-* [재귀로](./code/stack_ex3.py)
+  * [재귀로](./code/stack_ex3.py)
   
   ```python
   # stack_ex3.py
@@ -1243,7 +1243,7 @@ print(fibo(40))
   print(g)
   
   DFS(1)
-```
+  ```
 
   
 

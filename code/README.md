@@ -1048,7 +1048,7 @@ Lean > Course > IM > List2 [부분집합의 합 4837](./4837.py) 문제를
 
 백트래킹 이용해 다시 풀어보겠다.
 
-* [부분집합의 합 4837-2](./4837-2.py)
+* [부분집합의 합 4837-2](./stack1/4837-2.py)
 
   * 가지치기 해보기
 
@@ -1165,4 +1165,102 @@ Lean > Course > IM > List2 [부분집합의 합 4837](./4837.py) 문제를
 
 SWEA > Soving Club
 
-* [1220 Magnetic](./code/day9/1220.py) 미완성코드!
+* [1220 Magnetic](./stack1/1220.py) 미완성코드!
+
+```
+준비(0, 1 무시) --> 교착(0, 2무시)
+```
+
+
+
+# Day 10 stack2
+
+SWEA > Soving Club
+
+* [1224. 6일차 - 계산기3](./stack2/1224.py)
+
+SWEA > Learn > Stack2
+
+* [4874. Forth](./stack2/4874.py)
+
+  ```python
+  # error!
+  
+  if stack and stack[-1].isdigit():
+  ```
+
+  `stack[-1]`이 연산되어 `int형`으로 stack에 있을 수 있다.
+
+  ```bash
+  # error message
+  
+  'int' object has no attribute 'isdigit'
+  ```
+
+  ```python
+  # 해결
+  
+  if stack and str(stack[-1]).isdigit():
+  ```
+
+  `str형`으로 변환 후 사용하였다.
+
+  ```python
+  # error!
+  else: # '/'
+      stack.append(num1 / num2) # => 소수점으로 return
+  
+  # 해결
+  else: # '/'
+      stack.append(num1 // num2) # => 소수점으로 return
+  ```
+
+  
+
+  * runtime error : 10개 중 5 case만 맞았다.
+
+    왜?
+
+    ```python
+    # 왜?
+    # 연산자 만났을 때, 숫자 2개 뽑는 과정
+    if stack and str(stack[-1]).isdigit():
+        num1 = int(stack.pop()) # num1 => num2
+    else:
+        result = 'error'
+        break
+    if stack and str(stack[-1]).isdigit():
+        num2 = int(stack.pop()) # num2 => num1
+    else:
+        result = 'error'
+        break
+       
+    # ...
+    
+    # 연산과정
+    if c == '+':
+       stack.append(num1 + num2)
+    # ...
+    ```
+
+    뒤에 숫자부터 뽑기 때문에 num1, num2자리가 바뀌었다.
+
+  * 불필요한 코드
+
+    ```python
+    if stack and str(stack[-1]).isdigit():
+        num1 = int(stack.pop())
+    ```
+
+    어차피 스택에 넣을 때, int로 들어가기 때문에 이러한 번거로운 작업 필요 없다.
+
+    아래와 같이 바꾸어줌
+
+    ```python
+    if stack:
+        num1 = stack.pop()
+    ```
+
+* [4875. 미로](./stack2/4875.py)
+
+토너먼트 재귀가 좋음

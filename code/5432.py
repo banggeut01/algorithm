@@ -7,26 +7,15 @@ for tc in range(1, t + 1):
 
     stack = []
     result = 0 # 답
-    cnt = 0 # 막대기 개수 임시 저장
+    i = 0
     for b in bar:
-        if b == '(': # 입력값 '('
-            if stack and stack[-1] == ')': # 막대기 끝 만났을 때, ')('
-                result += 1
+        if b == '(':
             stack.append(b)
-            cnt += 1
-            tmp = '('
-        else: # 입력값 ')'
-            if tmp == '(': # 레이저 쐈을 때, '()',
-                cnt -= 1
-                result += cnt
-                stack.pop()
-                tmp = ')'
-            else: # tmp == ')'
-                if stack[-1] == b: # '))'
-                    stack.pop()
-                else: # '()'
-                    stack.pop()
-                cnt -= 1
-            tmp = ')'
-
-    print(result)
+        else: # ')'
+            # stack 비었는지 확인 안해도 됨
+            stack.pop()
+            result += len(stack)
+        # i += 1
+        # print(i, result)
+        # print('{} {}'.format(i, stack))
+    print('#{} {}'.format(tc, result))

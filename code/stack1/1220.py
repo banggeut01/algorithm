@@ -1,7 +1,7 @@
 # 1220.py 마그네틱
 
 import sys
-stdin = sys.open('1210input.txt', 'r')
+sys.stdin = open('1210input.txt', 'r')
 
 def matnetic(j):
 

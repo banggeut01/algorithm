@@ -1569,7 +1569,140 @@ print(getMin(0, len(arr) - 1))
 
 ## 6. Queue
 
+### 큐
 
+* 사용법
+
+  ```python
+  from queue import Queue, PriortyQueue # 큐, 우선순위큐
+  from collections import deque # 덱, 가장 성능상 좋음
+  
+  dq = deque()
+  ```
+
+  * 주의사항
+
+    * 검정시험에서 `from` 쓰면 안됨
+    * 아래와 같이 사용
+
+    ```python
+    import collections
+    
+    que = collections.deque()
+    ```
+
+    
+
+### 우선순위 큐
+
+* 우선순위
+
+* 코드
+
+  ```python
+  from queue import PriorityQueue
+  
+  arr = [(3, 5), (7, 8), (1, 4), (2, 6)]
+  
+  PQ = PriorityQueue()
+  for val in arr:
+      PQ.put(val)
+      
+  while not PQ.empty():
+      print(PQ.get())
+  ```
+
+  
+
+### BFS
+
+* DFS vs BFS
+
+  * BFS는 항상 최단경로
+  * DFS는 어디를 선택하느냐에 따라 달라짐(최단 경로 보장 못함)
+
+  ```python
+  import sys, collections
+  sys.stdin = open('input.txt', 'r')
+  
+  def bfs(s): # 시작점
+      queue = collections.deque() # 큐생성
+      visit[s] = True # 방문 표시
+      queue.append(s) # 큐에 삽입
+      
+      while queue: # 빈큐 아닐동안
+          v = queue.leftpop() # 큐에서 하나 꺼내옴
+          for w in G[v]:# v의 방문하지 않은 인접정점을 모두 찾아서
+          	if not visit[w]:# 차례로 방문하고, 큐에 삽입
+      			visit[w] = True
+                  queue.append(w)
+                 
+                  # 스택과 다른점 : 찾는 족족 다 방문
+                  # 스택은 방문하고 v를 w로 바꾸어줌
+                  
+  V, E = map(int, input().aplit())
+  visit = [False] * (V + 1)
+  G = [[] for _ in range(V + 1)]
+  # g에 input 삽입하기
+  bfs(s)
+  
+  ```
+
+  
+
+### 큐 활용 : 버퍼
+
+
+
+### 최단경로
+
+* 구현
+
+  * 최단거리와 최단경로트리를 저장
+
+    ```
+    D[] : 최단 거리를 저장
+    P[] : 최단 경로 트리
+    
+    v -> w일 때,
+    D[w] = D[W] + 1
+    P[w] = v
+    
+    거쳐오는 정점이 없으면, p[w] = w
+    ```
+
+    
+
+  ```python
+  def bfs(s): # 시작점
+      queue = collections.deque() # 큐생성
+      visit[s] = True # 방문 표시
+      queue.append(s) # 큐에 삽입
+      D[s], P[s] = 0, s
+      
+      while queue: # 빈큐 아닐동안
+          v = queue.popleft() # 큐에서 하나 꺼내옴
+          for w in G[v]:# v의 방문하지 않은 인접정점을 모두 찾아서
+          	if not visit[w]:# 차례로 방문하고, 큐에 삽입
+      			visit[w] = True
+                  D[w] = D[v] + 1
+                  P[w] = v
+                  queue.append(w)
+                 
+                  # 스택과 다른점 : 찾는 족족 다 방문
+                  # 스택은 방문하고 v를 w로 바꾸어줌
+                  
+  V, E = map(int, input().aplit())
+  visit = [False] * (V + 1)
+  G = [[] for _ in range(V + 1)]
+  # g에 input 삽입하기
+  D = [0] * (V + 1) # 최단 거리를 저장
+  P = [0] * (V + 1) # 최단 경로 트리
+  bfs(s)
+  
+  ```
+
+  
 
 
 

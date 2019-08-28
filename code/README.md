@@ -1,3 +1,15 @@
+# Error
+
+### Rumtime error
+
+- 원인
+
+  - 연산 횟수 초과
+  - 인덱스 에러
+  - import 하지 않은 것 사용
+
+  
+
 # Day 1
 
 Solving Club > list(7월 31일)
@@ -1038,7 +1050,39 @@ SWEA > Soving Club
       * 현재 노드를 스택에 저장
     * 거꾸로 출력! (stack pop)
 
-* [쇠막대기 자르기 5432](./5432.py) 아직 푸는 중!
+* [쇠막대기 자르기 5432](./5432.py) 
+
+  * 초기 코드 Fail
+
+    * 원인
+      * 쇠막대기 길이가 끝났을 때를 고려 안해줌
+      * 끝나는 경우는 `)`다음에 `(`가 오는 경우
+      * 주의) laser 경우와 구별해야함
+      * laser `(`,`)`다음에 `(`가 오는 경우
+      * 해결) tmp 값으로 이전 괄호를 저장해준다.
+        *  `))` `()`
+        * `)`가 입력될 때, 막대끝 : tmp = `)`/레이저 : tmp = `(` 
+
+    ```python
+    t = int(input())
+    for tc in range(1, t + 1):
+        bar = input()
+    
+        stack = []
+        result = 0 # 답
+        i = 0
+        for b in bar:
+            if b == '(':
+                stack.append(b)
+            else: # ')'
+                # stack 비었는지 확인 안해도 됨
+                stack.pop()
+                result += len(stack)
+         
+        print('#{} {}'.format(tc, result))
+    ```
+
+    
 
 # Day 9 - Stack1
 
@@ -1165,13 +1209,20 @@ Lean > Course > IM > List2 [부분집합의 합 4837](./4837.py) 문제를
 
 SWEA > Soving Club
 
-* [1220 Magnetic](./stack1/1220.py) 미완성코드!
+* [1220 Magnetic](./stack1/1220.py) 
 
-```
-준비(0, 1 무시) --> 교착(0, 2무시)
-```
+  * 선생님 풀이
 
+    ```python
+    준비(0, 1 무시) --> 교착(0, 2무시)
+    ```
 
+  * 내 풀이
+
+    ```
+    상태 1(n극) or 2(s극)만 기억, 0무시
+    1 => 2 개수만 세어줌!
+    ```
 
 # Day 10 - Stack2
 
@@ -1400,3 +1451,7 @@ SWEA > Learn > Stack2
     
 
 # Day 11 - Queue
+
+* [stack 2; 4875 - 미로](./stack2/4875.py)를 BFS로 풀어보자
+  * [소스보기 4875-1.py](./queue/4875-1.py)
+

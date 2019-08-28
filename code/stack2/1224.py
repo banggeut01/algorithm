@@ -26,17 +26,17 @@ for tc in range(1, 11):
                 postfix.append(stack.pop())
             stack.append(c)
         else: # 피연산자
-            postfix.append(c)
+            postfix.append(int(c))
 
     # 후위표기식 계산
     for c in postfix:
         if c == '+':
-            num1 = int(stack.pop())
-            num2 = int(stack.pop())
+            num1 = stack.pop()
+            num2 = stack.pop()
             stack.append(num1 + num2)
         elif c == '*':
-            num1 = int(stack.pop())
-            num2 = int(stack.pop())
+            num1 = stack.pop()
+            num2 = stack.pop()
             stack.append(num1 * num2)
         else: # 피연산자
             stack.append(c)

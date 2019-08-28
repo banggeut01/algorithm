@@ -8,7 +8,46 @@
   - 인덱스 에러
   - import 하지 않은 것 사용
 
-  
+
+### Pycharm memory 부족
+
+실제로 사용할 수 있는 용량보다 적게 설정되어 있다.
+
+Heap 메모리 부족한 상태
+
+* 증상
+
+  * pycharm이 버벅거리기 시작함
+  * 메모리 부족 에러 메시지가 떴을 땐, 파이참 실행도 안됨
+  * 인터넷 역시 사용 불가
+
+* 메모리 확인 방법
+
+  * Settings > memory  검색 > Apperance > Show memory indicator 체크
+
+  * 설치 경로 bin에서 설정파일 수정하여줌
+
+  * bash로 실행하였다.
+
+    ```bash
+    # 설치 경로
+    # C:\Program Files\JetBrains\PyCharm Community Edition 2018.2.3/bin
+    
+    $ pwd
+    /c/Program Files/JetBrains/PyCharm Community Edition 2018.2.3/bin
+    
+    $ vi pycharm64.exe.vmoptions
+    ```
+
+    ```
+    -Xms128m
+    -Xmx750m
+    
+    위를 아래와 같이 바꿔줌
+    
+    -Xms256m
+    -Xmx2048m
+    ```
 
 # Day 1
 
@@ -767,6 +806,24 @@ SWEA > IM > stack1
        	return 0
     ```
 
+    ```python
+    # 선생님 solution - 이렇게 쓰자!
+    def DFS(v, g): # v 현재 노드, g 도착 노드
+        if v == g:
+            return 1
+        
+        visit[v] = True
+    
+        for w in matrix[v]:
+            if not visit[w]:
+                route.append(w)
+                if DFS(w, g) == 1:
+                    return 1
+       	return 0
+    ```
+
+    
+
     ```결과
     #1 1
     #2 1
@@ -1455,3 +1512,11 @@ SWEA > Learn > Stack2
 * [stack 2; 4875 - 미로](./stack2/4875.py)를 BFS로 풀어보자
   * [소스보기 4875-1.py](./queue/4875-1.py)
 
+SWEA > Learn > IM > Queue
+
+* [5097 - 회전](./queue/5097.py)
+* [5105 - 미로의 거리](./queue/5105.py)
+  * BFS, 최단거리
+
+* [5099 - 피자 굽기](./queue/5099.py)
+* 

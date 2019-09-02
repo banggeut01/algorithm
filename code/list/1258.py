@@ -3,7 +3,8 @@ import sys
 sys.stdin = open('1258input.txt', 'r')
 
 class Node:
-    def __init__(self, row, col):
+    def __init__(self, size, row, col):
+        self.size = size
         self.row = row
         self.col = col
         self.next = None
@@ -27,13 +28,20 @@ class Linkedlist:
         result = [] # 답
         cur = self.head
         while cur is not None:
-            tmp = [cur.row, cur.col]
+            tmp = [cur.size, cur.row, cur.col]
             result.append(tmp)
             cur = cur.next
         
-        result = list(map(str, sorted(result)))
-        print(len(result), end=' ')
-        print(' '.join(result))
+        result = sorted(result)
+        print(len(result), end='')
+        for i in range(len(result)):
+            print(' {} {}'.format(result[i][1], result[i][2]), end='')
+        print()
+
+def updateMap(i, j, n, m):
+    for row in range(i, n):
+        for col in range(j, m):
+            mymap[row][col] = 0
 
 t = int(input())
 for tc in range(1, t + 1):
@@ -46,13 +54,12 @@ for tc in range(1, t + 1):
         for c in range(n):
             if mymap[r][c] != 0:
                 i, j = r, c
-                while 0 <= i < n and 0 <= j and mymap[i][j]:
-                    mymap[i][j] = 0
+                while 0 <= j < n and mymap[i][j]:
                     j += 1
-                    if j + 1 < n and mymap[i][j + 1] == 0 or j + 1 == n:
-                        i, j = i + 1, c
-                ##### 수정하기 끝위치 row, col 찾아서 시작위치부터 끝 위치까지 0으로 바꾸는 함수 짜기
-                mylist.insertLast(Node(i, j))
+                while 0 <= i < n and mymap[i][j - 1]:
+                    i += 1
+                updateMap(r, c, i, j) # r,c: 시작 위치, i,j: 끝 위치 + 1
+                mylist.insertLast(Node((i - r) * (j - c), i - r, j - c))
             
     print('#{} '.format(tc), end='')
     mylist.printList()

@@ -1780,4 +1780,8 @@ IM - list
                   self.head = cur # => self.head = cur.next 수정 후 해결
       ```
 
-* 
+SC 추가문제
+
+* [1258 - 행렬찾기](./list/1258.py)
+* [6485 - 삼성시의 버스 노선](./list/6485.py)
+

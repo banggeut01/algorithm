@@ -1708,6 +1708,147 @@ print(getMin(0, len(arr) - 1))
 
 ## 7. 연결리스트
 
+### 리스트
+
+* 구현 방법에 따라 크게 두 가지로 나뉨
+
+  * 순차 리스트 : 배열을 기반으로 구현
+    * 인덱스로 접근
+    * c에서 배열이름은 시작주소
+    * `arr[5] `는 시작주소로부터 4byte(보통)  * 5 위치에 있다.
+  * 연결 리스트 : 메모리 동적할당을 기반으로 구현
+
+* 연결 리스트 클래스 코드 구현
+
+  * [실습코드](./list/linkedList.py) : 아래 코드 완성시키기
+
+  ```python
+  class Node:
+      def __init__(self, data): # 노드 생성
+          self.data = data
+          self.next = None
+  
+      def __del__(self): # 노드 삭제
+          print(self.data, '삭제')
+  
+  class List:
+      def __init__(self):
+          self.head = None
+          self.tail = None
+          self.size = 0
+  
+      def printlist(self):
+          pass
+  
+      def insertlast(self, node):
+          pass
+  
+      def insertfirst(self, node):
+          pass
+  
+      def deletelast(self):
+          pass
+  
+      def deletefirst(self):
+          pass
+  
+      def insertAt(self, idx, node):
+          pass
+  
+      def deleteAt(self, idx):
+          pass
+  ```
+
+  
+
+### 삽입 정렬
+
+* 도서관 사서의 책 정리
+
+* 이미 정렬된 부분과 비교해 자신의 위치를 찾아 삽입하는 방법
+
+* O(n^2)
+
+* 연결리스트일 때, 배열보다 효율적이다.
+
+  * 연결만 끊었다 연결하면 되기 때문
+
+* 구현
+
+  ```python
+  arr = [69, 10, 30, 2, 16, 8, 31, 22]
+  N = len(arr)
+  # 삽입하는 작업을 n-1번 반복(1번 ~ n - 1번)
+  
+  for i in range(1, N):
+      tmp = arr[i]
+      j = i - 1
+      while j >= 0 and arr[j] > tmp:
+          arr[j + 1] = arr[j]
+          j -= 1
+      arr[j + 1] = tmp
+  ```
+
+  
+
+### 병합 정렬
+
+* O(n log n)
+
+* 분할 정복 알고리즘 활용
+
+* 분할 단계 : 문제를 리스트 크기 1개가 될 때까지 분할
+
+  * depth가 logn만큼 나오게 된다.
+
+* 병합 과정
+
+* 구현
+
+  ```python
+  arr = [69, 10, 30, 2, 16, 8, 31, 22]
+  tmp = [0] * len(arr)
+  
+  def mergeSort(lo, hi):
+      # print(lo, hi)
+      # 분할 단계
+      if lo > = hi: return
+      mid = (lo + hi) >> 1
+      mergeSort(lo, mid) # 왼쪽
+      mergeSort(mid + 1, hi) # 오른쪽
+  
+      # 병합 과정
+      i, j, k = lo, mid + 1, lo # i:왼쪽시작위치, j:오른쪽시작위치, k:tmp시작위치
+      while i <= mid  and j <= hi:
+          if arr[i] < arr[j]:
+              tmp[k] = arr[i]
+              k, i = k + 1, i + 1
+          else:
+              tmp[k] = arr[j]
+              k, j = k + 1, j + 1
+          
+      while i <= mid: # 왼쪽 남아있으면
+          tmp[k] = arr[i]
+          k, i = k + 1, i + 1
+      while j <= hi:
+          tmp[k] = arr[j]
+          k, j = k + 1, j + 1
+          
+      for i in rnage(lo, hi + 1):
+          arr[i] = tmp[i]
+          
+  mergeSort(0, len(arr) - 1) # 시작, 끝 인덱스
+  print(arr)
+  ```
+
+  
+
+
+
+### 리스트를 이용한 스택
+
+### 우선순위 큐
+
 
 
 

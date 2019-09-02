@@ -1330,12 +1330,12 @@ SWEA > Learn > Stack2
 
   ```python
   # error!
-  else: # '/'
+  else: # '/' 나누기
       stack.append(num1 / num2) # => 소수점으로 return
   
   # 해결
-  else: # '/'
-      stack.append(num1 // num2) # => 소수점으로 return
+  else: # '//' 몫
+      stack.append(num1 // num2) # => 정수형으로 return
   ```
 
   
@@ -1535,7 +1535,7 @@ SWEA > Learn > IM > Queue
 
 * [5105 - 미로의 거리](./queue/5105.py)
   
-* BFS, 최단거리
+  * BFS, 최단거리
   
 * [5099 - 피자 굽기](./queue/5099.py)
 
@@ -1668,11 +1668,11 @@ SC 추가문제
 
 * [2628.종이자르기]
 
-  * [문제](https://www.acmicpc.net/problem/2628)
+  * [문제](https://www.acmicpc.net/problem/2628) 아직안함!
 
 * [4012. 요리사]
 
-  * [문제]
+  * [문제] 아직안함!
 
 * 풀었던 문제
 
@@ -1695,3 +1695,66 @@ SC 추가문제
 * [2206.벽부수고 이동하기]
   * [문제](https://www.acmicpc.net/problem/2206)
 
+## A 대비
+
+SWEA
+
+* N-Queen
+* [1873.상호의 배틀필드]
+
+백준
+
+* [2309.일곱난쟁이]
+  * [문제](https://www.acmicpc.net/problem/2309)
+* [1759.암호만들기]
+  * [문제](https://www.acmicpc.net/problem/1759)
+* [1697.숨바꼭질]
+  * [문제](https://www.acmicpc.net/problem/1697)
+* [2589.보물섬]
+  * [문제](https://www.acmicpc.net/problem/2589)
+* [2468.안전영역]
+  * [문제](https://www.acmicpc.net/problem/2468)
+* [5427.불]
+  * [문제](https://www.acmicpc.net/problem/5427)
+
+# Day13 - Linked List
+
+IM - list
+
+* [5108 - 숫자 추가](./list/5108.py)
+
+* [5110 - 수열 합치기](./list/5110.py) 미완성!
+
+  * error - 제한시간 초과
+
+    * 끝에 있는 노드 10개만 출력하는 코드
+
+      * 모든 노드를 새로운 리스트(`tmp`)에 넣고 마지막부터 출력하였음
+
+      ```python
+          def printListReverse(self):
+              if self.head is None: # 빈리스트
+                  print('빈리스트')
+                  return
+      
+              cur, tmp = self.head, []
+              while cur is not None:
+                  tmp.append(cur.data)
+                  cur = cur.next
+      
+              for i in range(1, 11):
+                  if len(tmp) < i:
+                      break
+                  print(tmp[-i], end=' ')
+              print()
+      ```
+
+    * 단방향이 아닌 양방향 리스트로 해본다면?? 
+
+      * 이 역시도 **제한시간 초과**
+
+    * 
+
+* [5120 - 암호](./list/5120.py) 
+
+* [5122 - 수열 편집](./list/5122.py) 푸는중!!

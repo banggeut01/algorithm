@@ -72,7 +72,7 @@ class LinkedList:
             idx -= 1
 
         if prev is None: # 첫번째위치
-            self.head = cur
+            self.head = cur.next
         elif cur is None: # 마지막위치
             prev.next = None
             self.tail = prev
@@ -88,10 +88,11 @@ class LinkedList:
             cur = cur.next
             idx -= 1
 
-        if cur is None: # 마지막위치
-            return self.tail.data
-        elif idx > 0:
-            return -1
+        if cur is None: 
+            if idx == 0:# 마지막위치
+                return self.tail.data
+            else:
+                return -1
         else:
             return cur.data
 
@@ -105,7 +106,7 @@ for tc in range(1, t + 1):
     mylist = LinkedList()
     for data in inputs:
         mylist.insertLast(Node(data))
-    mylist.printList()
+
     for _ in range(m):
         inputs = list(input().split())
         if inputs[0] == 'I': # 추가
@@ -116,4 +117,4 @@ for tc in range(1, t + 1):
             else: # 삭제
                 mylist.deleteAt(int(inputs[1])) # idx
 
-    print(mylist.printAt(l))
+    print('#{} {}'.format(tc, mylist.printAt(l)))

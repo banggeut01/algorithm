@@ -1,4 +1,5 @@
-# 5110.py 수열 합치기
+# 5110_fail.py 수열 합치기
+# 제한 횟수 초과 에러
 
 import sys
 sys.stdin = open('5110input.txt', 'r')
@@ -7,11 +8,14 @@ class Node():
     def __init__(self, data):
         self.data = data
         self.next = None
+        # self.rvs_next = None
 
 class LinkedList():
     def __init__(self):
         self.head = None
         self.tail = None
+        # self.rvs_head = None
+        # self.rvs_tail = None
 
     def printList(self):
         if self.head is None:
@@ -42,17 +46,10 @@ class LinkedList():
         if self.head == cur:
             return 0
 
-    def insertLast(self, node):
-        if self.head is None: # 빈 리스트
-            self.head = self.tail = node
-        else:
-            self.tail.next = node
-            self.tail = node
-
-    def insertAt(self, idx, other):
+    def insertAt(self, idx, node):
         if self.head is None: # 빈리스트
-            self.head = other.head
-            self.tail = other.tail
+            self.head = self.tail = node
+            # self.rvs_head = self.rvs_tail = node
             return
 
         prev, cur = None, self.head
@@ -62,15 +59,21 @@ class LinkedList():
             idx -= 1
 
         if prev is None: # 첫번째 위치에 삽입
-            other.tail.next = cur
-            self.head = other.head
-        elif cur is None: # 마지막 위치에 삽입
-            prev.next = other.head
-            self.tail = other.tail
-        else:
-            prev.next = other.head
-            other.tail.next = cur
+            node.next = cur
+            self.head = node
+            # self.rvs_tail = node
+            # cur.rvs_next = node
 
+        elif cur is None: # 마지막 위치에 삽입
+            prev.next = node
+            self.tail = node
+            # node.rvs_next = prev
+            # self.rvs_head = node
+        else:
+            prev.next = node
+            node.next = cur
+            # cur.rvs_next = node
+            # node.rvs_next = prev
 
     def printListReverse(self):
         if self.head is None:  # 빈리스트
@@ -93,10 +96,9 @@ for tc in range(1, t + 1):
     for _ in range(m):
         inputs = list(map(int, input().split()))
         pos = mylist.findIdx(inputs[0])
-        tmpList = LinkedList()
         for i in range(n):
-            tmpList.insertLast(Node(inputs[i]))
-        mylist.insertAt(pos, tmpList)
+            node = Node(inputs[i])
+            mylist.insertAt(pos + i, node)
         # mylist.printList()
 
     # print('#{} {}'.format(tc, printListReverse()))

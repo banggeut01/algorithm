@@ -1695,28 +1695,6 @@ SC 추가문제
 * [2206.벽부수고 이동하기]
   * [문제](https://www.acmicpc.net/problem/2206)
 
-## A 대비
-
-SWEA
-
-* N-Queen
-* [1873.상호의 배틀필드]
-
-백준
-
-* [2309.일곱난쟁이]
-  * [문제](https://www.acmicpc.net/problem/2309)
-* [1759.암호만들기]
-  * [문제](https://www.acmicpc.net/problem/1759)
-* [1697.숨바꼭질]
-  * [문제](https://www.acmicpc.net/problem/1697)
-* [2589.보물섬]
-  * [문제](https://www.acmicpc.net/problem/2589)
-* [2468.안전영역]
-  * [문제](https://www.acmicpc.net/problem/2468)
-* [5427.불]
-  * [문제](https://www.acmicpc.net/problem/5427)
-
 # Day13 - Linked List
 
 IM - list
@@ -1783,4 +1761,100 @@ IM - list
 SC 추가문제
 
 * [1258 - 행렬찾기](./list/1258.py)
+
 * [6485 - 삼성시의 버스 노선](./list/6485.py)
+
+  * error
+
+    ```
+    결과 출력시 print 주의
+    아래와 같이 나오지 않도록 개행문자 빠뜨리지 말자
+    
+    #1 1 1 2 2 1 1#2 3 0 ... 
+    ```
+
+# A 대비
+
+## 190903
+
+SWEA
+
+- [2806. N-Queen](./A/2806.py)
+
+  - [백트래킹 참고 링크](http://ddmix.blogspot.com/2015/06/cppalgo-29-greedy-backtracking.html)
+
+  - 한 행에 Queen이 두 개 놓일 수 없음
+
+  - 한 행에 한개씩! => 각 행에 대해 x위치를 구한다.
+
+  - 고려할 것)
+
+    ```
+    두 좌표 (a, b), (c, d)일 때
+    1. 한 열에 있지 않을 것! : b != d
+    2. 한 행에 있지 않을 것! : a != c
+    3. 대각선에 있지 않을 것! : |c - a| != |d - b|
+    ```
+
+  - 유망한지 검사하는 함수 : `isPromising()`
+
+  - 퀸 놓는 함수 : `nQueen()`
+
+  - [4881 배열 최소합 참고](./stack2/4881.py)
+
+    - 배열최소합에서는 `used = [False] * n # used[j]: j열 선택 유무` 이용
+    - nqueen에서는 행, 열의 정보 저장해야함
+    - 따라서, `col = [False] * n # col[i] : i행에 놓인 queen의 열` 사용한다.
+
+- [1873.상호의 배틀필드](./A/1873.py)
+
+SC - 9월 4일 실습 집중 문제 
+
+- [2001. 파리 퇴치](./A/2001.py) 
+
+- [4615. 재미있는 오셀로 게임](./A/4615.py) 
+
+  - 문제 잘 읽기!
+  - 초기답 12나왔던 이유는 문제를 제대로 안읽어서..
+  - 보드의 초기값을 중앙에 `WB\nBW`로 두고 풀어야 한다.
+
+- [5356. 의석이의 세로로 말해요](./A/5356.py)
+
+- [6190. 정곤이의 단조 증가하는 수](./A/6190.py) 아직 못품!
+
+  - 풀이)
+
+    - 원소를 두개로 하는 부분집합 생성
+    - 두 원소의 곱 구해 str형으로 변환
+    - 단조 검사 후 단조면? max 갱신
+
+  - 결과 Fail 왜?
+
+    - 50개중 0개 (제한횟수 초과)
+
+    - `isMono()` 단조 검사함수에서 이전 문자 tmp에 저장하지 않고,
+
+      n-1까지 검사하였다. (i, i+1 비교) ==> 50개중 1개
+
+    - 부분집합 개수 2개 => 단조검사 하였는데,
+
+      최대값보다 작으면 검사 생략 가능(구글링)
+
+    - 단조 증가 검사 나머지 연산으로(구글링)
+
+백준
+
+- [2309.일곱난쟁이]
+  - [문제](https://www.acmicpc.net/problem/2309)
+- [1759.암호만들기] 0904
+  - [문제](https://www.acmicpc.net/problem/1759)
+- [1697.숨바꼭질] 0904
+  - [문제](https://www.acmicpc.net/problem/1697)
+- [2589.보물섬]
+  - [문제](https://www.acmicpc.net/problem/2589)
+- [2468.안전영역]
+  - [문제](https://www.acmicpc.net/problem/2468)
+- [5427.불] 0904
+  - [문제](https://www.acmicpc.net/problem/5427)
+- [14501.퇴사] 0904
+  - [문제](https://www.acmicpc.net/problem/14501)

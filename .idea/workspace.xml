@@ -23,10 +23,10 @@
     <session id="1582792393">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
+          <entry key="project.closed" value="4" />
           <entry key="project.open.time.0" value="1" />
-          <entry key="project.open.time.2" value="1" />
-          <entry key="project.opened" value="2" />
+          <entry key="project.open.time.2" value="2" />
+          <entry key="project.opened" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -46,11 +46,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/code/stack1/1220.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18">
+            <state relative-caret-position="19">
               <caret line="1" selection-start-line="1" selection-end-line="1" />
-              <folding>
-                <marker date="1566953759132" expanded="true" signature="83:86" ph="..." />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -61,10 +58,10 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="811" />
-    <option name="y" value="61" />
+    <option name="x" value="951" />
+    <option name="y" value="4" />
     <option name="width" value="974" />
-    <option name="height" value="1047" />
+    <option name="height" value="1043" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -154,11 +151,8 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/code/stack1/1220.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
+        <state relative-caret-position="19">
           <caret line="1" selection-start-line="1" selection-end-line="1" />
-          <folding>
-            <marker date="1566953759132" expanded="true" signature="83:86" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>

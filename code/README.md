@@ -1762,6 +1762,66 @@ SC 추가문제
 
 * [1258 - 행렬찾기](./list/1258.py)
 
+  * 나의 방법)
+
+    * 나는 행, 열 길이를 구한 뒤 0으로 만들어감
+
+  * 선생님 방법) **best!!!** 
+
+    * 한번에 처리하기
+
+      ```python
+      n = int(input())
+      arr = [list(map(int, input().split())) for _ in range(n)]
+      
+      ans = [] # 튜플로 행,열의 크기 저장
+      
+      for i in range(n):
+          for j in range(n):
+              if arr[i][j] == 0: continue
+                  
+                  r, c = i, 0 # r, c 행,열
+                  while r < n and arr[r][j]:
+                      c = j
+                      while c < n and arr[r][c]:
+                          arr[r][c] = 0
+                          c += 1
+                      r += 1
+                      
+                  ans.append(r - i, c - j)
+      ans.sort(key=_lambda a: (a[0] * a[1], a[0]))
+      ```
+
+    * `_lambda` 사용법!!
+
+      * lambda 인자 : 표현식
+
+        ```python
+        # 함수 정의
+        def hap(x, y):
+            return x + y
+        
+        # 함수 호출
+        hap(10, 20)
+        ```
+
+        함수 정의 호출을 한번에!!
+
+        위 코드를 lambda를 사용해보자.
+
+        ```python
+        (lambda x, y: x + y)(10, 20)
+        ```
+
+      * 다른 예)
+
+        ```python
+        >>> list(map(lambda x: x ** 2, range(5)))
+        [0, 1, 4, 9, 16]  
+        ```
+
+        
+
 * [6485 - 삼성시의 버스 노선](./list/6485.py)
 
   * error
@@ -1808,53 +1868,316 @@ SWEA
 
 - [1873.상호의 배틀필드](./A/1873.py)
 
-SC - 9월 4일 실습 집중 문제 
+SC - 9월 4일 집중실습
 
 - [2001. 파리 퇴치](./A/2001.py) 
 
-- [4615. 재미있는 오셀로 게임](./A/4615.py) 
+- [4615. 재미있는 오셀로 게임](./A/4615.py) **필수**
 
   - 문제 잘 읽기!
   - 초기답 12나왔던 이유는 문제를 제대로 안읽어서..
   - 보드의 초기값을 중앙에 `WB\nBW`로 두고 풀어야 한다.
+  - 갔던 경로 인덱스 저장 후 아니면, 다시 되돌리기
 
 - [5356. 의석이의 세로로 말해요](./A/5356.py)
 
-- [6190. 정곤이의 단조 증가하는 수](./A/6190.py) 아직 못품!
+- [6190. 정곤이의 단조 증가하는 수](./A/6190.py) 
 
-  - 풀이)
+  - 초기 풀이)
 
     - 원소를 두개로 하는 부분집합 생성
+      - Binary Counting:비트연산을 통한 순열
     - 두 원소의 곱 구해 str형으로 변환
-    - 단조 검사 후 단조면? max 갱신
-
-  - 결과 Fail 왜?
-
-    - 50개중 0개 (제한횟수 초과)
-
-    - `isMono()` 단조 검사함수에서 이전 문자 tmp에 저장하지 않고,
-
-      n-1까지 검사하였다. (i, i+1 비교) ==> 50개중 1개
-
-    - 부분집합 개수 2개 => 단조검사 하였는데,
-
+  - 단조 검사 후 단조면? max 갱신
+  
+- 결과 Fail 왜?
+  
+  - [fail코드](./A/6190_fail.py)
+  
+  - 50개중 0개 (제한횟수 초과)
+  
+  - `isMono()` 단조 검사함수에서 이전 문자 tmp에 저장하지 않고,
+  
+    n-1까지 검사하였다. (i, i+1 비교) ==> 50개중 1개
+  
+  - 부분집합 개수 2개 => 단조검사 하였는데,
+  
       최대값보다 작으면 검사 생략 가능(구글링)
+    
+  - 다른방법으로 풀어보기(재귀)
+  
+    - binary counting 말고, 재귀로 두 원소 선택해보자.
+  
+    - 1759.암호만들기 - 풀이2 조합 참고
+  
+      - 굳이 `findChoosedIdx(): 시작 위치 구해줌`사용하지 않고도 인자로 선택된 원소 idx 같이 넘겨줄 수 있다.
+  
+      => 해결!!
 
-    - 단조 증가 검사 나머지 연산으로(구글링)
+## 190904
 
-백준
+SC - 9월 5일 집중실습
 
-- [2309.일곱난쟁이]
-  - [문제](https://www.acmicpc.net/problem/2309)
-- [1759.암호만들기] 0904
+* [6109 .추억의 2048게임]  **필수**
+* [2005. 파스칼의 삼각형]
+* [1979. 어디에 단어가 들어갈 수 있을까]
+* [1493. 수의 새로운 연산]
+
+백준 9월 4일
+
+- [1759.암호만들기]
+  
   - [문제](https://www.acmicpc.net/problem/1759)
-- [1697.숨바꼭질] 0904
+  
+    - 알파벳 증가하는 순서로 배열
+    - 최소 한 개의 모음과 최소 두 개의 자음으로 구성
+  
+  - 만약 6개 중 4개 골라내면 조합, 6개 중 4개 골라 순서대로 나열하면 순열
+  
+  - 전체 원소 6개 중 원소 4개인 부분집합 만들어 풀 수 있다.
+  
+  - 풀이 1) 이진 트리
+  
+    ```python
+    # 4 6
+    # a t c i s w
+    pwd = []
+    moal = ['a', 'e', 'i', 'o', 'u']
+    def backtrack(k, mo, ja): # 모음개수, 자음개수
+        if len(pwd) == L:
+            print(pwd)
+            return
+        if k == C: return
+        
+        pwd.append(arr[k])
+        a = b = 0
+        if arr[k] in alpah: a = 1
+        else: b = 1
+        backtrack(k + 1, mo + a, ja + b) # k번째 요소 포함하는 경우
+        pwd.pop()
+        backtrack(k + 1, mo, ja) # k번째 요소 포함하지 않은 경우
+        
+    L, C = map(int, input().split())
+    arr = list(input().split())
+    arr = sorted(arr)
+    
+    backtrack(0, 0, 0)
+    ```
+  
+  - 풀이 2)
+  
+    ```python
+    arr = 'ABC'; N = len(arr)
+    
+    # Pi(3, 2) 중복순열
+    for i in range(N):
+        for j in range(N):
+            print(arr[i], arr[j])
+            
+    # 중복 제외 순열
+    for i in range(N):
+        for j in range(N):
+            if i == j: continue
+            print(arr[i], arr[j])
+    
+    # C(3, 2) 조합
+    for i in range(N):
+        for j in range(i + 1, N):
+            print(arr[i], arr[j])
+            
+    # H(3, 2) 중복 조합
+    for i in range(N):
+        for j in range(i, N):
+            print(arr[i], arr[j])
+    ```
+  
+    ```python
+    # C(5, 3)
+    arr = 'ABCDE'; N = len(arr)
+    for i in range(N):
+        for j in range(i + 1, N):
+            for k in range(j + 1, N):
+            	print(arr[i], arr[j], arr[k])
+                
+    # 재귀로 바꿔보자
+    arr = 'ABCDE'; N = len(arr); R = 3
+    choose = [] # 선택된 원소
+    def comb(k, start):
+        if k == R:
+            print(choose)
+            return
+        
+        for i in range(start, N):
+            choose.append(arr[i]) # i번째 정보를 저장
+            comb(k + 1, i + 1) # 만약 중복조합이라면 인자(k + 1, i)
+    		choose.pop() # 되돌리기
+    ```
+  
+    
+  
+- [1697.숨바꼭질](./A/1697.py)
+  
   - [문제](https://www.acmicpc.net/problem/1697)
+  
+  - 풀이
+  
+    - 한 숫자에서 다른 숫자를 하기 위해 최소 몇번 연산해야하나?
+  
+    - 연산은 *2 혹은 +1, -1만 가능
+  
+    - [초기 풀이)](./A/1697_fail.py )
+  
+      - 2진수로 바꾸어 풀면 간단할듯
+      - python에서 2진수출력해주는 `bin()`의 return type은 `str`
+      - => Fail, +1, *2연산만 있으면 가능하나 -1 연산까지 있다.
+  
+    - BFS로 다시 풀어보자. 최단경로니까!
+  
+      - maximum recursion depth exceeded error
+  
+        ```
+        job = [-1, 1, N]
+        ```
+  
+      - 아래와 같이 순서를 바꾸니 파이참에서는 예제 실행되지만,
+  
+        백준에서 런타임 에러 발생!
+  
+        ```
+        job = [1, -1, N]
+        ```
+  
+      - 최소를 구하는 문제에서 초기값 이렇게 설정하였다.
+  
+        ```python
+        result = 0xffffff
+        
+        # bfs()의 result 갱신부분
+            if cur == K:
+                result = min(result, tmp)
+                return
+        ```
+  
+        아래와 같이 바꾸고 bfs()의 result갱신 조건 수정
+  
+        ```python
+        result = -1
+        
+        # bfs()의 result 갱신부분
+            if cur == K:
+                if result == -1:
+                    result = tmp
+                else:
+                    result = min(result, tmp)
+                return
+        ```
+  
+        런타임에러 여전함! 이게 문제가 아니었음
+  
+        `result = 100001`으로 수정
+  
+      - 다시 처음부터 풀어보기
+  
+        - **한번 나왔던 숫자 다시 연산하지 않아도 된다.**
+        - 따라서 나올 수 있는 숫자범위 100,001에 대한 방문 정보를 만들어 BFS를 진행해보자.
+  
+      - error
+  
+        ```python
+        job = [1, -1, N] # 연산작업 +1, -1, *2 N은초기수빈위치
+        ```
+  
+        N을 갱신해주지 않았기 때문
+  
+        아래 코드 추가해 N 갱신
+  
+        ```python
+        job[2] = cur # 현재 수빈 위치
+        ```
+  
+- [5427.불] 
+  
+  - [문제](https://www.acmicpc.net/problem/5427)
+    - BFS
+    
+    - 불은 '#' 벽, '*'불을 제외하고 '.'빈공간이나 '@'상근에게 갈 수 있음
+    
+      - 처음 상근 위치 찾을 때 상근이를 .로 바꿔준후 시작한다.
+      - 그럼 불이 '.'일때 번지면 된다.
+    
+    - 상근이는 '.' 빈 공간, 그것도 방문하지 않았던 곳만 갈 수 있음
+    
+    - 불을 먼저 처리하고 상근이 처리
+    
+    - 초기 큐 설정시 appendleft를 사용해 불이 우선으로 나오게 해줌
+    
+      ```python
+      if mymap[i][j] == '*':    dq.appendleft((0, i, j)) # 불 먼저
+      ```
+    
+    * 상근이가 갈 수 없는 경로는 visit에 표시
+    
+    * 불은 mymap을 사용해 갈 수 있는지 검사
+    
+    * 만약 불이 번졌을 때, mymap 값을 갱신해야 갔던 곳 다시 안가게 된다.
+    
+      아래 추가
+    
+      ```
+      mymap[r][c] = '*'
+      ```
+    
+  - error - 시간초과, 런타임 에러(BOJ에서 너무 심한 메모리 초과 런타임에러 가능)
+  
+    - 런타임 에러 추측
+      - 큐에 너무 많은 데이터를 삽입해서 그러지 않나 예상중
+      - 상근이가 갈 수 없는 곳은 `'*', '#', '@'`, 불이 갈 수 없는 곳은 `'#', '*'`인데 이렇게 하면 불이 옮겨질 때 삽입되는 좌표와 상근이가 갈 수 있는 좌표가 같은 좌표 일 때 중복값이 큐에 삽입 될 수 있다.
+  
+  - 선생님 풀이)
+  
+    - 불, 상근 동시에 가면 복잡하다.
+    - 불을 먼저 저장해놓고, 상근이가 이동하면서 불보다 늦게 도착했으면 못간걸로...
+    - 불의 시작점을 좌표로 bfs를 돌리면 각 좌표마다 어느시간부터 불이 붙어있는지 알 수 있음
+    - 4179, 3055번 비슷한 문제
+  
+- [14501.퇴사] 
+  
+  - [문제](https://www.acmicpc.net/problem/14501)
+  
+    - 최적화 문제
+    - 부분집합 - 바이너리 카운팅, 혹은 백트래킹
+    - 선택한 일자들의 상담시간이 겹치는지 조사
+  
+  - 선생님 풀이
+  
+    ```python
+    N = int(input())
+    arr = [(0, 0)] + [tuple(map(int, input().split())) for _ in range(N)]
+    
+    ans = 0
+    def backtrack(day, p): # day: 결정할 일, p: 지금까지 이익
+        global ans
+        
+        if day > N + 1: return
+        if day == N + 1:    
+            ans = max(ans, p)
+            return
+        
+        # 상담을 하는 경우
+        backtrack(day + arr[day][0], p + arr[day][1])
+        # 상담을 하지 않는 경우
+        backtrack(day + 1, p)
+    ```
+  
+    - DFS를 할 땐, 썼다 지웠다하고, BFS를 할 땐 queue에 때려박고 하면됨.
+
+
+
+
+
 - [2589.보물섬]
   - [문제](https://www.acmicpc.net/problem/2589)
 - [2468.안전영역]
   - [문제](https://www.acmicpc.net/problem/2468)
-- [5427.불] 0904
-  - [문제](https://www.acmicpc.net/problem/5427)
-- [14501.퇴사] 0904
-  - [문제](https://www.acmicpc.net/problem/14501)
+- [2309.일곱난쟁이]
+  - [문제](https://www.acmicpc.net/problem/2309)

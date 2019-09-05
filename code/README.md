@@ -2379,8 +2379,137 @@ SC - 9월 4일 집중실습
     * spreadDust()에서 새로운 tmp 배열 생성 대신, 바로 계산하는 형식으로 바꾸었다.
 
     * 그래도 시간초과는 여전하다...
-
-
+    
+    * for문 줄여보기
+    
+      ```python
+      # 수정전
+      def cleanAir(start, dir): # 시작행
+          i, j = start + 1, 0
+          x = 1 * dir
+          y = 0
+          while True:
+              dust[i][j], dust[i + x][j + y] = dust[i + x][j + y], dust[i][j]
+              i, j = i + x, j + y
+              if i == 0:
+                  if j == 0:
+                      x, y = 0, 1
+                  elif j == C - 1:
+                      x, y = 1, 0
+              elif i == start:
+                  if j == C - 1:
+                      x, y = 0, -1
+                  elif j == 1: # 공청
+                      dust[i][j] = 0
+                      break
+              elif i == R - 1:
+                  if j == 0:
+                      x, y = 0, 1
+                  elif j == C - 1:
+                      x, y = -1, 0
+          return
+      ```
+    
+      
+    
+      ```python
+      # 수정전
+      def cleanAir(start, dir): # 시작행
+          # 1.
+          # 위
+          if dir == -1: # 반시계방향
+              for i in range(start - 1, 0, -1):
+                  dust[i][0]= dust[i - 1][0]
+              i -= 1
+          # 아래로
+          else: # 시계방향
+              for i in range(start + 1, R - 1):
+                  dust[i][0] = dust[i + 1][0]
+              i += 1
+          # 2.
+          # 오른쪽으로
+          for j in range(0, C - 1):
+              dust[i][j] = dust[i][j + 1]
+          j += 1
+          # 3.
+          # 아래로
+          if dir == -1:  # 반시계방향
+              for i in range(0, start):
+                  dust[i][j] = dust[i + 1][j]
+              i += 1
+          # 위로
+          else:  # 시계방향
+              for i in range(R - 1, start, -1):
+                  dust[i][j] = dust[i - 1][j]
+              i -= 1
+          # 4.
+          # 왼쪽으로
+          for j in range(C - 1, 1, -1):
+              dust[i][j] = dust[i][j - 1]
+          j -= 1
+          dust[i][j] = 0
+      ```
+    
+      ```python
+      # 수정 후
+      def cleanAir(start, dir): # 시작행, dir-방향 -1:위, 1:아래
+          if dir == -1:
+              # 1. 위로
+              for i in range(start - 1, 0, -1):
+                  dust[i][0]= dust[i - 1][0]
+              # 2. 오른쪽으로
+              for j in range(0, C - 1):
+                  dust[0][j] = dust[0][j + 1]
+              # 3. 아래로
+              for i in range(0, start):
+                  dust[i][C - 1] = dust[i + 1][C - 1]
+              # 4. 왼쪽으로
+              for j in range(C - 1, 1, -1):
+                  dust[start][j] = dust[start][j - 1]
+          else:
+              for i in range(start + 1, R - 1):
+                  dust[i][0] = dust[i + 1][0]
+              for j in range(0, C - 1):
+                  dust[R - 1][j] = dust[R - 1][j + 1]
+              for i in range(R - 1, start, -1):
+                  dust[i][C - 1] = dust[i - 1][C - 1]
+              for j in range(C - 1, 1, -1):
+                  dust[start][j] = dust[start][j - 1]
+          dust[start][1] = 0
+      
+      ```
+    
+      비교구문 줄여도 시간초과...
+    
+  * [백준 사이트 질문](https://www.acmicpc.net/board/view/41140#comment-72247)
+  
+    * 이 문제는 python으로 구현시 최적화에 매우 능숙해야(엄청나게 효율적으로 짜야) 통과할 수 있다.
+    * pypy3로 제출하면 정답으로 처리됨.
+  
+  * 윤형씨 도움을 좀 받았다.
+  
+    * [추윤형 베스트 코드보기](./A/17144_best.py)
+  
+    * 나와 다른점
+  
+      * `dust[i][j]>=5`조건을 걸어주었음
+  
+      * **5이상일때만 수행한다는 점이 중요**
+  
+      * 유출된 미세먼지 (`dust[i][j]`)는 바로 업데이트해주고,
+  
+        유입된 미세먼지는 별도(`move[ni][nj]`)로 저장
+  
+      * dust 와 move를 더해주면서 확산 종료
+  
+    * 이 방법으로 일주일 뒤에 다시 짜보기!!!
+  
+  * 이 문제는 시뮬레이션 문제다!
+  
+    * 시뮬레이션?
+      * 문제에 주어진 조건 그대로 구현하는 문제!!
+      * 시뮬레이션 문제 풀어보기!
+    * [참고사이트](https://rebas.kr/848)
 
 SC - 9월 5일 집중실습
 

@@ -3,8 +3,14 @@ t = int(input())
 for tc in range(1, t + 1):
     N, job = input().split()
     N = int(N)
-    tile = [list(map(int, input().split()))]
+    tile = [list(map(int, input().split())) for _ in range(N)]
 
     tmp = []
-    for _ in range(N):
-        
+    if job == 'up':
+        dir = 1
+    elif job == 'down':
+        dir = -1
+    elif job == 'right':
+        dir = -1
+    else: # 'left'
+        dir = 1

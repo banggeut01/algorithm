@@ -2511,6 +2511,75 @@ SC - 9월 4일 집중실습
       * 시뮬레이션 문제 풀어보기!
     * [참고사이트](https://rebas.kr/848)
 
+## 190906
+
+백준
+
+* [17136.색종이붙이기](./A/17136.py)
+
+  * [문제](https://www.acmicpc.net/problem/17136)
+
+    * 연산자 끼워넣기 처럼 색종이 크기 i, paper[i]에 개수 저장
+      * 초기 dfs로 안하고 크기 5부터 붙여주었더니, 최적해 나오지 않았다.
+      * 처음 5를 붙었다가 나중에 3을 붙여볼 수 있도록 해야함
+    * DFS + 백트래킹
+    * 1일 때, 크기 5부터 차례대로 검사해보고 (**탐욕**)
+    * 맞는 색종이면 0으로 바꿔주기
+
+  * 가지치기
+
+    * 모두 지워졌으면 cnt 갱신하고 return
+
+    * 크기 5부터 1 색종이까지 확인해서 붙일 수 없다면 return
+
+    * [도움글]([https://sophia2730.tistory.com/entry/Algorithm-%EB%B0%B1%EC%A4%8017136-%EC%83%89%EC%A2%85%EC%9D%B4-%EB%B6%99%EC%9D%B4%EA%B8%B0](https://sophia2730.tistory.com/entry/Algorithm-백준17136-색종이-붙이기))
+
+      * **해당 좌표를 바꾼 후에 아직도 1이 남아있으면 유효하지 않은 경우이므로 return한다.        >> 가지치기**
+
+      * 이것이 무슨소리..?
+
+        * 색종이를 붙일 수 있을 때(현재 좌표x1y1) 붙이고 -> (재귀) 다음 위치 (x2y2)찾아 붙이고 -> (재귀) -> 다음 위치(x3y3) 찾아 붙이고... -> 다 붙이게 되면 최소값 갱신 후 return하게 된다.
+
+        * 다시 return 되면서 x3y3 위치로 돌아왔을 때, for문을 돌고 있기 때문에 x3y3+1 위치로 가게 되는데 **그럴 필요가 없다.**
+
+        * 따라서 돌아온 후 return하면 된다.
+
+        * 맨 아래 return 추가로 해결하였다!!
+
+          ```python
+          for i in range(r, 10):    
+              for j in range(10):        
+                  if board[i][j]:            
+                      flag = 0            
+                      for size in range(5, 0, -1): # 크기 5부터
+                          if checkSize(i, j, size): # 붙이기가능 
+                              if paper[size]:                        					flag = 1                     
+                                  paper[size] -= 1  # 붙이기
+                                  updatePaper(i, j, size, 0)
+                                  dfs(i, tmp + 1)
+                                  paper[size] += 1# 되돌리기
+                                  updatePaper(i, j, size, 1)
+                      if not flag: # 색종이 하나도 못붙이면,
+                          return            
+                      return # => 추가된 부분!!
+          ```
+
+* [17070.파이프 옮기기1](./A/17070.py)
+
+  * [문제](https://www.acmicpc.net/problem/17070)
+    * DFS
+  * error - 시간초과
+    * 도착점 도착시 return 빠뜨렸기 때문!
+    * return 주의하자!!
+
+* [15683.감시](./A/15683.py)
+
+  * [문제](https://www.acmicpc.net/problem/15683)
+
+백준 나이트의 이론 풀어보기
+
+색종이 올려놓기 목표는 30분
+
 SC - 9월 5일 집중실습
 
 - [6109 .추억의 2048게임](./A/6109.py)  **필수** ## 아직 못품!

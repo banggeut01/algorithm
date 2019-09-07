@@ -1,51 +1,61 @@
 # 15683.py 감시
-import pprint
-def backtrack(r, tmp, zero):
+
+import copy
+
+def getZeroArea(chooList): 
+    table = copy.deepcopy(board)
+    for i, j, s, cNum in chooList: # cctv좌표ij, s:cctv타입, cNum:경우 번호
+        for direct in cctv[s][cNum]:
+            # direct:0-상, 1-우,..
+            dx, dy = d[direct]
+            row, col = i + dx, j + dy
+            while -1 < row < N and -1 < col < M and table[row][col] != 6:
+                if not table[row][col]:
+                    table[row][col] = '#'
+                row, col = row + dx, col + dy
+    zcnt = 0
+    for i in range(N):
+        for j in range(M):
+            if not table[i][j]:
+                zcnt += 1
+    del chooList
+    del table
+    return zcnt
+
+def dfs(r, tmp):
     global result, cctvNum
 
-    if tmp == cctvNum:
+    choose = copy.deepcopy(tmp)
+    if len(choose) == cctvNum:
+        zero = getZeroArea(choose)
         result = min(zero, result)
-
-        pprint.pprint(board)
-        print(zero)
-
         return
 
+    choose = copy.deepcopy(tmp)
     for i in range(r, N):
         for j in range(M):
             if not board[i][j]: continue
-            if board[i][j] != 6 and board[i][j] != '#' and not used[i][j]: # 카메라 찾음!
-                s = board[i][j] # cctv 상태 1 ~ 5
-                for case in cctv[s]:
-                    visit = []  # 방문좌표 임시저장
-                    for direct in case:
-                        dx, dy = d[direct]
-                        row, col = i + dx, j + dy
-                        while -1 < row < N and -1 < col < N and board[row][col] != 6:
-                            if not board[row][col] and board[row][col] != '#':
-                                visit.append((row, col))
-                                zero -= 1
-                                board[row][col] = '#'
-                            row, col = row + dx, col + dy
+            if board[i][j] != 6 and board[i][j] != '#' and not used[i][j]: # cctv발견!
+                s = board[i][j] # cctv 타입 1 ~ 5
+                for cNum in range(len(cctv[s])): # 경우 선택 ex.s=1, len(cctv[s])=4 => case = 0, 1, 2, 3
+                    choose.append((i, j, s, cNum))
                     used[i][j] = True
-                    backtrack(i, tmp + 1, zero)
-                    for row, col in visit:# 되돌리기
-                        board[row][col] = 0
-                        zero += 1
+                    dfs(r, choose)
+                    choose.pop()
                     used[i][j] = False
                 return
 
 
-# N, M = map(int, input().split()) # N:행, M:열
-# board = [list(map(int, input().split())) for _ in range(N)]
-N, M = 6, 6
-board = [[0, 0, 0, 0, 0, 0],
- [0, 2, 0, 0, 0, 0],
- [0, 0, 0, 0, 6, 0],
- [0, 6, 0, 0, 2, 0],
- [0, 0, 0, 0, 0, 0],
- [0, 0, 0, 0, 0, 5]]
-d = [(0, -1), (0, 1), (1, 0), (0, -1)] # [0]:상, [1]:우, [2]:하, [3]:좌
+N, M = map(int, input().split()) # N:행, M:열
+board = [list(map(int, input().split())) for _ in range(N)]
+# N, M = 6, 6
+# board = [[0, 0, 0, 0, 0, 0],
+#  [0, 2, 0, 0, 0, 0],
+#  [0, 0, 0, 0, 6, 0],
+#  [0, 6, 0, 0, 2, 0],
+#  [0, 0, 0, 0, 0, 0],
+#  [0, 0, 0, 0, 0, 5]]
+d = [(-1, 0), (0, 1), (1, 0), (0, -1)] # [0]:상, [1]:우, [2]:하, [3]:좌
 cctv = [[],  # [0]
         [[0], [1], [2], [3]],  # [1] 4가지
         [[0, 2], [1, 3]],  # [2] 2가지
@@ -61,7 +71,6 @@ for i in range(N):
             zero += 1
             continue
         if board[i][j] != 6: cctvNum += 1
-pprint.pprint(board)
-backtrack(0, 0, zero) # 시작행, 감시완료한 cctv개수, 0개수
+dfs(0, []) # 시작행, 선택된 cctv 정보
 print(result)
 

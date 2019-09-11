@@ -2532,7 +2532,7 @@ SC - 9월 4일 집중실습
 
     * 크기 5부터 1 색종이까지 확인해서 붙일 수 없다면 return
 
-    * [도움글]([https://sophia2730.tistory.com/entry/Algorithm-%EB%B0%B1%EC%A4%8017136-%EC%83%89%EC%A2%85%EC%9D%B4-%EB%B6%99%EC%9D%B4%EA%B8%B0](https://sophia2730.tistory.com/entry/Algorithm-백준17136-색종이-붙이기))
+    * [도움글](https://sophia2730.tistory.com/entry/Algorithm-%EB%B0%B1%EC%A4%8017136-%EC%83%89%EC%A2%85%EC%9D%B4-%EB%B6%99%EC%9D%B4%EA%B8%B0](https://sophia2730.tistory.com/entry/Algorithm-백준17136-색종이-붙이기)
 
       * **해당 좌표를 바꾼 후에 아직도 1이 남아있으면 유효하지 않은 경우이므로 return한다.        >> 가지치기**
 

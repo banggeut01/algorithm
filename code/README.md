@@ -2615,15 +2615,37 @@ SC - 9월 4일 집중실습
 SC - 9월 5일 집중실습
 
 - [6109 .추억의 2048게임](./A/6109.py)  **필수** ## 아직 못품!
-  - 행 또는 열 읽어가면서 별도의 tmp에 저장
-  - 끝나면 행열을 tmp값으로 갱신하기
+  
+  - 새로 갱신되는 값 tmp 리스트에 0을 제외하고 저장
+  
+  - 경우
+  
     - prev 이전값, new: 새로운값
+  
     - 4가지 경우
-      - prev 0 new not 0
-      - prev 0
-      - prev not 0
-      - prev not 0
-      - **새로나온 칸 0이고, prev가 0이 아닐 때 prev값 유지!**
+  
+      1. prev 0, new 0 -> 아무것도 하지 않음
+  
+      2. prev 0, new not 0 -> prev갱신 (prev = new)
+  
+         1, 2번 합칠 수 있다. prev = new로 갱신!
+  
+      3. prev not 0, new 0 -> **prev갱신하지 않음** 아무것도 하지 않음!
+  
+      4. prev not 0, new not 0
+  
+         4-1. prev == new
+  
+         ​	4-1-1. <del>new 8이 아닐 때 -></del> new*2 tmp에 추가, prev갱신  (prev = 0)
+  
+         ​	4-1-2. <del>new 8일 때 -> prev갱신(prev = 0)</del>
+  
+         4-2. prev != new -> tmp에 prev추가, prev갱신(prev = new)
+  
+  - 100개 tc중 75개 맞음 왜?
+  
+    - 문제 제대로 읽기
+    - 마지막 값 제한 없음!
 - [2005. 파스칼의 삼각형]
 - [1979. 어디에 단어가 들어갈 수 있을까]
 - [1493. 수의 새로운 연산]

@@ -5,12 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8c7928ff-d53c-4b14-afb5-3d85fa790d26" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/start/1240-2input.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/start/1240.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/start/1242.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/start/4366.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/start/1242.py" beforeDir="false" afterPath="$PROJECT_DIR$/start/1242.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/start/1242input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/start/1242input.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -98,35 +96,37 @@
     <session id="-346864493">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
+          <entry key="project.closed" value="4" />
           <entry key="project.open.time.1" value="1" />
-          <entry key="project.open.time.2" value="1" />
-          <entry key="project.opened" value="2" />
+          <entry key="project.open.time.2" value="2" />
+          <entry key="project.open.time.4" value="1" />
+          <entry key="project.opened" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="22" />
-          <entry key="txt" value="9" />
+          <entry key="py" value="25" />
+          <entry key="txt" value="13" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="PLAIN_TEXT" value="9" />
-          <entry key="Python" value="22" />
+          <entry key="PLAIN_TEXT" value="13" />
+          <entry key="Python" value="25" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Python Console" value="310" />
+          <entry key="Python Console" value="906" />
           <entry key="dummy" value="1" />
-          <entry key="py" value="17430" />
+          <entry key="py" value="20286" />
+          <entry key="txt" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="1" />
-          <entry key="Python" value="17740" />
+          <entry key="PLAIN_TEXT" value="5" />
+          <entry key="Python" value="21192" />
         </counts>
       </usages-collector>
     </session>
@@ -134,22 +134,27 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/start/1242.py">
+        <entry file="file://$PROJECT_DIR$/start/1240.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="22" column="17" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
+            <state relative-caret-position="380">
+              <caret line="20" column="45" selection-start-line="19" selection-start-column="16" selection-end-line="20" selection-end-column="45" />
               <folding>
-                <marker date="1568789571802" expanded="true" signature="337:431" ph="..." />
+                <marker date="1568785708704" expanded="true" signature="113:1368" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/start/1242input.txt">
+        <entry file="file://$PROJECT_DIR$/start/1242.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="631">
-              <caret line="14355" column="257" selection-start-line="14355" selection-start-column="257" selection-end-line="14355" selection-end-column="257" />
+            <state relative-caret-position="395">
+              <caret line="66" column="29" lean-forward="true" selection-start-line="66" selection-start-column="29" selection-end-line="66" selection-end-column="29" />
+              <folding>
+                <marker date="1568862901261" expanded="true" signature="68:70" ph="..." />
+                <marker date="1568862901261" expanded="true" signature="68:2644" ph="..." />
+                <marker date="1568862901261" expanded="true" signature="2642:2644" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -181,6 +186,7 @@
       <find>N</find>
       <find>K</find>
       <find>print</find>
+      <find>tmp</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -189,7 +195,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/stack2/4880.py" />
         <option value="$PROJECT_DIR$/stack2/ete1.py" />
         <option value="$PROJECT_DIR$/stack2/4881.py" />
         <option value="$PROJECT_DIR$/stack1/1220.py" />
@@ -238,15 +243,16 @@
         <option value="$PROJECT_DIR$/start/1240input.txt" />
         <option value="$PROJECT_DIR$/start/1240-2input.txt" />
         <option value="$PROJECT_DIR$/start/1240.py" />
-        <option value="$PROJECT_DIR$/start/1242.py" />
         <option value="$PROJECT_DIR$/start/4366.py" />
+        <option value="$PROJECT_DIR$/start/1242input.txt" />
+        <option value="$PROJECT_DIR$/start/1242.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="111" />
-    <option name="y" value="29" />
-    <option name="width" value="1664" />
+    <option name="x" value="749" />
+    <option name="y" value="10" />
+    <option name="width" value="1121" />
     <option name="height" value="1041" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -255,6 +261,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -271,7 +278,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -295,7 +301,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.4366">
+  <component name="RunManager" selected="Python.1242">
     <configuration name="1240" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="code" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -432,8 +438,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.4366" />
         <item itemvalue="Python.1242" />
+        <item itemvalue="Python.4366" />
         <item itemvalue="Python.1240" />
         <item itemvalue="Python.6109" />
         <item itemvalue="Python.5427" />
@@ -463,9 +469,28 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="111" y="29" width="1664" height="1041" extended-state="0" />
+    <frame x="749" y="10" width="1121" height="1041" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.060270604" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.09048938" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32819384" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.7168803" weight="0.19869708" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.6356838" weight="0.3029316" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32819384" />
+      <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49893162" weight="0.32671082" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50213677" side_tool="true" weight="0.32378855" />
+      <window_info active="true" anchor="bottom" id="Python Console" order="10" sideWeight="0.49786323" visible="true" weight="0.3289183" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.09048938" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -479,25 +504,6 @@
       <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49893162" weight="0.3270925" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50213677" side_tool="true" weight="0.32378855" />
       <window_info active="true" anchor="bottom" id="Python Console" order="10" sideWeight="0.49786323" visible="true" weight="0.3289183" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-    </layout>
-    <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.105374075" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.32819384" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.7168803" weight="0.21255507" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.6356838" visible="true" weight="0.30837005" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.32819384" />
-      <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49893162" weight="0.3270925" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50213677" side_tool="true" weight="0.32378855" />
-      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49786323" weight="0.32378855" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -649,6 +655,26 @@
           <line>19</line>
           <option name="timeStamp" value="69" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/start/1242.py</url>
+          <line>98</line>
+          <option name="timeStamp" value="70" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/start/1242.py</url>
+          <line>95</line>
+          <option name="timeStamp" value="73" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/start/1242.py</url>
+          <line>34</line>
+          <option name="timeStamp" value="74" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/start/1242.py</url>
+          <line>17</line>
+          <option name="timeStamp" value="85" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
@@ -656,43 +682,24 @@
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
+        <watch expression="str_bin" language="Python" />
+        <watch expression="str_bin[idx]" language="Python" />
+        <watch expression="c" language="Python" />
+        <watch expression="tmp" language="Python" />
+        <watch expression="c!=None" language="Python" />
         <watch expression="code" language="Python" />
-        <watch expression="tri_to_dec" language="Python" />
-        <watch expression="len(tri_num) - 1" language="Python" />
-        <watch expression="len(tri_num) - 1 - i" language="Python" />
-        <watch expression="tmp" language="Python" />
-        <watch expression="len(tri_num)" language="Python" />
-        <watch expression="3 ** (len(tri_num) -1 -i)" language="Python" />
-        <watch expression="3 ** 2" language="Python" />
-        <watch expression="len(tri_num)-1-0" language="Python" />
-        <watch expression="tmp" language="Python" />
       </configuration>
     </watches-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
       <expression>
-        <expression-string>len(tri_num) - 1</expression-string>
+        <expression-string>code</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>len(tri_num)</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>len(tri_num) - 1 - i</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>3 ** (len(tri_num) -1 -i)</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>3 ** (len(tri_um) -1 -i)</expression-string>
+        <expression-string>c!=None</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
@@ -702,22 +709,37 @@
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>3 ** 2</expression-string>
+        <expression-string>c</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>len(tri_num)-1-0</expression-string>
+        <expression-string>str_bin[idx]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>tri_to_dec</expression-string>
+        <expression-string>str_bin</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>code</expression-string>
+        <expression-string>element.get(tmp)</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>j</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>board[i]</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>len(tri_num) - 1</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
@@ -735,9 +757,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="504">
           <caret line="28" column="40" selection-start-line="28" selection-start-column="40" selection-end-line="28" selection-end-column="40" />
-          <folding>
-            <element signature="e#30#48#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -958,13 +977,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/Program Files/Python35/Lib/codecs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="308" selection-start-line="308" selection-end-line="308" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/A/1697.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
@@ -1038,28 +1050,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/start/1240.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-836">
-          <caret line="1" column="10" lean-forward="true" selection-start-line="1" selection-start-column="10" selection-end-line="1" selection-end-column="10" />
-          <folding>
-            <marker date="1568785708704" expanded="true" signature="113:1368" ph="..." />
-            <marker date="1568785708704" expanded="true" signature="1237:1360" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/A/6109.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-275">
           <caret line="38" column="46" selection-start-line="38" selection-start-column="46" selection-end-line="38" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/start/1240input.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3" column="6" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="11" />
         </state>
       </provider>
     </entry>
@@ -1070,20 +1064,46 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/start/1242.py">
+    <entry file="file://C:/Program Files/Python35/Lib/codecs.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="22" column="17" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
-          <folding>
-            <marker date="1568789571802" expanded="true" signature="337:431" ph="..." />
-          </folding>
+        <state relative-caret-position="197">
+          <caret line="308" selection-start-line="308" selection-end-line="308" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/start/1242input.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="631">
-          <caret line="14355" column="257" selection-start-line="14355" selection-start-column="257" selection-end-line="14355" selection-end-column="257" />
+        <state relative-caret-position="57">
+          <caret line="3" column="22" selection-start-line="3" selection-start-column="8" selection-end-line="3" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/start/1240input.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="3" column="6" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/start/1240.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="20" column="45" selection-start-line="19" selection-start-column="16" selection-end-line="20" selection-end-column="45" />
+          <folding>
+            <marker date="1568785708704" expanded="true" signature="113:1368" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/start/1242.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="395">
+          <caret line="66" column="29" lean-forward="true" selection-start-line="66" selection-start-column="29" selection-end-line="66" selection-end-column="29" />
+          <folding>
+            <marker date="1568862901261" expanded="true" signature="68:70" ph="..." />
+            <marker date="1568862901261" expanded="true" signature="68:2644" ph="..." />
+            <marker date="1568862901261" expanded="true" signature="2642:2644" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>

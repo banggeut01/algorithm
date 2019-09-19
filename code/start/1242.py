@@ -50,7 +50,6 @@ def scan_code(i):
                     code.append(c)
                 else:  # 유효하지 않은 암호코드일 때,
                     return False
-                j = j - 1
                 return True
 
             elif len(tmp) == 4: # 4개의 구성요소 찾으면, (마지막암호코드 아닐 때)
@@ -70,7 +69,7 @@ def scan_code(i):
                     return False
                 tmp = [] # 4개 구성요소 리스트 초기화
         j = j - 1
-    return True
+    return False
 
 def is_valid():
     total = 0
@@ -94,10 +93,12 @@ for tc in range(1, t + 1):
     code = []  # 암호코드
     result = 0 # 답
     for i in range(N):
-        for j in range(M - 1, 13, -1): # 열의 끝에서부터,
+        j = M - 1 # 열의 끝에서부터,
+        while j > 12:
             if board[i][j] != '0' and -1 < i - 1 and board[i - 1][j] == '0': # 0이 아닌 곳 찾음
                 if scan_code(i): # 암호코드 8자리 스캔
                     if is_valid(): # 검증 성공했을 때,
                         result += sum(code) # 답갱신
                 code = [] # 암호코드 초기화
+            j = j - 1
     print('#{} {}'.format(tc, result))

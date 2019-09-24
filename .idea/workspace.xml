@@ -1,7 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4e34160b-d1fb-464e-98eb-a89ed875ba0d" name="Default Changelist" comment="" />
+    <list default="true" id="4e34160b-d1fb-464e-98eb-a89ed875ba0d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/10163.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/10815.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/1206.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/1206input.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/1206풀이.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/1208-2.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/1208.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/1208input.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/1209.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/1209input.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/1209풀이.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/1210-2.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/1210.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/1210input.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/1210solution.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/1215.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/1215input.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/1216.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/1216input.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/1221.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/1259.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/1259input.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/1267-2.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/1267-3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/1267.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/1267input.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/1946.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/2578.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/2578input.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/4408.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/4522.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/4579.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/4828.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/4828input.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/4831.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/4831input.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/4834.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/4834input.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/4835.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/4835input.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/4836.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/4836input.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/4837.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/4839.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/4843.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/4861.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/4861chu.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/4861input.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/4864.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/4865.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/4866.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/4869-2.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/4869.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/4871-2.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/4871.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/4871input.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/4873.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/5432.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/code/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/b1244.py" beforeDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,12 +103,12 @@
     <session id="1887837971">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="4" />
-          <entry key="project.open.time.0" value="1" />
+          <entry key="project.closed" value="5" />
+          <entry key="project.open.time.0" value="2" />
           <entry key="project.open.time.1" value="1" />
-          <entry key="project.open.time.2" value="1" />
+          <entry key="project.open.time.2" value="2" />
           <entry key="project.open.time.3" value="1" />
-          <entry key="project.opened" value="4" />
+          <entry key="project.opened" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -89,8 +151,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/code/greedy/5202.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="11" selection-start-line="11" selection-end-line="11" />
+            <state relative-caret-position="418">
+              <caret line="22" column="35" selection-start-line="22" selection-start-column="35" selection-end-line="22" selection-end-column="35" />
               <folding>
                 <marker date="1569222165415" expanded="true" signature="48:269" ph="..." />
               </folding>
@@ -136,9 +198,9 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="524" />
-    <option name="y" value="96" />
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="x" value="705" />
+    <option name="y" value="12" />
     <option name="width" value="1102" />
     <option name="height" value="1043" />
   </component>
@@ -146,31 +208,7 @@
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes>
-      <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="algorithm" type="b2602c69:ProjectViewProjectNode" />
-              <item name="algorithm" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="algorithm" type="b2602c69:ProjectViewProjectNode" />
-              <item name="algorithm" type="462c0819:PsiDirectoryNode" />
-              <item name="code" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="algorithm" type="b2602c69:ProjectViewProjectNode" />
-              <item name="algorithm" type="462c0819:PsiDirectoryNode" />
-              <item name="code" type="462c0819:PsiDirectoryNode" />
-              <item name="greedy" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -325,7 +363,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="524" y="96" width="1102" height="1043" extended-state="0" />
+    <frame x="705" y="12" width="1102" height="1043" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.13063909" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -493,8 +532,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/code/greedy/5202.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
+        <state relative-caret-position="418">
+          <caret line="22" column="35" selection-start-line="22" selection-start-column="35" selection-end-line="22" selection-end-column="35" />
           <folding>
             <marker date="1569222165415" expanded="true" signature="48:269" ph="..." />
           </folding>

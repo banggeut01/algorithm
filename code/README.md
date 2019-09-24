@@ -70,25 +70,25 @@ Heap 메모리 부족한 상태
 * TypeError: 'int' object is not subscriptable
   * 빈 리스트를 인덱스로 참조하려하였을 때 혹은 잘못된 이름의 리스트 참조
 
-# Day 1
+# Day 1 - Array
 
 Solving Club > list(7월 31일)
 
 * 조망권 View
-  * 소스보기 [소스보기](./1206.py)
-  * best [소스보기](./1206풀이.py)
+  * 소스보기 [소스보기](./array/1206.py)
+  * best [소스보기](./array/1206풀이.py)
 
 
 
-# Day 2
+# Day 2 - List1
 
 ### SWEA
 
 Lean > Course > IM > List1
 
-* 1일차 - min max [소스보기](./4828.py)
+* 1일차 - min max [소스보기](./list1/4828.py)
 
-* 1일차 - 전기버스 [소스보기](./4831.py)
+* 1일차 - 전기버스 [소스보기](./list1/4831.py)
   
   * 현재 위치가 N-K보다 작을 동안 반복 
   
@@ -110,7 +110,7 @@ Lean > Course > IM > List1
     # (m, n, -1) => m ~ n+1
     ```
   
-* 1일차 - 숫자 카드 [소스보기](./4834.py)
+* 1일차 - 숫자 카드 [소스보기](./list1/4834.py)
 
   * 염겨레 방법
 
@@ -128,7 +128,7 @@ Lean > Course > IM > List1
   max_cnt, max_num = (cnt[i], i) for i in range(1, 10) if cnt[i] >= max_cnt
   ```
 
-* 1일차 - 구간합 [소스보기](./4835.py) 
+* 1일차 - 구간합 [소스보기](./list1/4835.py) 
 
   * 선생님 방법
 
@@ -143,9 +143,9 @@ Lean > Course > IM > List1
 
 Solving Club > list(8월 1일)
 
-* Flatten, 평탄화 [소스보기](1208.py)
+* Flatten, 평탄화 [소스보기](list1/1208.py)
 
-  * 인덱스 접근, 변수에 따로 저장해 접근 [소스보기](1208-2.py)
+  * 인덱스 접근, 변수에 따로 저장해 접근 [소스보기](list1/1208-2.py)
 
   ```python
   if box[i] > box[max_idx] # 비교할 때마다 인덱스로 접근하는 대신
@@ -186,11 +186,11 @@ Solving Club > list(8월 1일)
   
   
 
-# Day 3
+# Day 3 - List1
 
 Solving Club > list(8월 7일)
 
-* [2일차 - Sum 1209 소스보기](./code/1209.py)
+* [2일차 - Sum 1209 소스보기](./list1/1209.py)
 
   * input 값 100개씩 들어옴
   * 100 * 100 행렬
@@ -213,11 +213,11 @@ Solving Club > list(8월 7일)
   1차원 배열 인덱스는 [67 * 100 + 8] 이다.
   ```
   
-  * [1209풀이 - for문 한개 쓰기](./code/1209풀이.py)
+  * [1209풀이 - for문 한개 쓰기](./list1/1209풀이.py)
 
 [추가 문제 - 백준](https://www.acmicpc.net/problem/2578)
 
-* [2578 빙고](./code/2578.py) 
+* [2578 빙고](./list1/2578.py) 
 
   ```python
   # list copy 주의!
@@ -283,7 +283,7 @@ Solving Club > list(8월 7일)
 
 추가문제 - SWEA
 
-* [요리사 4012](./code/4012.py) (아직 안함)
+* [요리사 4012](./list1/4012.py) (아직 안함)
 
   * 부분집합 문제
   * 부분집합 잘 모르니 일단 그냥 풀어보기
@@ -325,11 +325,11 @@ Solving Club > list(8월 7일)
   
   
 
-# Day 4
+# Day 4 - List2
 
 Lean > Course > IM > List2
 
-* [색칠하기 4836](./4836.py)
+* [색칠하기 4836](./list2/4836.py)
 
 ```python
 # 칠해지지 않은 상태에서 처음 칠할 때만 쓸 수 있음
@@ -341,14 +341,14 @@ for i in range(r1, r2+1): # 위 -> 아래로 r1~r2
 # for문 2개로 row, col 순회하며 color 확인
 ```
 
-* [부분집합의 합 4837](./4837.py)
-* [이진탐색 4839](./4839.py)
+* [부분집합의 합 4837](./list2/4837.py)
+* [이진탐색 4839](./list2/4839.py)
 
-* [특별한 정렬 4843](./4843.py)
+* [특별한 정렬 4843](./list2/4843.py)
 
 Solving Club > list(8월 8일)
 
-* [7일차 - 금속막대 1259](./1259.py)
+* [7일차 - 금속막대 1259](./list2/1259.py)
 
   * 수나사, 암나사 길이가 같은 나사는 존재하지 않음!
   * 연결되지 않는 나사 존재하지 않음!
@@ -390,11 +390,11 @@ Solving Club > list(8월 8일)
 
 추가 문제 - 백준
 
- * [색종이 10163](./10163.py)
+ * [색종이 10163](./list2/10163.py)
    
     * [사이트](https://www.acmicpc.net/problem/10163)
     
- * [숫자카드 10815](./10815.py) 
+ * [숫자카드 10815](./list2/10815.py) 
    
    * [사이트](https://www.acmicpc.net/problem/10815)
    * 첫번째시도) 초기 완전탐색 코드 시간초과!
@@ -448,28 +448,28 @@ Solving Club > list(8월 8일)
    ```
    
 
-# Day 5
+# Day 5 - String
 
 SWEA
 
-* [String 1221.py](./1221.py)
+* [String 1221.py](./string/1221.py)
   * 내 방법은 dictionary에 개수 세어 저장하고 출력하는 방식.
   * 굳이 이렇게 할 이유가 없음
   * 세면서 바로 출력하게 하기!
-* [간단한 압축 풀기 1946.py](./1946.py)
+* [간단한 압축 풀기 1946.py](./string/1946.py)
 
-# Day 6
+# Day 6 - String
 
 SWEA > Learn > Course > IM > 파이썬 - String
 
-* [문자열 비교 4864.py](./4864.py)
+* [문자열 비교 4864.py](./string/4864.py)
   
   * 브루트 포스로 풀어보자.
   * 다른 방법으로도 풀어보기!
   
-* [회문 4861.py](./4861.py) 
+* [회문 4861.py](./string/4861.py) 
 
-  * 추윤형 코드 [4861chu.py](./4861chu.py)
+  * 추윤형 코드 [4861chu.py](./string/4861chu.py)
 
   ```
   이중 for문 나오기 위해 flag 라는 변수를 이용!
@@ -488,17 +488,17 @@ SWEA > Learn > Course > IM > 파이썬 - String
 
   
 
-* [글자수 4865.py](./4865.py)
+* [글자수 4865.py](./string/4865.py)
 
 추가문제 - SWEA
 
-* [세상의 모든 팰린드롬 2 4579.py](./4579.py)
-* [세상의 모든 팰린드롬 4522.py](./4522.py)
-* [자기 방으로 돌아가기 4408.py](./4408.py)
+* [세상의 모든 팰린드롬 2 4579.py](./string/4579.py)
+* [세상의 모든 팰린드롬 4522.py](./string/4522.py)
+* [자기 방으로 돌아가기 4408.py](./string/4408.py)
 
 [추가문제 - 백준](https://www.acmicpc.net/problem/1244)
 
-* [스위치 켜고 끄기 b1244.py](./b1244.py) 
+* [스위치 켜고 끄기 b1244.py](./string/b1244.py) 
 
   ```python
   # error 출력형식이 잘못되었습니다.
@@ -548,7 +548,7 @@ SWEA > Learn > Course > IM > 파이썬 - String
 
 Solving club > 03.String(8월 16일)
 
-* [회문1 1215.py](./1215.py) 
+* [회문1 1215.py](./string/1215.py) 
 
   ```
   index 주의하기!
@@ -597,7 +597,7 @@ Solving club > 03.String(8월 16일)
               ans += 1
   ```
   
-* [회문2 1216.py](./1216.py) 
+* [회문2 1216.py](./string/1216.py) 
 
   * 선생님 코드 
 
@@ -667,13 +667,13 @@ Solving club > 03.String(8월 16일)
               ans = max(ans, cnt)
   ```
 
-# Day 7
+# Day 7 - Stack1
 
 SWEA > IM > stack1
 
-* [4일차 괄호검사 4866.py](./4866.py)
+* [4일차 괄호검사 4866.py](./stack1/4866.py)
 
-* [Ladder 1](./1210.py)
+* [1210 Ladder 1](./stack1/1210.py)
 
   * 김준영 방법 : 거꾸로 생각하기
 
@@ -684,14 +684,14 @@ SWEA > IM > stack1
   헿
   ```
 
-  * [재귀로 해보기](./1210-2.py)
+  * [재귀로 해보기](./stack1/1210-2.py)
 
   ```
   김준영 방법으로 첫번째 행부터 말고, 마지막 행부터!
   결과를 찾아 올라가기!
   ```
   
-  * [선생님 풀이1 - 반복문 (내 방법과 같음)](./1210solution.py)
+  * [선생님 풀이1 - 반복문 (내 방법과 같음)](./stack1/1210solution.py)
 
     * 조건에 따른 좌표 이동과 방향 설정
   
@@ -729,7 +729,7 @@ SWEA > IM > stack1
         x -= 1
     ```
     
-  * [선생님 풀이 2(재귀)](./1210solution.py)
+  * [선생님 풀이 2(재귀)](./stack1/1210solution.py)
   
     * 나의 재귀와 다르게 visit라는 방문 리스트를 따로 만들지 않고,
   
@@ -752,7 +752,7 @@ SWEA > IM > stack1
   
 
 
-# Day 8
+# Day 8 - Stack1
 
 SWEA > IM > stack1
 
@@ -774,12 +774,12 @@ SWEA > IM > stack1
   (세로2개는 n-1에 10짜리 붙이는 방법에 포함!)
   ```
 
-  * [재귀](./4869.py)
-  * [DP](./4869-2.py) 
+  * [재귀](./stack1/4869.py)
+  * [DP](./stack1/4869-2.py) 
 
 * 4871 [파이썬 S/W 문제해결 기본] 4일차 - 그래프 경로
 
-  * [스택 사용](./4871-2.py) 해결하지 못하였음!
+  * [스택 사용](./stack1/4871-2.py) 해결하지 못하였음!
 
     ```python
     # runtime error!
@@ -808,7 +808,7 @@ SWEA > IM > stack1
     * 이유를 모르겠다. 원래 재귀로 푸는 것인가..???
     * 해결하지 못하였음!
 
-  * [재귀 사용](./4871.py)
+  * [재귀 사용](./stack1/4871.py)
 
     * ??? 의문점) 재귀로 쓰는 DFS는 중간에 stop하지 못하는가..?
 
@@ -950,7 +950,7 @@ SWEA > IM > stack1
 
     
 
-* [4873. [파이썬 S/W 문제해결 기본] 4일차 - 반복문자 지우기 D](./4873.py)
+* [4873. [파이썬 S/W 문제해결 기본] 4일차 - 반복문자 지우기 D](./stack1/4873.py)
 
 추가문제
 
@@ -958,14 +958,14 @@ SWEA > Soving Club
 
 * 작업순서 1267
 
-  * DFS-스택, [DFS-재귀](./code/1267-2.py), [DAG-queue](./code/1267-3.py) 세가지 방법으로 풀어보았다.
+  * DFS-스택, [DFS-재귀](./stack1/1267-2.py), [DAG-queue](./stack1/1267-3.py) 세가지 방법으로 풀어보았다.
   * DFS-스택, 재귀는 답을 스택에 저장해 거꾸로 출력
     * 방문하면서 위상순서 리스트에 저장하는 것이 아닌
     * 더 이상 갈 노드가 없을 때, 위상순서에 저장하였고
     * 이를 거꾸로 출력한 것이 답이다.
   * DAG-큐는 위상순서 그대로 출력
     * visit 대신 indegree 리스트를 사용하였음
-  * [dfs스택 - 소스보기](./1267.py) 
+  * [dfs스택 - 소스보기](./stack1/1267.py) 
 
   ```python
   # 항상 스택 접근할 때 isEmpty 주의한다!
@@ -1029,7 +1029,7 @@ SWEA > Soving Club
 
     * 왜?
       * 혼자 떨어져 있는 노드가 존재함
-      * [input data](./day9/1210input.txt)의 in, out node에는 존재하지 않음
+      * [input data](./stack1/1210input.txt)의 in, out node에는 존재하지 않음
       * 예로 test case 6번의 {160, 137, 172, 140, 119}번 노드들
       * 모두 다 연결된 상태는 아님
 
@@ -1128,7 +1128,7 @@ SWEA > Soving Club
       * 현재 노드를 스택에 저장
     * 거꾸로 출력! (stack pop)
 
-* [쇠막대기 자르기 5432](./5432.py) 
+* [쇠막대기 자르기 5432](./stack1/5432.py) 
 
   * 초기 코드 Fail
 
@@ -1166,7 +1166,7 @@ SWEA > Soving Club
 
 오늘은 백트래킹에 대해서 배웠다.
 
-Lean > Course > IM > List2 [부분집합의 합 4837](./4837.py) 문제를
+Lean > Course > IM > List2 [부분집합의 합 4837](./list2/4837.py) 문제를
 
 백트래킹 이용해 다시 풀어보겠다.
 

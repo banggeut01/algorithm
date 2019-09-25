@@ -1963,7 +1963,128 @@ print(getMin(0, len(arr) - 1))
       * 물건을 부분적으로 담는 것이 허용
       * 물건을 쪼갤 수 있는 경우
 
+### 병합정렬
+
+* 연결리스트에 적합
+
+* python List append(), pop(), slicing을 사용하면 시간이 너무 오래 소요됨
+
+* C - style, 배열을 사용하듯이
+
+  ```python
+  arr = [69, 10, 30, 2, 16, 8, 31, 22]
+  tmp = [0] * len(arr)
+  
+  def mergeSort(lo, hi): # 문제의 크기 - 정렬할 자료의 범위
+      # 기저 사례
+      if lo == hi: return
+      # 유도 사례
+      mid = (lo + hi) >> 1
+      mergeSort(lo, mid) # 왼쪽
+      mergeSort(mid + 1, hi) # 오른쪽
+      # 왼쪽 오른쪽 자료들이 정렬된 상태
+      i, j, k = lo, mid + 1, lo # 왼쪽/오른쪽/tmp 시작인덱스
+      while i <= mid and j <= hi:
+          if arr[i] < arr[j]:
+              tmp[k] = arr[i]; k, i = k + 1, i + 1
+          else:
+              tmp[k] = arr[j]; k, j = k + 1, j + 1
+      while i <= mid: # 남아있는 왼쪽
+          tmp[k] = arr[i]; k, i = k + 1, i + 1
+      while j <= hi: # 남아있는 오른쪽
+          tmp[k] = arr[j]; k, j = k + 1, j + 1
+  
+      for x in range(lo, hi + 1):
+          arr[x] = tmp[x]
+  
+  mergeSort(0, len(arr) - 1)
+  print(*arr)
+  ```
+
+  
+
 ### 퀵정렬
+
+* 병합 정렬은 두 부분으로 나누는 반면, 퀵은 pivot을 기준으로 이보다 작은 것은 왼편, 큰 것은 오른편에 위치시킨다.
+
+* 최악의 경우 분할이 안될 수 있다. 
+
+  * pivot 어떻게 선택하는지, 어떠한 데이터가 주어지는지에 따라 시간 달라짐
+  * O(n^2)
+  * pivot을 선택하는 것이 중요하다.
+  * pivot을 랜덤하게 선택하는 것이 성능이 가장 좋다고 알려짐
+  * 병합정렬의 경우 무조건 이분할(n, n/2, n/4, ... )이기 때문에 O(NlogN)
+
+* A형 문제에는 거의 나오지 않는다.
+
+* Pro시험에서는 직접 구현해서 써야한다.
+
+* 과정
+
+  * 임의의 pivot을 정한다.
+    * i = 0, j = N-1
+    * pivot보다 작을동안 i 증가
+    * pivot보다 클동안 j감소
+    * i, j값 교환
+  * 위의 과정 반복하다가 i, j가 지나치면 경계가 생긴다.
+  * j값과 pivot교환하고 pivot 왼쪽, 오른쪽에 대해 같은 과정 반복
+  * **주의**
+    * pivot보다 다 작은값만 있는 경우 i값이 hi값 + 1까지 간다.
+    * 경계를 벗어남
+    * 조건 추가 i<=hi
+    * j값은 항상 범위안에 있게 된다.
+  * `arr[lo] >= arr[i]`
+    * `=`를 넣어야하는 이유 : pivot값을 지나치기 위해
+
+  ```python
+  arr = [69, 10, 30, 2, 16, 8, 31, 22]
+  
+  def quickSort(lo, hi):
+      if lo >= hi: return
+  
+      i, j = lo, hi # arr[lo]: 피봇
+      while i < j:
+          while i <= hi and arr[lo] >= arr[i]: i += 1
+          while arr[lo] < arr[j]: j -= 1
+          if i < j:
+              arr[i], arr[j] = arr[j], arr[i]
+      arr[lo], arr[j] = arr[j], arr[lo] # 피봇을 있어야 할 위치로
+  
+      quickSort(lo, j - 1)
+      quickSort(j + 1, hi)
+  
+  print(*arr)
+  quickSort(0, len(arr) - 1)
+  print(*arr)
+  ```
+
+* Lomuto partition 알고리즘
+
+  * 퀵 정렬에 선택 알고리즘 적용
+  * 성능이 좋다.
+  * 잘 이해가 가지 않는다... 나중에 다시 이해해보기
+
+  ```python
+  arr = [69, 10, 30, 2, 16, 8, 31, 22]
+  
+  def quickSort(lo, hi):
+      if lo >= hi: return
+      i = lo - 1
+      for j in range(lo, hi): # lo ~ hi - 1
+          if arr[j] < arr[hi]:
+              i += 1
+              arr[i], arr[j] = arr[j], arr[i]
+      i += 1
+      arr[i], arr[hi] = arr[hi], arr[i]
+      quickSort(lo, i - 1)
+      quickSort(i + 1, hi)
+  
+  print(arr)
+  quickSort(0, len(arr) - 1)
+  print(arr)
+  ```
+
+  
 
 ## 4. 그래프
 

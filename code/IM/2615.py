@@ -1,6 +1,6 @@
 # 2615.py 오목
-# import sys
-# sys.stdin = open('2615input.txt', 'r')
+import sys
+sys.stdin = open('2615input.txt', 'r')
 
 def row_check(i, j, stn): # ij: 시작위치, stn(stone): 바둑알
     if (j - 1 > -1 and board[i][j] != board[i][j - 1]) or j == 0:

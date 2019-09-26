@@ -2084,7 +2084,111 @@ print(getMin(0, len(arr) - 1))
   print(arr)
   ```
 
+
+### 백트래킹
+
+* 동전 거스름돈
+
+  ```python
+  coins = [6, 4, 1]
+  choose = []
+  MIN = 0xffffff
+  def coinChange(k, n): # k:선택한 동전수, n:거스름돈 금액
+      if n == 0:
+          global MIN
+          if MIN > k:
+              MIN = k
+              print(choose)
+      else:
+          for coin in coins:
+              if coin > n: continue
+              choose.append(coin)
+              coinChange(k + 1, n - coin)
+              choose.pop()
   
+  coinChange(0, 8)
+  ```
+
+  * DP로 풀기
+
+    * 동전 거스름돈이 8일 때
+
+      거스름돈 6, 4, 1을 선택할 수 있음
+
+    * 그때 각 거스름돈은 2, 4, 7이 된다.
+
+    * 거스름돈 n일 때 n-6, n-4, n-1
+
+      ```
+      f(n) = min(f(n-6)+1, f(n-4)+1, f(n-1)+1)
+      ,0(n=0)
+      ```
+
+    ```python
+    coins = [6, 4, 1]
+    choose = []
+    
+    def coinChange(n): # n:매개변수
+        if n == 0: return 0
+        MIN = 0xffffff
+        for coin in coins:
+            if coin > n : continue
+            ret = coinChange(n - coin) + 1
+            if ret < MIN: MIN = ret
+    
+        return MIN
+    
+    print(coinChange(8))
+    ```
+
+    * 하지만 값이 커지면, 재귀이기 때문에 오래걸리는 단점이 있다. 이때 `Memoization` 사용한다.
+
+  * Memoization
+
+    ```python
+    coins = [6, 4, 1]
+    choose = []
+    memo = [-1] * 100
+    def coinChange(n): # n:매개변수, 문제의 크기(식별), 반환값: 문제의 해
+        if n == 0: return 0
+        if memo[n] != -1: return memo[n]
+        MIN = 0xffffff
+        for coin in coins:
+            if coin > n : continue
+            ret = coinChange(n - coin) + 1
+            if ret < MIN: MIN = ret
+        memo[n] = MIN
+        return MIN
+    
+    print(coinChange(80))
+    ```
+
+    * bottom-up
+
+      ```python
+      coins = [6, 4, 1]
+      choose = []
+      memo = [-1] * 100
+      def coinChange(n): # n:매개변수, 문제의 크기(식별), 반환값: 문제의 해
+          memo[0] = 0
+          for i in range(1, n + 1): # i=>문제를 나타내는 값
+              MIN = 0xffffff
+              for coin in coins:
+                  if coin > i : continue
+                  ret = memo[i - coin] + 1
+                  if ret < MIN: MIN = ret
+              memo[i] = MIN
+          return MIN
+      
+      print(coinChange(8))
+      print(memo[:9])
+      ```
+
+      
+
+* 백트래킹은 top-down(기저사례까지 갔다가 다시 올라옴), DP는 bottom-up
+
+* DP가 어렵게 느껴질 수 있지만, 점화식은 완전탐색으로부터 나온다.
 
 ## 4. 그래프
 

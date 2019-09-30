@@ -31,3 +31,4 @@ for tc in range(1, t + 1):
     M = N // 2
     getSet()
     print('#{} {}'.format(tc, MIN))
+    

@@ -2005,6 +2005,7 @@ print(getMin(0, len(arr) - 1))
 
   * 병합정렬 이용해 풀 수 있는 유명한 문제
   * [백준 - 카운팅 인버전](https://www.acmicpc.net/problem/10090)
+  * 
 
 ### 퀵정렬
 

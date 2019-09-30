@@ -2664,28 +2664,78 @@ SC - 9월 5일 집중실습
   
     - 문제 제대로 읽기
     - 마지막 값 제한 없음!
+  
 - [2005. 파스칼의 삼각형](./A/2005.py)
+
 - [1979. 어디에 단어가 들어갈 수 있을까](./A/1979.py)
+
 - [1493. 수의 새로운 연산](./A/1493.py)
 
-- [2589.보물섬](./A/2589.py)
-  
-  - [문제](https://www.acmicpc.net/problem/2589)
-- [2468.안전영역]
-  
-  - [문제](https://www.acmicpc.net/problem/2468)
+## etc
 
-* [1873.상호의 배틀필드]
-  SWEA
-* [1987.알파벳]
-* [14889.스타트와 링크]
-* [14501.퇴사]
-* [16234.인구이동]
-* [14503.로봇청소기]
-* [2573.빙산]
+- [2589.보물섬](./A/2589.py)
+  - [문제](https://www.acmicpc.net/problem/2589)
+- [2468.안전영역](./A/2468.py)
+  - [문제](https://www.acmicpc.net/problem/2468)
+  - 런타임 에러
+    - python3으로 제출하기
+      - sys.setrecursionlimit(10000)
+
+* [1987.알파벳](./A/1987.py)
+
+  * [문제](https://www.acmicpc.net/problem/1987)
+
+    * 초기 BFS로 풀었으나 지나왔던 길 체크할 때 문제가 있다.
+
+      * 무조건 최단 거리로 기록
+
+    * 백트래킹
+
+    * 지나왔던 길 리스트 체크 문제
+
+      * 총 나올 수 있는 길이는 26 (알파벳 26개)
+
+      * past 변수에 길 방문 여부를 체크해준다.
+
+        ```python
+        past = [False] * 26
+        # past[ord(board[r][c]) - 65] = True
+        ```
+
+      * not in past => 시간초과
+
+        ```python
+        past = ['A', 'B', 'C'], past.append(board[r][c])
+        ```
+
+      * not `past[r][c]` => 시간초과 해결
+
+    * 지나온 길 개수는 인자로 넘겨주기 
+
+* [14889.스타트와 링크](./A/14889.py)
+
+  * [문제](https://www.acmicpc.net/problem/14889)
+
+* [16234.인구이동](./A/16234.py)
+
+  * [문제](https://www.acmicpc.net/problem/16234)
+
+* [14503.로봇청소기](./A/14503.py)
+
+  * [문제](https://www.acmicpc.net/problem/14503)
+
+* [2573.빙산](./A/2573.py)
+
+  * [문제](https://www.acmicpc.net/problem/2573)
+  * 시간초과
+
 * [14502.연구소]
+
 * [16236.아기상어]
+
 * [17143.낚시왕]
+
+* 연구소 3
 
 # APS응용 - Start
 

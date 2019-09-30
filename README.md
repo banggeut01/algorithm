@@ -30,7 +30,7 @@
   * len(), append(), 리스트 컴프리헨션 외에 다른 것 쓰지 않기
   * list slicing 쓰지 않기
   
-* [알고리즘 참고 사이트 broblems](http://problems.kr/)
+* [알고리즘 참고 사이트 problems](http://problems.kr/)
 
 ## 1. 배열(List) 1 
 
@@ -2001,7 +2001,10 @@ print(getMin(0, len(arr) - 1))
   print(*arr)
   ```
 
-  
+* Counting Inversions
+
+  * 병합정렬 이용해 풀 수 있는 유명한 문제
+  * [백준 - 카운팅 인버전](https://www.acmicpc.net/problem/10090)
 
 ### 퀵정렬
 

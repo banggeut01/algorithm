@@ -9,15 +9,16 @@
 # 3. 채취한 꿀, 각각의 제곱만큼 수익
 import sys
 sys.stdin = open('2115input.txt', 'r')
+# sys.stdin = open('2115-2input.txt', 'r')
 def getHoney(r, c): # rc좌표에서 최대 수익
     maxVal = 0
     for i in range(1 << M):
         tmp, total = 0, 0
         for j in range(M):
             if i & (1 << j):
-                total += board[r][c + j]
-                tmp += board[r][c + j] ** 2
-        if total < C:
+                total += board[r][c + j] # 벌꿀 합
+                tmp += board[r][c + j] ** 2 # 벌꿀 제곱 합
+        if total <= C:
             maxVal = max(maxVal, tmp)
     return maxVal
 
@@ -28,10 +29,8 @@ def selectArea(r, c, total):
             if i == r: # 현재 위치 다음부터 시작한다.
                 if j < c + M:
                     continue
-            if j - c < M:
-                continue
-            if MAX < total + H[i][j]:
-                print(r, c, i, j)
+            # if MAX < total + H[i][j]:
+            #     print(r, c, i, j)
             MAX = max(MAX, total + H[i][j])
 
 
@@ -45,8 +44,8 @@ for tc in range(1, t + 1):
     for i in range(N):
         for j in range(N - M + 1):
             H[i][j] = getHoney(i, j)
-    print(H)
+    # print(H)
     for i in range(N):
         for j in range(N - M + 1):
             selectArea(i, j, H[i][j])
-    # print(MAX)
+    print('#{} {}'.format(tc, MAX))

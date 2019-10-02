@@ -2273,8 +2273,81 @@ print(getMin(0, len(arr) - 1))
 * 최장경로 (NP-Hard)
 
   * 최적 원칙 적용되지 않는 예 
+  * 최단경로는 최적 원칙 적용된다.
+    * 최단경로가 s -> a -> b -> c -> d -> t일 때 s->c, c->t는 최단 경로이다.
+    * 최장경로는 성립하지 않는다.
+    * 최장경로문제는 DP로 해결할 수 없다.
+      * **DAG그래프 일 땐 DP를 적용할 수 있다.**
+      * DAG 그래프 위상 정렬 가능
+    * [SWEA 1247 최적 경로](./code/1001/1247.py) DP로 풀어보기!
+
+* 탐욕과 DP
+
+  * 탐욕의 조건
+    * 탐색적 선택
+    * **최적 부분 구조** => 탐욕 문제는 DP로 풀 수 있다.
+  * DP문제는 탐욕으로 풀 수 없다.
 
 * 분할 정복 vs DP
+
+* 연습문제 2
+
+  * 문제
+
+    * 1cm 파란막대, 1cm 노란막대, 2cm 빨간막대
+    * 이 막대들을 이용해 길이가 n인 막대 만드는 방법수 f(n)?
+
+  * 풀이
+
+    * n일때 1cm 파란막대 => n-1, 노란막대 => n-1, 2cm 빨간막대 => n-2
+    * f(n) = f(n-1) + f(n-1) + f(n-2)
+
+  * 재귀 풀이
+
+    ```python
+    stick = ['B', 'Y', 'RR']
+    
+    def makeStick(n, s):
+        if n == 0:
+            print(s)
+        else:
+            for i in stick:
+                if n >= len(i):
+                    makeStick(n - len(i), s + i)
+    
+    makeStick(2, '')
+    ```
+
+    ```python
+    stick = ['B', 'Y', 'RR']
+    
+    def makeStick(n):
+        if n == 1: return 2
+        if n == 2: return 5
+        return makeStick(n - 1) * 2 + makeStick(n - 2)
+    
+    print(makeStick(5))
+    ```
+
+    => 오래 걸린다.
+
+  * memoization
+
+    ```python
+    stick = ['B', 'Y', 'RR']
+    memo = [-1] * 100
+    
+    def makeStick(n):
+        if n == 1: return 2
+        if n == 2: return 5
+        if memo[n] != -1: return memo[n]
+    
+        memo[n] =  makeStick(n - 1) * 2 + makeStick(n - 2)
+        return memo[n]
+    print(makeStick(50))
+    ```
+
+    
 
 ## 7. DP2, NP-Complete
 

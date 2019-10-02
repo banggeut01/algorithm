@@ -1,17 +1,8 @@
-arr = [69, 10, 30, 2, 16, 8, 31, 22]
+stick = ['B', 'Y', 'RR']
 
-def quickSort(lo, hi):
-    if lo >= hi: return
-    i = lo - 1
-    for j in range(lo, hi): # lo ~ hi - 1
-        if arr[j] < arr[hi]:
-            i += 1
-            arr[i], arr[j] = arr[j], arr[i]
-    i += 1
-    arr[i], arr[hi] = arr[hi], arr[i]
-    quickSort(lo, i - 1)
-    quickSort(i + 1, hi)
+def makeStick(n):
+    if n == 1: return 2
+    if n == 2: return 5
+    return makeStick(n - 1) * 2 + makeStick(n - 2)
 
-print(arr)
-quickSort(0, len(arr) - 1)
-print(arr)
+print(makeStick(5))

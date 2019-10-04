@@ -1,4 +1,4 @@
-# 1244_3.py
+# 1244_fail2.py
 import sys
 sys.stdin = open('1244input.txt', 'r')
 def getNum():

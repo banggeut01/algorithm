@@ -2975,7 +2975,7 @@ SC
 
 # 집중실습(10월01일)
 
-* [3752. 가능한 시험 점수](./1001/3752.py) 
+* [3752. 가능한 시험 점수](./1001/3752.py) ★★★
 
   * 부분집합
 
@@ -3053,14 +3053,18 @@ SC
 
 * [1861. 정사각형 방](./1002/1861.py)
 
-* [1244. 최대 상금](./1002/1244.py)
+* [1244. 최대 상금](./1002/1244.py) ★★★★★ 방법
+
+  * 탐욕으로 풀면 안된다.
+
+    * 탐욕으로 풀면 안되는 케이스들이 있음
 
   * [완전탐색 시간초과](./1002/1244_fail.py)
 
     * 해결 : k깊이의 숫자를 visit 리스트를 이용해 방문한적 없으면 재귀호출한다.
-
+  
   * [두번째 실패](./1002/1244_fail2.py)
-
+  
     ```python
     # 실패 코드
         for i in range(M - 1):
@@ -3070,11 +3074,11 @@ SC
                 if visit[k][tmp]: ##
                     NUM[i], NUM[j] = NUM[j], NUM[i] ##
                     return # 다음 for문이 돌아가지 않음!
-                visit[k][tmp] = True ##
+              visit[k][tmp] = True ##
                 switch(k + 1) ##
                 NUM[i], NUM[j] = NUM[j], NUM[i]
     ```
-
+  
     ```python
     # 정상 코드
         for i in range(M - 1):
@@ -3086,6 +3090,131 @@ SC
                     switch(k + 1) ##
                 NUM[i], NUM[j] = NUM[j], NUM[i]
     ```
+  
+  * 선생님 방법
+  
+    * 한번 교환할 때 N개중 2개 선택만큼의 경우
+  
+      ```python
+      num = [3, 2, 8, 8, 8]
+      N = len(num)
+      # 두 개의 숫자를 선택해서 교환
+      # 교환횟수 1회 일 때 => Comb(5, 2) = 10만큼의 선택지
+      for i in range(N - 1):
+          for j in range(i + 1, N):
+              num[i], num[j] = num[j], num[i]
+              print(num)
+              num[i], num[j] = num[j], num[i] # 원상태로 복구
+      ```
+  
+    * 두번 교환 - 한번교환 * 한번교환 만큼의 경우
+  
+      ```python
+      # 교환횟수 2회 일 때 => 중첩
+      for i in range(N - 1):
+          for j in range(i + 1, N):
+              num[i], num[j] = num[j], num[i]
+              #-------------------------------- 한번 교환
+              for i in range(N - 1):
+                  for j in range(i + 1, N):
+                      num[i], num[j] = num[j], num[i]
+                      print(num)
+                      num[i], num[j] = num[j], num[i]
+                      #------------------------- 두번교환
+      ```
+  
+    * 상태 공간 그래프
+  
+      * 숫자 3개일 때 가능한 상태는 3! = 6
+      * 정점 - 숫자들의 상태 
+      * 간선 - 교환을 통해 변경되는 상태들 사이의 관계
+      * 123 - 321, 123 - 213, 123 - 132, ...
+  
+    * 321, 교환횟수 1회
+  
+      * 시작 상태 = (321)
+      * 다음 상태 = (231), (123), (312)
+  
+    * 간선의 개수만큼 따라가서 거쳐간 상태중 가장 큰 수를 출력하면 된다.
+  
+    * 여기서 주의할 점은 한번 거친 상태 또 방문할 수 있다.
+  
+      * 2번 교환시 첫번째 교환후 다시 그 자리를 바꾸면 원래 상태로 돌아감
+  
+    * 상태 공간 트리 - 교환 1회
+  
+      * 1234 숫자 4개 일 때 => Comb(4, 2) = 6
+  
+    * 교환 횟수 2회 일 때 => 중복!
+  
+      * 6 * 6 = 36가지 => 중복이 일어남 (이전 단계로 돌아감)
+      * 엄청난 수가 된다.
+      * 같은 높이에서 같은 수가 나온다. => **가능한 시험점수 - 집중실습(10월01일)**
+  
+    ```python
+    num = [4, 5, 6, 7, 8, 9]
+    N = len(num)
+    cnt = 10
+    # 두 개의 숫자를 선택해서 교환
+    # 교환횟수 1회 일 때 => Comb(5, 2) = 10만큼의 선택지
+    visit = [[0] * 1000000 for _ in range(11)] # 6자리일때 999999 최대값
+    
+    MAX = 0
+    def backtrack(k):
+        global MAX
+        val = max(MAX, int(''.join(map(str, num))))
+        if visit[k][val]: return # k높이에서 val숫자가 나온적 있는지
+        visit[k][val] = 1
+        if k == cnt:
+            MAX = val;
+        else:
+            for i in range(N - 1):
+                for j in range(i + 1, N):
+                    num[i], num[j] = num[j], num[i]
+                    backtrack(k + 1)
+                    num[i], num[j] = num[j], num[i] # 원상태로 복구
+    
+    backtrack(0)
+    print(MAX)
+    ```
+  
+  * BFS로 푸는 방법
+  
+    * visit에 높이와 val값을 같이 저장함
+  
+    ```python
+    import collections
+    d = [10000, 1000, 100, 10, 1] # 10진수 자리값
+    def swap(val, i, j):
+        a = (val//d[i]) % 10
+        b = (val//d[j]) % 10
+        # 3 2 8 8 8, 2000 80 교환
+        # -2000 +20
+        # + 8000 -80
+        return val - a * d[i] + a * d[j] - b * d[j] + b * d[i]
+    
+    num = 32888 # 숫자로
+    N = len(str(num))
+    visit = [[0] * 1000000 for _ in range(11)] #
+    MAX = 0
+    Q = collections.deque()
+    Q.append((num, 0))
+    cnt = 2
+    while Q:
+        val, k = Q.popleft()
+        if k == cnt:
+            MAX = max(MAX, val)
+        else:
+            for i in range(N - 1):
+                for j in range(i + 1, N):
+                    t = swap(val, i, j)
+                    if visit[k][t]: continue
+                    Q.append((t, k + 1))
+    
+    print(MAX)
+    ```
+  
+    
 
 # 집중실습(10월04일)
 
@@ -3099,3 +3228,4 @@ SC
 
 * [1952. 수영장](./1004/1952.py)
 
+* [1808. 지희의 고장난 계산기](./1004/1808.py)

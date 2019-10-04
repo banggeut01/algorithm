@@ -1,4 +1,4 @@
-# 1244.py 최대 상금
+# 1244_fail.py 최대 상금
 # 시간 초과
 def switch(k): # k번째 교환
     global MAX

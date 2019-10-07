@@ -3228,4 +3228,34 @@ SC
 
 * [1952. 수영장](./1004/1952.py)
 
+  * 선생님 풀이
+
+    * 이용일이 없는 경우
+    * 이용일이 있는 경우 => 1일, 1달, 3달
+
+    ```python
+    def backtrack(n, cost): # n: 현재 달, cost: 지금까지 이용 요금
+        global ans
+        if cost >= ans: return
+        if n >= 13:
+            ans = min(ans, cost)
+        else:
+            if arr[n]:  # 이용일이 있는 경우
+                backtrack(n + 1, cost + day * arr[n])
+                backtrack(n + 1, cost + month)
+                backtrack(n + 3, cost + quarter)
+            else:       # 없는 경우
+                backtrack(n + 1, cost)
+    
+    T = int(input())
+    for tc in range(1, T + 1):
+        day, month, quarter, year = map(int, input().split())
+        arr = [0] + list(map(int, input().split()))
+        ans = year
+        backtrack(1, 0)
+        print('#{} {}'.format(tc, ans))
+    ```
+
+    
+
 * [1808. 지희의 고장난 계산기](./1004/1808.py)

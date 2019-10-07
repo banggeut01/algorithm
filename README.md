@@ -1631,7 +1631,7 @@ print(getMin(0, len(arr) - 1))
       queue.append(s) # 큐에 삽입
       
       while queue: # 빈큐 아닐동안
-          v = queue.leftpop() # 큐에서 하나 꺼내옴
+          v = queue.popleft() # 큐에서 하나 꺼내옴
           for w in G[v]:# v의 방문하지 않은 인접정점을 모두 찾아서
           	if not visit[w]:# 차례로 방문하고, 큐에 삽입
       			visit[w] = True

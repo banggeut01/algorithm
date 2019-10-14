@@ -21,22 +21,24 @@ while True:
             x = 0
             while x < len(tree[i][j]) and board[i][j] >= tree[i][j][x]:
                 board[i][j] -= tree[i][j][x]
+                tree[i][j][x] += 1
                 x += 1
             while x != len(tree[i][j]):
                 move[i][j] += tree[i][j][x] // 2
                 tree[i][j].pop()
                 tcnt -= 1
-    # 여름
+    # # 여름
     for i in range(1, N + 1):
         for j in range(1, N + 1):
             if move[i][j]:
                 board[i][j] += move[i][j]
                 move[i][j] = 0
-    # 가을
+    # # 가을
     for i in range(1, N + 1):
         for j in range(1, N + 1):
             if not tree[i][j]: continue
-            # for x in range(len(tree)):
+            for x in range(len(tree[i][j])):
+                if tree[i][j][x] % 5: continue
                 for dx, dy in (-1, 0), (1, 0), (0, -1), (0, 1), (1, 1), (1, -1), (-1, 1), (-1, -1):
                     r, c = i + dx, j + dy
                     if 0 < r < N + 1 and 0 < c < N + 1:
@@ -46,11 +48,24 @@ while True:
     for i in range(1, N + 1):
         for j in range(1, N + 1):
             board[i][j] += A[i][j]
-    break
-print(tree)
-    # year += 1
-    # if year == K: # K년
-    #     break
-    # if not tcnt: break
+
+    year += 1
+    if year == K: # K년
+        break
+    if not tcnt: break
 print(tcnt)
-print(tree)
+'''
+10 1 1000
+100 100 100 100 100 100 100 100 100 100
+100 100 100 100 100 100 100 100 100 100
+100 100 100 100 100 100 100 100 100 100
+100 100 100 100 100 100 100 100 100 100
+100 100 100 100 100 100 100 100 100 100
+100 100 100 100 100 100 100 100 100 100
+100 100 100 100 100 100 100 100 100 100
+100 100 100 100 100 100 100 100 100 100
+100 100 100 100 100 100 100 100 100 100
+100 100 100 100 100 100 100 100 100 100
+1 1 1
+답: 5443
+'''

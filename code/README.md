@@ -2809,7 +2809,7 @@ SC - 9월 5일 집중실습
     
   * [실패코드2](./A/16235_fail2.py)
   
-    * continue 사용 => 논리적 오류를 초래할 수 있음
+    * continue 사용 => 논리적 오류를 초래할 수 있음, 자신없다면 가급적 쓰지 말자.
   
     * 반례
   
@@ -2831,7 +2831,21 @@ SC - 9월 5일 집중실습
       5443
       ```
   
-      
+
+## 191015
+
+**+ 추천 문제 ** https://rebas.kr/789
+
+1. [파이프 옮기기 1](https://www.acmicpc.net/problem/17070) / 품!
+2. [17135. 캐슬 디펜스](https://www.acmicpc.net/problem/17135) / [코드](./A/17135.py)
+3. [Maaaaaaaaaze](https://www.acmicpc.net/problem/16985) / [코드](https://rebas.kr/842)
+4. [Puyo Puyo](https://www.acmicpc.net/problem/11559) / [코드](https://rebas.kr/731)
+
+
+
+
+
+
 
 # APS응용 - Start
 

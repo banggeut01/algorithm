@@ -2836,16 +2836,32 @@ SC - 9월 5일 집중실습
 
 **+ 추천 문제 ** https://rebas.kr/789
 
-1. [파이프 옮기기 1](https://www.acmicpc.net/problem/17070) / 품!
-2. [17135. 캐슬 디펜스](https://www.acmicpc.net/problem/17135) / [코드](./A/17135.py)
-3. [Maaaaaaaaaze](https://www.acmicpc.net/problem/16985) / [코드](https://rebas.kr/842)
-4. [Puyo Puyo](https://www.acmicpc.net/problem/11559) / [코드](https://rebas.kr/731)
+* [17135. 캐슬 디펜스](https://www.acmicpc.net/problem/17135) / [코드](./A/17135.py)
 
+## 191016
 
+* [13459. 구슬 탈출](./A/13459.py)
 
+  * [문제](https://www.acmicpc.net/problem/13459)
 
+  * 문제 분류 : BFS
 
+  * visit 정보 4차원 배열
 
+  * 오류
+
+    ```python
+    if rc == 0: continue # R이 이동한 거리가 0이면, 다음 for문으로 넘어감
+    ```
+
+    이동한 거리 0이더라도 그냥 넘기면 안된다.
+
+    R과 O이 인접한 경우가 있을 수 있기 때문이다.
+
+* [13460. 구슬 탈출2](./A/13460.py)
+
+* [12100. 2048(Easy)](./A/12100.py)
+* [3190. 뱀](./A/3190.py) 풀이중
 
 # APS응용 - Start
 

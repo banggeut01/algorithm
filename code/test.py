@@ -1,12 +1,21 @@
-# 연소ㅐ행렬곱생
-def matrix(start, end):
-    if start == end : return 0
-    MIN = 0xffffff
-    for k in range(start, end + 1):
-        left = matrix(start, k)
-        right = matrix(k + 1, end)
-        if MIN > left + right + row[start]*col[k]*col[end]
-            MIN = left + right + row[start]*col[k]*(col[end])
-        dp[start][end] = MIN
-        return MIN
-            
+
+from collections import deque
+def BFS(s):
+    D = [0xffffff] * (V + 1) # D[] 초기값 설정
+    Q = deque()
+    Q.append(s); D[s] = 0
+
+    while Q:
+        u = Q.popleft()
+        for v, w in G[u]:
+            if D[v] > D[u]: # u ----> v
+                D[v] += D[u] + w
+                Q.append(v)
+
+V, E = map(int, input().split())
+G = [[] for _ in range(V)]
+for _ in range(E):
+    u, v, w = map(int, input().split())
+    G[u].append((v, w))
+    G[v].append((u, w))
+

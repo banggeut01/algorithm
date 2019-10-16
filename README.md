@@ -2515,8 +2515,6 @@ print(getMin(0, len(arr) - 1))
 
 ## 4. 그래프
 
-### 최단경로, 최소신장트리(Minimum Spanning Tree)
-
 > 최소신장트리 : Prim, Kruskal
 >
 > 최단경로: [Dijkstra](https://cloge.tistory.com/26)(가중치가 양), [벨만포트](https://cloge.tistory.com/27)(가중치가 음인 것 포함)
@@ -2528,6 +2526,173 @@ print(getMin(0, len(arr) - 1))
 ### 서로소 집합들(Disjoint-Sets)
 
 * 교집합이 없는 집합들의 정보를 관리하기 위한 **자료구조**
+
+* [7465. 창용 마을 무리의 개수](https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AWngfZVa9XwDFAQU&)
+
+  * 정점 : 1, 2, 3, 4, 5, 6
+
+  * 부모 : 1, 2, 3, 4, 5, 6
+
+    ```
+    1 2
+    - 정점 : 1, 2, 3, 4, 5, 6
+    - 부모 : 1, 1, 3, 4, 5, 6
+    2 5
+    - 정점 : 1, 2, 3, 4, 5, 6
+    - 부모 : 1, 1, 3, 4, 1, 6
+    5 1
+    변화 없음
+    3 4 
+    - 정점 : 1, 2, 3, 4, 5, 6
+    - 부모 : 1, 1, 3, 3, 1, 6
+    4 6
+    - 정점 : 1, 2, 3, 4, 5, 6
+    - 부모 : 1, 1, 3, 3, 1, 4
+    ```
+
+  * 구현
+
+    ```python
+    for tc in range(1, int(input()) + 1):
+        N, M = map(int, input().split())
+    
+        p = [x for x in range(N + 1)] # 1 ~ N, make-set(모든 정점)
+    
+        def find_set(x):
+            if x != p[x]:
+                p[x] = find_set(p[x]) # path-compression
+            return p[x]
+        ans = N # 집합의 수 => 연결 컴포넌트의 수
+        for _ in range(M):
+            u, v = map(int, input().split())
+            a = find_set(u); b = find_set(v)
+            if a != b:
+                p[b] = a
+                ans -= 1
+        print('#{} {}'.format(tc, ans))
+    ```
+
+### 최소신장트리(MST)
+
+* 신장 트리
+
+  * 주어진 그래프의 정점 n개가 n-1개의 간선으로 이루어진 트리
+
+* Kruskal
+
+  * 구현
+
+    ```python
+    V, E = map(int, input().split()) # 정점수, 간선수
+    # Edge : (u, v, w)
+    Edge = [tuple(map(int, input().split())) for _ in range(E)]
+    
+    # disjoin-set
+    p = [x for x in range(V)] # 0 ~ V-1
+    def find_set(x):
+        if x != p[x]:
+            p[x] = find_set(p[x]) # path-compression
+        return p[x]
+    
+    Edge.sort(key=lambda x: x[2]) # 가중치 오름차순 정렬
+    MST = []
+    idx = 0
+    while len(MST) < V - 1: # V - 1 개의 간선을 선택
+        u, v, w = Edge[idx]
+        a = find_set(u); b = find_set(v)
+        if a != b:
+            MST.append((u, v, w))
+            p[b] = a
+        idx += 1
+    ```
+
+* Prim
+
+  * 구현
+
+    ```python
+    V, E = map(int, input().split()) # 정점수, 간선수
+    G = [[] for _ in range(V)]
+    for _ in range(E):
+        u, v, w = map(int, input().split())
+        G[u].append((v, w))
+        G[v].append((u, w))
+    
+    pi = [0] * V
+    key = [0xffffff] * V
+    visit = [False] * V # 트리에 포함된 정점과 아닌 정점을 구분하기 위해
+    
+    key[0] = 0
+    cnt = V
+    while cnt: # 모든 정점을 선택할 때 까지
+        # 아직 트리에 포함되지 않은 정점들 중에서 key 값이 최소인 정점을 찾는다.
+        u, MIN = 0, 0xfffff
+        for i in range(V):
+            if not visit[i] and MIN > key[i]: u, MIN = i, key[i]
+        visit[u] = True
+        for v, w in G[u]:
+            if not visit[v] and w < key[v]:
+                key[v] = w
+                pi[v] = u
+        cnt -= 1
+    ```
+
+* 다익스트라
+
+  * 구현
+
+    ```python
+    # 오류 찾아내기 
+    from collections import deque
+    def BFS(s):
+        D = [0xffffff] * (V + 1) # D[] 초기값 설정
+        Q = deque()
+        Q.append(s); D[s] = 0
+    
+        while Q:
+            u = Q.popleft()
+            for v, w in G[u]:
+                if D[v] > D[u]: # u ----> v
+                    D[v] += D[u] + w
+                    Q.append(v)
+    
+    V, E = map(int, input().split())
+    G = [[] for _ in range(V)]
+    for _ in range(E):
+        u, v, w = map(int, input().split())
+        G[u].append((v, w))
+        G[v].append((u, w))
+    ```
+
+    ```python
+    def BFS(s):
+        D = [0xffffff] * (V + 1) # D[] 초기값 설정
+        visit = [False] * (V + 1) # 이미 최단 경로를 찾은 정점들과 아닌 정점들 구분
+        D[s] = 0
+        cnt = V
+        while cnt:
+            # 아직 선택하지 않은 정점 중에 D[]가 최소인 정점을 찾는다.
+            
+            for v, w in G[u]:
+                if D[v] > D[u]: # u ----> v
+                    D[v] += D[u] + w
+            cnt -= 1
+    
+    V, E = map(int, input().split())
+    G = [[] for _ in range(V)]
+    for _ in range(E):
+        u, v, w = map(int, input().split())
+        G[u].append((v, w))
+        G[v].append((u, w))
+    ```
+
+  * 다익스트라
+
+    * s에서 t까지 최단경로를 구할 때, t 전에 x를 거친다고 한다. 
+
+      그렇다면 s에서 x까지 최단경로에 x-t가중치 더한 것
+
+    * 더 작은 문제로 작아지는 것이다.
 
 ## 5. 문자열
 

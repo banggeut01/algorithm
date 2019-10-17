@@ -2861,7 +2861,67 @@ SC - 9월 5일 집중실습
 * [13460. 구슬 탈출2](./A/13460.py)
 
 * [12100. 2048(Easy)](./A/12100.py)
-* [3190. 뱀](./A/3190.py) 풀이중
+
+* [3190. 뱀](./A/3190.py) 
+
+  * 틀렸습니다.
+
+    ```python
+    # 초기 코드 game()
+    def game():
+        for _ in range(L):
+            # time : 방향 틀 시각, ch: 방향 'L', 'R'
+            time, ch = input().split() 
+            time = int(time)
+                while Ture:
+                    second += 1
+                    '''
+                    뱀 이동 코드
+                    '''
+                if time == second:
+                    # 방향 변경
+                    if ch == 'L': # 왼쪽
+                        dir = left[dir]
+                    else: # 오른쪽
+                        dir = right[dir]
+                    break
+    ```
+
+    * 마지막 방향틀기 후 break 에 걸려서 종료된다.
+
+    * time과 ch를 한꺼번에 받은 후 사용하는 코드로 바꿈
+
+    * 해결
+
+      ```python
+      stop = [] # time과 ch를 저장
+      for _ in range(L):
+          t, ch = input().split()
+          t = int(t)
+          stop.append((t, ch))
+          
+      def game():
+          time, ch = stop.pop(0)
+          time = int(time)
+          while True:
+              second += 1
+              '''
+              뱀 이동
+              '''
+              if second == time:
+                  # 직진 다하고, 방향을 틀어줘야함
+                  if ch == 'L': # 왼쪽
+                      dir = left[dir]
+                  else: # 오른쪽
+                      dir = right[dir]
+                  if stop:
+                      time, ch = stop.pop(0)
+                      time = int(time)
+      ```
+
+## 191017
+
+
 
 # APS응용 - Start
 

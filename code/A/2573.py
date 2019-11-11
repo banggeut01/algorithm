@@ -1,49 +1,53 @@
 # 2573.py 빙산
-import collections
-def bfs(i, j):
-    dq = collections.deque()
-    visit[i][j] = True
-    dq.append((i, j))
-    while dq:
-        i, j = dq.popleft()
-        for dx, dy in (-1, 0), (1, 0), (0, -1), (0, 1):
-            r, c = i + dx, j + dy
-            if -1 < r < N and -1 < c < M:
-                if not board[r][c]:
-                    melt[i][j] += 1
-                elif not visit[r][c]:
-                    dq.append((r, c))
-                    visit[r][c] = True
 
-def updateBoard(): ##### 고칠 곳만 고칠 수 있도록
-    for i in range(N):
-        for j in range(M):
-            d = board[i][j] - melt[i][j]
-            if d <= 0:
-                board[i][j] = 0
-            else:
-                board[i][j] = d
+def dfs(i, j, visit):
+    visit[i][j] = True
+    for x, y in (-1, 0), (1, 0), (0, -1), (0, 1):
+        nx, ny = i + x, j + y
+        if board[nx][ny] and not visit[nx][ny]:
+            dfs(nx, ny, visit)
+
+def meltIce():
+    melt = [[0] * M for _ in range(N)]
+    for i in range(1, N - 1):
+        for j in range(1, M - 1):
+            for x, y in (-1, 0), (1, 0), (0, -1), (0, 1):
+                nx, ny = i + x, j + y
+                if not board[nx][ny]:
+                    melt[i][j] += 1
+    for i in range(1, N - 1):
+        for j in range(1, M - 1):
+            if melt[i][j]:
+                if melt[i][j] >= board[i][j]: board[i][j] = 0
+                else: board[i][j] -= melt[i][j]
+
+def solution():
+    rtn = 0
+    while True:
+        meltIce()
+        flag = 0
+        visit = [[False] * M for _ in range(N)]
+        for i in range(1, N - 1):
+            for j in range(1, M - 1):
+                if board[i][j] and not visit[i][j]:
+                    if not flag:
+                        rtn += 1
+                        flag = 1
+                        dfs(i, j, visit)
+                    else: # 두번째 섬
+                        return rtn
+        if not flag: # 다 녹았을 때
+            rtn = 0
+            return rtn
 
 N, M = map(int, input().split())
 board = [list(map(int, input().split())) for _ in range(N)]
-ans = 0
-while True:
-    flag = 0
-    visit = [[False] * M for _ in range(N)]
-    melt = [[0] * M for _ in range(N)]
-    for i in range(N):
-        for j in range(M):
-            if board[i][j] and not visit[i][j]:
-                if not flag:
-                    flag = 1
-                    bfs(i, j)
-                else: # 빙산 2개 이상
-                    flag = 2
-                    break
-        if flag == 2:
-            break
-    if flag == 2:
-        break
-    updateBoard()
-    ans += 1
-print(ans)
+# 주변 0의 개수 melt
+
+result = solution()
+print(result)
+
+
+
+
+

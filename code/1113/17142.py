@@ -25,7 +25,7 @@ def bfs():
                     D[nx][ny] = D[x][y] + 1
                     maxD = max(maxD, D[nx][ny])
                     cnt += 1
-                elif board[nx][ny] == 2 and not (nx, ny) in active: # 비활성 -> 활성
+                elif board[nx][ny] == 2: # 비활성 -> 활성
                     visit[nx][ny] = True
                     dq.append((nx, ny))
                     D[nx][ny] = D[x][y] + 1

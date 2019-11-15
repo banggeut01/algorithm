@@ -1,7 +1,7 @@
 # 17472 다리 만들기2
 import pprint
 from collections import deque
-def dfs(x, y):
+def dfs(x, y): # 섬에 번호를 부여함
     board[x][y] = islandCnt
     visit[x][y] = True
     for dx, dy in (-1, 0), (1, 0), (0, -1), (0, 1):
@@ -28,15 +28,17 @@ def find_set(x):
     return p[x]
 
 def getMIN():
-    cnt, total = 0, 0
-    for d, s, e in bridges:
-        p1 = find_set(s)
-        p2 = find_set(e)
-        if p1 != p2:
-            cnt += 1
+    total = 0
+    setNum = islandCnt # 연결 컴포넌트 개수
+    for d, s, e in bridges: # d:거리, s:부모, e:자식
+        set1 = find_set(s) # 최상위 노드번호(부모) 리턴. set1컴포넌트번호
+        set2 = find_set(e)
+        if set1 != set2: # 만약 같으면 같은컴포넌트
+            p[set2] = set1 # 연결하고,
             total += d
-        if cnt == islandCnt - 1:
-            return total
+            setNum -= 1
+            if setNum == 1:
+                return total
     return -1
 
 
@@ -52,7 +54,7 @@ for i in range(N):
         if board[i][j] and not visit[i][j]:
             islandCnt += 1
             dfs(i, j)
-p = [x for x in range(islandCnt + 1)]
+p = [x for x in range(islandCnt + 1)] # x의 부모노드 p[x]
 # 다리 만들기
 for i in range(N):
     for j in range(M):
@@ -64,7 +66,9 @@ for key, d in dist.items():
     s, e = key
     bridges.append((d, s, e))
 bridges = sorted(bridges)
+
 # pprint.pprint(board)
 # print(bridges)
 
 print(getMIN())
+# print(p)

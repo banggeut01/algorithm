@@ -2674,12 +2674,18 @@ SC - 9월 5일 집중실습
 ## etc
 
 - [2589.보물섬](./A/2589.py)
+  
   - [문제](https://www.acmicpc.net/problem/2589)
 - [2468.안전영역](./A/2468.py)
   - [문제](https://www.acmicpc.net/problem/2468)
+  
   - 런타임 에러
     - python3으로 제출하기
-      - sys.setrecursionlimit(10000)
+      
+      ```python
+      import sys
+      sys.setrecursionlimit(10000)
+      ```
 
 * [1987.알파벳](./A/1987.py)
 

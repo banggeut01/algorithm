@@ -52,6 +52,7 @@ for _ in range(E):
 
 
 * 2667.단지번호붙이기
+  
   * [문제](https://www.acmicpc.net/problem/2667)
   
 * [코드](./2667.py) (BFS)
@@ -161,13 +162,71 @@ for _ in range(E):
 # 조합 탐색, 백트래킹
 
 * 14502.연구소
-  * [문제]
-  * [코드]
+  
+  * [문제](https://www.acmicpc.net/problem/14502)
 
+  * [코드](./14502.py)
+  
+  * 시간 비교
+  
+    ```python
+    # 856ms
+    dq = deepcopy(virus)
+    
+    # 616ms
+    dq = deque()
+    for x, y in virus:
+        dq.append((x, y))
+    ```
+  
+    ```python
+    # 1. 756ms
+    def bfs(x, y):
+        # ...
+        if -1 < nx < N and -1 < ny < M and not board[nx][ny] and not visit[nx][ny] \
+                        and (nx, ny) not in wall: # 벽
+                # ...
+    def getWall(k, s): # 벽 3개를 고름
+        # ...
+        for idx in range(s, len(empty)):
+            wall.append(empty[idx])
+            getWall(k + 1, idx + 1)
+            wall.pop()
+        
+    wall = [] # 벽 3개
+    
+    # 2. 424ms
+    def bfs(x, y):
+        # ...
+        if -1 < nx < N and -1 < ny < M and not board[nx][ny] and not visit[nx][ny]: # 벽
+                # ...
+                
+    def getWall(k, s): # 벽 3개를 고름
+        # ...
+        for idx in range(s, len(empty)):
+            x, y = empty[idx]
+            board[x][y] = 1
+            getWall(k + 1, idx + 1)
+            board[x][y] = 0
+    ```
+  
+    1. 벽 리스트를 만들어 리스트에 있는지 없는지 검사
+    2. `board` 값을 바꿈. 벽인지 아닌지 검사하는 조건 삭제
+  
 * 14889.스타트와 링크
   * [문제](https://www.acmicpc.net/problem/14889)
-  * [코드](./14889.py)
-
+  
+* [코드](./14889.py)
+  
+  * 파이썬 `/` , `//`
+  
+    ```python
+    >>> 4 / 2
+    2.0 # float
+    ```
+  
+    
+  
 * 15686.치킨배달
   * [문제]
   * [코드]
@@ -185,8 +244,8 @@ for _ in range(E):
   * [코드]
 
 * 14501.퇴사
-  * [문제]
-  * [코드]
+  * [문제](https://www.acmicpc.net/problem/14501)
+  * [코드](./14501.py)
 * 14888.연산자끼워넣기
   * [문제]
   * [코드]

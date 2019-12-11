@@ -3681,7 +3681,7 @@ Ad > 07. 그래프의 최소 비용 문제
   - [새로운 게임 2](https://www.acmicpc.net/problem/17837)
 - [17822. 원판 돌리기]
   - [원판 돌리기](https://www.acmicpc.net/problem/17822)
-- [17825. 주사위 윷놀이]
+- [17825. 주사위 윷놀이](17825.py)
   - [주사위 윷놀이](https://www.acmicpc.net/problem/17825)
 
 > 삼성 a 기출 - BOJ
@@ -3694,7 +3694,4 @@ Ad > 07. 그래프의 최소 비용 문제
 
       * pprint 잘 지우기!
 
-      
-
-* 
 

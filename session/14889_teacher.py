@@ -4,6 +4,7 @@ N = 4
 def backtrack(k, acnt, bcnt):
     if acnt > N // 2 or bcnt > N // 2: return
     if acnt == N // 2 and bcnt == N // 2:
+        print(A[:acnt], B[:bcnt])
         pass # 시너지를 구함
 
     # k번 값을 A에 추가할지

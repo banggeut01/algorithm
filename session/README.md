@@ -159,6 +159,12 @@ for _ in range(E):
   * [런타임에러 DFS 코드](./16234_fail.py)
   * `newVal`로 업데이트 하는 부분 bfs()함수에서 처리할 수 있음
     * 원래 했던 코드 참고
+  * 보완점
+    * `tmp`라는 리스트 따로 만들지 않고 큐에 원소를 빼지 않고 `front`와 `rear` 이용
+    * `front` 증가시키면서 sum값을 계산함
+  * 주의할 점
+    * 
+  * <b>이 방법으로 다시 풀어보기!</b>
 
 # 조합 탐색, 백트래킹
 
@@ -227,10 +233,35 @@ for _ in range(E):
     2.0 # float
     ```
   
+  * [부분집합 생성 선생님 코드](./14889_teacher.py)
+  
+    ```python
+    #N = 4초기값 0으로 지정
+    def backtrack(k, acnt, bcnt):
+        if acnt > N // 2 or bcnt > N // 2: return
+        if acnt == N // 2 and bcnt == N // 2:
+            pass # 시너지를 구함
     
+        # k번 값을 A에 추가할지
+        A[acnt] = k
+        backtrack(k + 1, acnt + 1, bcnt)
+        # B에 추가할지
+        B[bcnt] = k
+        backtrack(k + 1, acnt, bcnt + 1)
+    
+    # 초기값 0으로 지정
+    A = [0] * N
+    B = [0] * N
+    
+    backtrack(1, 1, 0)
+    ```
+  
+    * 초기값 0으로 지정
+    * 리스트에 넣고 빼는 것 오래 걸리기 때문
+    * 이 방법이 부분집합할 때 best인듯
   
 * 15686.치킨배달
-  * [문제]
+  * [문제](https://www.acmicpc.net/problem/15686)
   * [코드]
 
 * 17471.게리맨더링
@@ -246,6 +277,7 @@ for _ in range(E):
   * [코드]
 
 * 14501.퇴사
+  
   * [문제](https://www.acmicpc.net/problem/14501)
   * [코드](./14501.py)
   * 

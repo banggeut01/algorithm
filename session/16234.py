@@ -22,14 +22,12 @@ N, L, R = map(int, input().split())
 board = [list(map(int, input().split())) for _ in range(N)]
 result = 0 # 인구이동 횟수
 while True:
-    cnt = 0  # 연합 개수
     flag = False
     visit = [[False] * N for _ in range(N)]
     for i in range(N):
         for j in range(N):
             if not visit[i][j]:
                 tmp = []
-                cnt += 1
                 total = bfs(i, j)
                 if len(tmp) > 1:
                     flag = True

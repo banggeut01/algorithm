@@ -54,8 +54,7 @@ for _ in range(E):
 * 2667.단지번호붙이기
   
   * [문제](https://www.acmicpc.net/problem/2667)
-  
-* [코드](./2667.py) (BFS)
+  * [코드](./2667.py) (BFS)
   
   * DFS로 풀었을 때 return value
   
@@ -158,6 +157,8 @@ for _ in range(E):
   * [문제](https://www.acmicpc.net/problem/16234)
   * [코드](./16234.py)
   * [런타임에러 DFS 코드](./16234_fail.py)
+  * `newVal`로 업데이트 하는 부분 bfs()함수에서 처리할 수 있음
+    * 원래 했던 코드 참고
 
 # 조합 탐색, 백트래킹
 
@@ -214,10 +215,11 @@ for _ in range(E):
     2. `board` 값을 바꿈. 벽인지 아닌지 검사하는 조건 삭제
   
 * 14889.스타트와 링크
+  
   * [문제](https://www.acmicpc.net/problem/14889)
   
-* [코드](./14889.py)
-  
+  * [코드](./14889.py)
+    
   * 파이썬 `/` , `//`
   
     ```python
@@ -246,6 +248,8 @@ for _ in range(E):
 * 14501.퇴사
   * [문제](https://www.acmicpc.net/problem/14501)
   * [코드](./14501.py)
+  * 
+  * 
 * 14888.연산자끼워넣기
   * [문제]
   * [코드]

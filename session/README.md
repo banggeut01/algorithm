@@ -4,6 +4,8 @@
 
 # 탐색 - BFS, DFS
 
+## 개념
+
 > 너비 우선 탐색
 >
 > 기본적인 그래프 탐색(결합 컴포넌트를 찾을 때)
@@ -49,7 +51,7 @@ for _ in range(E):
     G[v].append(v) # 인접 리스트
 ```
 
-
+## 문제
 
 * 2667.단지번호붙이기
   
@@ -168,6 +170,76 @@ for _ in range(E):
 
 # 조합 탐색, 백트래킹
 
+## 개념
+
+* 조합 생성
+
+  ```python
+  N, R = 4, 2 # 0 ~ N - 1 중에 R개를 선택
+  ```
+
+  
+
+  ```python
+  # itertools
+  import itertools
+  
+  arr = itertools.combinations([i for i in range(N)], R)
+  print(arr) # <itertools.combinations object at 0x000001C166ED92C8>
+  for val in arr:
+      print(val)
+  (0, 1)
+  (0, 2)
+  (0, 3)
+  (1, 2)
+  (1, 3)
+  (2, 3)
+  ```
+
+  ```python
+  # binary counting
+  cnt = 0
+  for val in range(1 << N):
+      for i in range(N):
+          if val & (1 << i): cnt += 1
+      if cnt == R:
+          pass
+  ```
+
+  ```python
+  # for문 중첩 -> R개를 고른다면 for문 R개 중첩
+  for i in range(N - 1):
+      for j in range(i + 1, N):
+          print(i, j)
+  ```
+
+  유연하지 못한 방법이다.
+
+  ```python
+  # 재귀
+  # k: 고른개수, 호출 depth
+  # s: 반복의 시작, 이전 고른 요소의 다음
+  sel = []
+  def backtrack(k, s):
+  	if k == R:
+          print(sel)
+          return
+      
+      for i in range(s, N):
+          # i번을 고른다. ---> 어딘가에 저장
+          sel.append(i)
+          backtrack(k + 1, i + 1)
+          sel.pop()
+          
+  backtrack(0, 0)
+  ```
+
+  재귀의 이점: 가지치기를 할 수 있다.
+
+  만약 가지치기 할 필요 없으면 itertools 써도 된다.
+
+## 문제
+
 * 14502.연구소
   
   * [문제](https://www.acmicpc.net/problem/14502)
@@ -266,29 +338,33 @@ for _ in range(E):
   * [코드](./15686.py)
 
 * 17471.게리맨더링
+  
   * [문제]
-  * [코드]
-
+* [코드]
+  * A그룹 or B그룹
+  
 * 17070.파이프 옮기기1
+  
   * [문제]
-  * [코드]
-
+* [코드]
+  
 * 17135.캐슬디펜스
-  * [문제]
-  * [코드]
-
+  
+  * [문제](https://www.acmicpc.net/problem/17135)
+* [코드](./17135.py)
+  
 * 14501.퇴사
   
   * [문제](https://www.acmicpc.net/problem/14501)
   * [코드](./14501.py)
-  * 
-  * 
+  * DP로 풀어봄!
 * 14888.연산자끼워넣기
   
-  * [문제]
-  * [코드]
+  * [문제](https://www.acmicpc.net/problem/14888)
+  * [코드](./14888.py)
 * 15683.감시
-  * [문제]
+  
+  * [문제](https://www.acmicpc.net/problem/15683)
   * [코드]
 
 # 백준 특강

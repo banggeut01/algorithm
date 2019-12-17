@@ -29,11 +29,11 @@ for i in range(N):
         if board[i][j] == 1: home.append((i, j))
         elif board[i][j] == 2: chicken.append((i, j))
 C, H = len(chicken), len(home)
-dist = [[0] * H for _ in range(C)] # 치킨집(행) - 집(열) 거리 리스트
+dist = [[] for _ in range(C)] # 치킨집(행) - 집(열) 거리 리스트
 for i in range(C):
     x1, y1 = chicken[i]
     for j in range(H):
         x2, y2 = home[j]
-        dist[i][j] = abs(x1 - x2) + abs(y1 - y2)
+        dist[i].append(abs(x1 - x2) + abs(y1 - y2))
 getSet(0, 0)
 print(MIN)

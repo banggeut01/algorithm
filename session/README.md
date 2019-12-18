@@ -397,7 +397,7 @@ for _ in range(E):
 * 14503.로봇청소기
 
   * [문제](https://www.acmicpc.net/problem/14503)
-  * [코드]
+  * [코드](./14503.py)
 
 # 백준 특강
 

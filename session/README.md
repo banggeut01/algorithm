@@ -340,31 +340,63 @@ for _ in range(E):
 * 17471.게리맨더링
   
   * [문제]
-* [코드]
+  * [코드]
   * A그룹 or B그룹
   
 * 17070.파이프 옮기기1
   
-  * [문제]
-* [코드]
+  * [문제](https://www.acmicpc.net/problem/17070)
+  * [코드](./17070.py)
   
 * 17135.캐슬디펜스
   
   * [문제](https://www.acmicpc.net/problem/17135)
-* [코드](./17135.py)
+  * [코드](./17135.py)
   
 * 14501.퇴사
   
   * [문제](https://www.acmicpc.net/problem/14501)
   * [코드](./14501.py)
   * DP로 풀어봄!
+  
 * 14888.연산자끼워넣기
   
   * [문제](https://www.acmicpc.net/problem/14888)
   * [코드](./14888.py)
+  
+  ```python
+  # 1. 순열 생성
+  # 2. 연산자를 하나씩 선택하면서 모든 경우를 생성
+  op = '+-*/'
+  cnt = [2, 0, 1, 1]
+  N = 4 # 피연산자 N + 1
+  order = []
+  def backtrack(k):
+      if k == N:
+  		print(*order)
+      else:
+          # k번째 위치에 올 연산자를 하나 선택
+          for i in range(4):
+              if cnt[i]:
+                  cnt[i] -= 1
+                  order.append(op[i])
+                  backtrack(k + 1)
+                  cnt[i] += 1
+                  order.pop()
+                  
+  backtrack(0)
+  ```
+  
+  
+  
 * 15683.감시
   
   * [문제](https://www.acmicpc.net/problem/15683)
+  * [코드](./15683.py)
+  
+* 14503.로봇청소기
+
+  * [문제](https://www.acmicpc.net/problem/14503)
   * [코드]
 
 # 백준 특강

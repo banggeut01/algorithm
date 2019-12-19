@@ -3,9 +3,10 @@
 def back(k, total):
     global END
     if END == 4 or k == 10:
+        if total == 209: print(tmp)
         global MAX
         MAX = max(MAX, total)
-        print(pos)
+        # print(pos)
         return
     
     for x in range(4): # 4개의 말
@@ -30,15 +31,17 @@ def back(k, total):
             if len(score[new0]) == diff:
                 new0, new1 = dct[new0][0], 0
             else:
-                new0, new1 = dct[new0][1], diff
+                new1 = diff
             newScore, oriScore = score[new0][new1], score[ori0][ori1]
             if not visit[newScore]: # 말 없는 경우
                 visit[oriScore] = False
                 visit[newScore] = True
+                tmp.append(x)
                 pos[x] = (new0, new1)
                 back(k + 1, total + newScore)
                 visit[oriScore] = True
                 visit[newScore] = False
+                tmp.pop()
                 pos[x] = (ori0, ori1)
 
 score = [[0, 2, 4, 6, 8, 10],                           # 0 -> 1 or 2
@@ -69,5 +72,6 @@ visit = [0] * 41 # score 말 유무
 # 이동하려고 하는 칸에 말이 이미 있는 경우 이동할 수 없음!
 # 이동할 때마다 점수 추가!
 pos = [(0, 0) for _ in range(4)] # 말 4개의 위치 [2][3]이면 19에 있다.
+tmp = []
 back(0, 0)
 print(MAX)
